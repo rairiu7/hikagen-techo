@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>火加減手帖｜地方の小さな飲食店が、仕組みで勝つ</title>
+<meta name="description" content="人口5万人未満の地方都市で弁当・惣菜店を2店舗営む元メーカー出身の店主が、経営のリアルと業務の仕組み化・デジタル化を一次情報で発信する手帖。GAS・Python・VBAによる自動化の実例つき。">
+<link rel="canonical" href="https://hikagen-techo.com/">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="火加減手帖｜地方の小さな飲食店が、仕組みで勝つ">
+<meta property="og:description" content="地方の小商いを仕組み化する人の手帖。経営のリアルとデジタル化の一次情報を発信。">
+<meta property="og:url" content="https://hikagen-techo.com/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<!-- Structured Data: WebSite + Person -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://hikagen-techo.com/#website",
+      "url": "https://hikagen-techo.com/",
+      "name": "火加減手帖",
+      "alternateName": "Hikagen Techo",
+      "description": "地方の小さな飲食店が、仕組みで勝つ。経営のリアルとデジタル化を一次情報で発信する手帖。",
+      "inLanguage": "ja",
+      "publisher": { "@id": "https://hikagen-techo.com/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://hikagen-techo.com/#person",
+      "name": "火加減手帖",
+      "description": "地方で小商いを仕組み化する人。人口5万人未満の地方都市で弁当・惣菜店を2店舗営む元メーカー出身の店主。",
+      "jobTitle": "地方で小商いを仕組み化する人",
+      "knowsAbout": [
+        "小規模飲食店経営",
+        "業務の仕組み化",
+        "業務自動化",
+        "Google Apps Script",
+        "Python",
+        "VBA",
+        "個人事業主の経理・お金",
+        "飲食店の開業"
+      ],
+      "url": "https://hikagen-techo.com/"
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --base:#FAFAF8;
+    --text:#2D2D2D;
+    --accent:#6B7F5E;
+    --accent-deep:#56684C;
+    --sub:#F5F5F3;
+    --hair:#E5E5E0;
+    --muted:#7A7A72;
+
+    --font-display:'Playfair Display', serif;
+    --font-body:'Noto Sans JP', sans-serif;
+    --font-label:'DM Sans', sans-serif;
+
+    --maxw:1080px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--base);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-weight:400;
+    line-height:1.85;
+    letter-spacing:.01em;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  .eyebrow{
+    font-family:var(--font-label);
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,250,248,.82);
+    backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--hair);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    height:66px;
+  }
+  .brand{display:flex;align-items:baseline;gap:11px}
+  .brand .logo{display:flex;align-items:center;gap:9px}
+  .brand .mark{width:18px;height:22px;display:block}
+  .brand .jp{
+    font-family:var(--font-body);
+    font-weight:700;font-size:1.12rem;letter-spacing:.06em;
+  }
+  .brand .en{
+    font-family:var(--font-label);
+    font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--muted);
+  }
+  .menu{display:flex;gap:30px}
+  .menu a{
+    font-family:var(--font-label);
+    font-size:.82rem;font-weight:500;letter-spacing:.04em;color:var(--text);
+    position:relative;padding:4px 0;
+  }
+  .menu a::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:0;height:1.5px;
+    background:var(--accent);transition:width .35s var(--ease);
+  }
+  .menu a:hover{color:var(--accent-deep)}
+  .menu a:hover::after{width:100%}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .menu-btn span{display:block;width:22px;height:1.6px;background:var(--text);margin:5px 0;transition:.3s}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:108px 0 84px;position:relative;overflow:hidden}
+  .hero .flame{
+    position:absolute;right:-40px;top:40px;width:300px;height:auto;opacity:.16;
+    pointer-events:none;
+  }
+  .hero .eyebrow{margin-bottom:26px}
+  .hero h1{
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:clamp(2.1rem,5.2vw,3.6rem);
+    line-height:1.42;
+    letter-spacing:.02em;
+    max-width:18ch;
+  }
+  .hero h1 em{
+    font-family:var(--font-display);
+    font-style:italic;font-weight:500;
+    color:var(--accent-deep);
+    letter-spacing:0;
+  }
+  .hero .lead{
+    margin-top:30px;max-width:46ch;color:#43433d;font-size:1.02rem;
+  }
+  .hero .by{
+    margin-top:34px;display:inline-flex;align-items:center;gap:12px;
+    font-family:var(--font-label);font-size:.8rem;letter-spacing:.04em;color:var(--muted);
+  }
+  .hero .by .line{width:34px;height:1px;background:var(--accent)}
+
+  /* ---------- Stats ---------- */
+  .stats{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);background:var(--sub)}
+  .stats .grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .stat{padding:34px 26px;border-left:1px solid var(--hair)}
+  .stat:first-child{border-left:0}
+  .stat .num{font-family:var(--font-display);font-size:2rem;font-weight:500;color:var(--accent-deep);line-height:1}
+  .stat .lbl{margin-top:11px;font-size:.82rem;color:var(--muted);line-height:1.6}
+
+  /* ---------- Section base ---------- */
+  section.block{padding:84px 0}
+  .head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:46px}
+  .head-row h2{
+    font-family:var(--font-body);font-weight:700;
+    font-size:clamp(1.5rem,3vw,2rem);letter-spacing:.04em;line-height:1.5;
+  }
+  .head-row .en-h{
+    font-family:var(--font-display);font-style:italic;font-weight:400;
+    font-size:1rem;color:var(--accent);white-space:nowrap;
+  }
+
+  /* ---------- About ---------- */
+  .about-body{max-width:62ch;font-size:1.02rem;color:#3b3b35}
+  .about-body p+p{margin-top:20px}
+  .about-body strong{font-weight:700;color:var(--text);border-bottom:2px solid rgba(107,127,94,.32)}
+
+  /* ---------- Categories ---------- */
+  .cats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--hair);
+        border:1px solid var(--hair)}
+  .cat{
+    background:var(--base);padding:38px 34px;position:relative;
+    transition:background .4s var(--ease);
+    display:block;
+  }
+  .cat:last-child:nth-child(odd){grid-column:1 / -1}
+  .cat .cnum{font-family:var(--font-display);font-size:.95rem;color:var(--accent);letter-spacing:.06em}
+  .cat h3{margin-top:14px;font-family:var(--font-body);font-weight:700;font-size:1.22rem;letter-spacing:.03em}
+  .cat p{margin-top:12px;font-size:.92rem;color:var(--muted);line-height:1.8;max-width:38ch}
+  .cat .arrow{
+    margin-top:20px;display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-label);font-size:.78rem;font-weight:600;letter-spacing:.08em;
+    color:var(--accent-deep);text-transform:uppercase;
+    opacity:.0;transform:translateX(-6px);transition:.4s var(--ease);
+  }
+  .cat:hover{background:var(--sub)}
+  .cat:hover .arrow{opacity:1;transform:translateX(0)}
+  .cat .tag-rev{
+    position:absolute;top:34px;right:34px;font-family:var(--font-label);
+    font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:#fff;background:var(--accent);padding:4px 9px;border-radius:2px;
+  }
+
+  /* ---------- Upcoming articles ---------- */
+  .articles{background:var(--sub);border-top:1px solid var(--hair)}
+  .art-list{border-top:1px solid var(--hair)}
+  .art{
+    display:flex;align-items:center;gap:24px;padding:24px 4px;
+    border-bottom:1px solid var(--hair);
+  }
+  .art .ano{font-family:var(--font-display);font-size:1.05rem;color:var(--accent);min-width:34px}
+  .art .acat{
+    font-family:var(--font-label);font-size:.66rem;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);min-width:128px;
+  }
+  .art .atitle{font-size:.98rem;font-weight:500;flex:1}
+  .art .soon{
+    font-family:var(--font-label);font-size:.64rem;font-weight:600;letter-spacing:.1em;
+    color:var(--muted);border:1px solid var(--hair);padding:3px 9px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--text);color:#E9E9E3;padding:64px 0 40px}
+  footer .ftop{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid #444}
+  footer .fbrand .jp{font-family:var(--font-body);font-weight:700;font-size:1.2rem;letter-spacing:.06em}
+  footer .fbrand .en{font-family:var(--font-label);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:#9a9a90;margin-top:6px}
+  footer .fbrand p{margin-top:16px;font-size:.86rem;color:#b4b4aa;max-width:34ch;line-height:1.8}
+  footer .fnav{display:flex;gap:46px;flex-wrap:wrap}
+  footer .fnav .col h4{font-family:var(--font-label);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#9a9a90;margin-bottom:14px}
+  footer .fnav .col a{display:block;font-size:.86rem;color:#d8d8d0;padding:5px 0}
+  footer .fnav .col a:hover{color:var(--accent)}
+  footer .fbottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:30px;font-family:var(--font-label);font-size:.72rem;letter-spacing:.05em;color:#8f8f86}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:860px){
+    .stats .grid{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(3){border-left:0}
+    .stat:nth-child(n+3){border-top:1px solid var(--hair)}
+  }
+  @media(max-width:680px){
+    .menu{
+      position:fixed;inset:66px 0 auto 0;background:var(--base);
+      flex-direction:column;gap:0;padding:8px 28px 22px;
+      border-bottom:1px solid var(--hair);
+      transform:translateY(-120%);transition:transform .4s var(--ease);
+    }
+    .menu.open{transform:translateY(0)}
+    .menu a{padding:13px 0;border-bottom:1px solid var(--hair)}
+    .menu-btn{display:block}
+    .cats{grid-template-columns:1fr}
+    .cat:last-child:nth-child(odd){grid-column:auto}
+    .hero{padding:72px 0 60px}
+    .art{flex-wrap:wrap;gap:8px 16px}
+    .art .acat{min-width:auto}
+    .art .atitle{flex-basis:100%;order:3}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <a class="logo" href="/" aria-label="火加減手帖 トップ">
+        <svg class="mark" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 1C12 8 18 9 18 16C18 22 14 26 12 28C10 26 6 22 6 16C6 12 9 11 9 7C11 9 12 4 12 1Z" stroke="#6B7F5E" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M12 28C13.6 26.4 15 22.8 15 19.4C15 16.4 13.4 15.2 12 12.6C10.6 15.2 9 16.4 9 19.4C9 22.8 10.4 26.4 12 28Z" fill="#6B7F5E" fill-opacity="0.22"/>
+        </svg>
+        <span class="jp">火加減手帖</span>
+      </a>
+      <span class="en">Hikagen&nbsp;Techo</span>
+    </div>
+    <nav class="menu" id="menu">
+      <a href="#about">書いている人</a>
+      <a href="#categories">カテゴリ</a>
+      <a href="#articles">記事</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="メニュー" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <svg class="flame" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M100 10C100 70 150 80 150 140C150 190 120 220 100 235C80 220 50 190 50 140C50 105 75 95 75 60C90 80 100 40 100 10Z" stroke="#6B7F5E" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M100 235C113 222 125 192 125 163C125 138 112 128 100 106C88 128 75 138 75 163C75 192 87 222 100 235Z" stroke="#6B7F5E" stroke-width="1.2"/>
+    </svg>
+    <p class="eyebrow reveal">A notebook for small local business</p>
+    <h1 class="reveal">地方の小さな飲食店が、<br><em>仕組み</em>で勝つ。</h1>
+    <p class="lead reveal">大手と同じ土俵では戦わない。実際に自分の店で使い、試し、数字で確かめたことだけを書く一次情報の手帖です。比較ではなく、「私が選んだ理由」を。</p>
+    <span class="by reveal"><span class="line"></span>地方で小商いを仕組み化する人</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats reveal">
+  <div class="wrap">
+    <div class="grid">
+      <div class="stat">
+        <div class="num">2</div>
+        <div class="lbl">弁当・惣菜店を<br>運営（店舗）</div>
+      </div>
+      <div class="stat">
+        <div class="num">3<span style="font-size:1rem">年目</span></div>
+        <div class="lbl">開業から<br>経営のリアルを記録</div>
+      </div>
+      <div class="stat">
+        <div class="num">5<span style="font-size:1rem">万未満</span></div>
+        <div class="lbl">人口の<br>地方都市が舞台</div>
+      </div>
+      <div class="stat">
+        <div class="num">89<span style="font-size:1rem">%</span></div>
+        <div class="lbl">自動化で削減した<br>作業時間（一例）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <h2>書いている人</h2>
+      <span class="en-h">Who writes this</span>
+    </div>
+    <div class="about-body reveal">
+      <p>人口5万人未満の地方都市で、<strong>弁当・惣菜店を2店舗</strong>営んでいます。開業3年目。前職は自動車部品メーカーの生産技術職で、製造・システム・経営管理をほぼ一人で回しています。</p>
+      <p>現場の非効率を放っておけない性分で、<strong>GAS・Python・VBA</strong>を使って注文管理や経理を自動化してきました。「導入前45分→導入後5分」のような地味な改善の積み重ねが、小さな店の利益を守ります。</p>
+      <p>この手帖では、<strong>経営のリアル</strong>と<strong>仕組み化の実例</strong>を、数字つきで正直に書きます。飲食店の話を入口にしていますが、内容は美容・整骨院・小売・フリーランスなど、地方で小商いをするすべての個人事業主に使えるように整理しています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="block" id="categories" style="padding-top:0">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <h2>カテゴリ</h2>
+      <span class="en-h">Categories</span>
+    </div>
+    <div class="cats reveal">
+      <a class="cat" href="#">
+        <span class="cnum">01</span>
+        <h3>経営のリアル</h3>
+        <p>数字はぼかしながら、地方で小商いを続ける現実を体験ベースで。</p>
+        <span class="arrow">読む →</span>
+      </a>
+      <a class="cat" href="#">
+        <span class="cnum">02</span>
+        <h3>仕組み化・デジタル化</h3>
+        <p>実際に導入したツールと自動化の話。GASのコードも公開します。</p>
+        <span class="arrow">読む →</span>
+      </a>
+      <a class="cat" href="#">
+        <span class="tag-rev">Review</span>
+        <span class="cnum">03</span>
+        <h3>使ってみた正直レビュー</h3>
+        <p>使ったものだけを書く。「比較」ではなく「私が選んだ理由」。</p>
+        <span class="arrow">読む →</span>
+      </a>
+      <a class="cat" href="#">
+        <span class="cnum">04</span>
+        <h3>個人事業主のお金</h3>
+        <p>比較記事は作らない。実際に使っているカードや融資の一次情報のみ。</p>
+        <span class="arrow">読む →</span>
+      </a>
+      <a class="cat" href="#">
+        <span class="cnum">05</span>
+        <h3>開業・独立</h3>
+        <p>飲食店の開業体験を軸に、個人事業主全般に使える情報へ展開。</p>
+        <span class="arrow">読む →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- UPCOMING ARTICLES -->
+<section class="block articles" id="articles">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <h2>これから公開する記事</h2>
+      <span class="en-h">Coming soon</span>
+    </div>
+    <div class="art-list reveal">
+      <div class="art"><span class="ano">01</span><span class="acat">プロフィール</span><span class="atitle">地方で小商いを仕組み化する人の話</span><span class="soon">準備中</span></div>
+      <div class="art"><span class="ano">02</span><span class="acat">経営のリアル</span><span class="atitle">人口5万の地方都市で弁当屋を開業して3年目のリアル</span><span class="soon">準備中</span></div>
+      <div class="art"><span class="ano">03</span><span class="acat">仕組み化</span><span class="atitle">GASで注文管理を自動化した話【コード公開】</span><span class="soon">準備中</span></div>
+      <div class="art"><span class="ano">04</span><span class="acat">正直レビュー</span><span class="atitle">Airレジを2年使った弁当屋の正直レビュー【導入前後の変化】</span><span class="soon">準備中</span></div>
+      <div class="art"><span class="ano">05</span><span class="acat">個人事業主のお金</span><span class="atitle">開業3年目の弁当屋が経費管理を仕組み化した話</span><span class="soon">準備中</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="ftop">
+      <div class="fbrand">
+        <div class="jp">火加減手帖</div>
+        <div class="en">Hikagen Techo</div>
+        <p>地方の小さな飲食店が、仕組みで勝つ。一次情報で書く小商いの手帖。</p>
+      </div>
+      <div class="fnav">
+        <div class="col">
+          <h4>Categories</h4>
+          <a href="#categories">経営のリアル</a>
+          <a href="#categories">仕組み化・デジタル化</a>
+          <a href="#categories">使ってみた正直レビュー</a>
+          <a href="#categories">個人事業主のお金</a>
+          <a href="#categories">開業・独立</a>
+        </div>
+        <div class="col">
+          <h4>About</h4>
+          <a href="#about">書いている人</a>
+          <a href="#articles">記事一覧</a>
+        </div>
+      </div>
+    </div>
+    <div class="fbottom">
+      <span>© 2026 火加減手帖</span>
+      <span>公開日 2026.05.24 ／ 最終更新 2026.05.24</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // モバイルメニュー
+  var btn = document.getElementById('menuBtn');
+  var menu = document.getElementById('menu');
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+  });
+
+  // スクロールでフェードイン
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
