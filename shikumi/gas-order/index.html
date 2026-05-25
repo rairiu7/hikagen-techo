@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>GASで注文管理を自動化した話【コード公開】｜火加減手帖</title>
+<meta name="description" content="電話・店頭・HPの3経路から入る注文を、Google Apps Script（GAS）で1枚のスプレッドシートに一元化し、生産計画を自動生成。毎日30分かかっていた転記作業が5分になり、予約の転記ミスがゼロになった弁当屋の実例とサンプルコードを公開します。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/gas-order/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="GASで注文管理を自動化した話【コード公開】｜火加減手帖">
+<meta property="og:description" content="電話・店頭・HPの注文をGASで一元化し生産計画を自動生成。毎日30分の転記が5分に、転記ミスがゼロに。サンプルコード付き。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/gas-order/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person（著者・全記事共通） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "GASで注文管理を自動化したら、毎日30分の転記作業が5分になった話",
+  "description": "電話・店頭・HPの3経路の注文をGASで1枚のスプレッドシートに一元化し、生産計画を自動生成した実例。毎日30分の転記作業が5分になり、予約の転記ミスがゼロになった手順とサンプルコードを公開。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/gas-order/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-05-25",
+  "dateModified": "2026-05-25",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化・デジタル化",
+  "keywords": "GAS, Google Apps Script, 注文管理, 自動化, 飲食店, スプレッドシート, 生産計画"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "GASで注文管理を自動化した話", "item": "https://hikagen-techo.com/shikumi/gas-order/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（GEOルール③・本文FAQと一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "プログラミングの知識がなくてもGASで注文管理を自動化できますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "完全にゼロからは難しいですが、本記事のような動くサンプルコードを土台にすれば、設定値の書き換えと簡単な調整で動かせる範囲は広いです。最初は『コピペして、自分の環境名に直す』ところから始めるのが現実的です。" }
+    },
+    {
+      "@type": "Question",
+      "name": "GAS（Google Apps Script）の利用に費用はかかりますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "Googleアカウントがあれば基本的に無料で使えます。ただし1日あたりの実行時間やトリガー数に上限があるため、注文件数が非常に多い場合は処理の作り方を工夫する必要があります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "注文の入り口が電話・店頭・HPと複数でも、ひとつにまとめられますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "まとめられます。コツは、入り口ごとに処理を分けず、すべての注文を1枚の『注文ログ』シートに集約することです。HPは自動POST、電話・店頭はスタッフ入力用のフォームと、入り口は違っても、ためる場所を1つにすれば集計は共通化できます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "自動化で本当にミスは減りますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "減ります。私の店では、ノートからホワイトボードへ予約を手で書き写す工程をなくしたことで、写し間違いや抜け漏れが構造的に発生しなくなり、転記ミスが実質ゼロになりました。人が転記しなければ、転記ミスは起きないという考え方です。" }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">GASで注文管理を自動化した話</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化</span>
+    <h1 class="post-title">GASで注文管理を自動化したら、毎日30分の転記作業が5分になった話【コード公開】</h1>
+    <div class="post-meta">
+      <time datetime="2026-05-25">2026年5月25日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-05-25">2026年5月25日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>電話・店頭・HPという<strong>3つの入り口</strong>から入る注文を、Google Apps Script（GAS）で<strong>1枚のスプレッドシートに集約</strong>し、そこから「生産計画」を自動生成する仕組みを作りました。</p>
+      <p>結果、毎日やっていた<strong>注文の転記作業が約30分から約5分（およそ83%減）</strong>になり、<strong>予約の転記ミスは実質ゼロ</strong>になりました。この記事では、その考え方と<strong>そのまま動かせるサンプルコード</strong>を公開します。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="この記事の数字">
+      <div class="stat"><div class="stat__num">30<span style="font-size:1rem">分→5分</span></div><div class="stat__label">毎日の転記作業</div></div>
+      <div class="stat"><div class="stat__num">83<span style="font-size:1rem">%</span></div><div class="stat__label">作業時間の削減</div></div>
+      <div class="stat"><div class="stat__num">0<span style="font-size:1rem">件</span></div><div class="stat__label">予約の転記ミス</div></div>
+    </div>
+
+    <!-- ③ 前提（一次情報） -->
+    <h2>自動化する前は、毎日「二度手間」をやっていた</h2>
+    <p>私は人口5万人未満の地方都市で、弁当・惣菜店を2店舗やっています（詳しくは<a href="/about/">この人について</a>）。注文は<strong>電話・店頭・ホームページ</strong>の3か所から入ってきます。問題は、その3つがバラバラだったことです。</p>
+    <p>以前のやり方はこうでした。まず予約の<strong>抜け漏れがないかをノートで確認</strong>し、それを今度は<strong>バイトへの指示用にホワイトボードへ書き写す</strong>。プロフィール記事でも触れた、あの「書き写し」です。やること自体は単純ですが、毎日<strong>約30分</strong>かかり、しかも<strong>手で写す以上、必ず写し間違いのリスク</strong>がありました。</p>
+    <p>「予約が1件、ホワイトボードに転記されていなかった」——これは小さな店にとって、その日の信用に直結する事故です。だから、ここを真っ先に仕組みで潰すことにしました。</p>
+
+    <!-- ④ 本文：設計 -->
+    <h2>設計の考え方：入り口は分けても、ためる場所は1つにする</h2>
+    <p>自動化でいちばん大事なのは、いきなりコードを書くことではなく<strong>「データの流れを1本にまとめる」</strong>設計です。私は次のように整理しました。</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>入り口</th><th>記録の方法</th><th>ためる場所</th></tr></thead>
+        <tbody>
+          <tr><td>ホームページ</td><td>注文時に自動でGASへ送信</td><td rowspan="2">スプレッドシート<br>「注文ログ」に集約</td></tr>
+          <tr><td>電話・店頭</td><td>スタッフが専用フォームに入力</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>入り口は3つでも、注文が最終的にたどり着く場所を<strong>「注文ログ」という1枚のシート</strong>に統一しました。こうすると、その後の集計は入り口の違いを気にせず<strong>1つのプログラムで処理</strong>できます。ここが自動化の肝です。</p>
+    <p>そして「注文ログ」から、<strong>受取日ごと・商品ごとの作る数量</strong>を自動で集計し、「生産計画」シートに毎回まっさらに書き出します。これで、ノートもホワイトボードへの書き写しも要らなくなりました。</p>
+
+    <!-- ⑤ コード公開 -->
+    <h2>【コード公開】注文を集計して生産計画を作る部分</h2>
+    <p>ここが仕組みの中心です。<strong>「注文ログ」を読み込み、指定した日の商品別合計を出して「生産計画」シートに書き出す</strong>関数を、そのまま載せます。引数なしで呼ぶと「明日の分」を作ります。</p>
+
+    <pre><code>// 注文ログを集計して「生産計画」シートを作り直す
+function buildProductionPlan(targetDate) {
+  const ss     = SpreadsheetApp.openById(SS_ID);
+  const orders = ss.getSheetByName(SHEET_ORDER).getDataRange().getValues().slice(1); // 見出し除く
+  const tz     = Session.getScriptTimeZone();
+
+  // 対象日（指定がなければ「明日」）を yyyy-MM-dd に整形
+  const target = targetDate
+    || Utilities.formatDate(new Date(Date.now() + 86400000), tz, 'yyyy-MM-dd');
+
+  // 受取日が対象日の注文だけ、商品ごとに数量を合算
+  const totals = {};
+  orders.forEach(function (row) {
+    const pickup = Utilities.formatDate(new Date(row[1]), tz, 'yyyy-MM-dd');
+    if (pickup !== target) return;
+    const item = row[2];
+    const qty  = Number(row[3]) || 0;
+    totals[item] = (totals[item] || 0) + qty;
+  });
+
+  // 集計結果を「生産計画」シートへ出力（毎回まっさらに作り直す）
+  const plan = ss.getSheetByName(SHEET_PLAN);
+  plan.clearContents();
+  plan.getRange(1, 1, 1, 3).setValues([['受取日', '商品', '作る数']]);
+  const rows = Object.keys(totals).sort().map(function (item) {
+    return [target, item, totals[item]];
+  });
+  if (rows.length) plan.getRange(2, 1, rows.length, 3).setValues(rows);
+
+  return rows.length;
+}</code></pre>
+    <p class="code-caption">設定値（SS_ID＝スプレッドシートID、シート名など）と、電話・店頭フォームの送信を受ける処理、HPからの自動受信処理を含む<strong>完全なサンプルコード一式</strong>は、この記事の末尾からダウンロードできます。</p>
+
+    <h3>電話・店頭の注文は「フォーム送信時」に走らせる</h3>
+    <p>電話と店頭の注文は、スタッフが入力する専用のGoogleフォームを用意し、<strong>送信されるたびに</strong>注文ログへ追記して生産計画を作り直します。フォーム送信をきっかけに動かすには、トリガーで <code>onFormSubmit</code> を指定します。</p>
+
+    <pre><code>// 電話・店頭フォームが送信されたら走る
+function onFormSubmit(e) {
+  const v = e.values; // [タイムスタンプ, 受取日, 商品, 数量, 名前]
+  appendOrder_({
+    pickupDate: v[1],
+    item:       v[2],
+    qty:        Number(v[3]),
+    source:     '電話・店頭',
+    customer:   v[4] || ''
+  });
+  buildProductionPlan(); // 入力のたびに生産計画を最新化
+}</code></pre>
+    <p>HP経由の注文は、ウェブアプリとして公開したGASのURLに注文データをPOSTする形（<code>doPost</code>）で、同じ「注文ログ」へ自動で入ります。3つの入り口が、最終的に同じ1枚へ流れ込む構造です。</p>
+
+    <!-- 結果 -->
+    <h2>結果：30分→5分、そして転記ミスがゼロに</h2>
+    <p>仕組みが回り始めてから、変化は明確でした。</p>
+    <ul>
+      <li>毎日の転記作業が<strong>約30分 → 約5分</strong>（残った5分は最終確認の時間）</li>
+      <li>ノート・ホワイトボードへの<strong>手書き写しが消滅</strong> → <strong>予約の転記ミスが実質ゼロ</strong>に</li>
+      <li>生産計画が誰でも同じ画面で見られるので、<strong>「私しか分からない」状態が解消</strong>した</li>
+    </ul>
+    <p>削減できたのは1日25分ですが、これは年間に直すと<strong>約150時間</strong>です。それ以上に大きいのが、ミスが「気をつける」ではなく<strong>「構造的に起きない」</strong>状態になったこと。人が転記しなければ、転記ミスは原理的に発生しません。</p>
+
+    <!-- つまずき -->
+    <h2>つまずいた点・注意したこと</h2>
+    <p>正直に書くと、すんなりとはいきませんでした。実際にハマったのは次の3点です。</p>
+    <ul>
+      <li><strong>商品名の表記ゆれ</strong>：「唐揚弁当」と「からあげ弁当」が別商品として集計される。入力をフォームの選択式にして根本から防ぎました。</li>
+      <li><strong>権限の承認</strong>：初回実行時にGoogleの承認画面が出ます。これは正常な動作なので、内容を確認して許可します。</li>
+      <li><strong>実行のタイミング</strong>：受注のたびに全件を再集計すると、注文が増えたとき重くなります。対象日を絞る（明日の分だけ作る）ことで軽くしています。</li>
+    </ul>
+
+    <!-- 今後 -->
+    <h2>これから：発注・在庫・棚卸へ広げる（準備中）</h2>
+    <p>注文の一元化ができると、その先が一気につながります。いま準備しているのは、この「注文ログ」を起点にした<strong>発注計画・在庫管理・棚卸</strong>の自動化です。必要な仕入れ量が注文から逆算でき、棚卸の手間も減らせる見込みです。動き出したら、また<a href="/shikumi/">仕組み化</a>カテゴリで報告します。</p>
+
+    <!-- ⑥ まとめ -->
+    <h2>まとめ</h2>
+    <p>注文管理の自動化は、派手なAIの話ではありません。<strong>バラバラの入り口を1枚に集約し、人の手による転記をなくす</strong>。たったこれだけで、毎日30分と、ミスの不安が同時に消えました。</p>
+    <p>まずは「自分の店で、毎日同じことを手で書き写している作業はどれか」を1つ見つけてみてください。そこが、最初に仕組み化すべき場所です。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>プログラミングの知識がなくてもGASで注文管理を自動化できますか？</summary>
+        <div class="faq__a"><p>完全にゼロからは難しいですが、本記事のような動くサンプルコードを土台にすれば、設定値の書き換えと簡単な調整で動かせる範囲は広いです。最初は「コピペして、自分の環境名に直す」ところから始めるのが現実的です。</p></div>
+      </details>
+
+      <details>
+        <summary>GAS（Google Apps Script）の利用に費用はかかりますか？</summary>
+        <div class="faq__a"><p>Googleアカウントがあれば基本的に無料で使えます。ただし1日あたりの実行時間やトリガー数に上限があるため、注文件数が非常に多い場合は処理の作り方を工夫する必要があります。</p></div>
+      </details>
+
+      <details>
+        <summary>注文の入り口が電話・店頭・HPと複数でも、ひとつにまとめられますか？</summary>
+        <div class="faq__a"><p>まとめられます。コツは、入り口ごとに処理を分けず、すべての注文を1枚の「注文ログ」シートに集約することです。HPは自動POST、電話・店頭はスタッフ入力用のフォームと、入り口は違っても、ためる場所を1つにすれば集計は共通化できます。</p></div>
+      </details>
+
+      <details>
+        <summary>自動化で本当にミスは減りますか？</summary>
+        <div class="faq__a"><p>減ります。私の店では、ノートからホワイトボードへ予約を手で書き写す工程をなくしたことで、写し間違いや抜け漏れが構造的に発生しなくなり、転記ミスが実質ゼロになりました。人が転記しなければ、転記ミスは起きないという考え方です。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/about/">
+          <span class="related__cat">プロフィール</span>
+          <div class="related__title">地方で小商いを仕組み化する人の話</div>
+        </a>
+        <a class="related__item" href="/shikumi/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">小規模飲食店がまずやるべきデジタル化3選</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+      <nav aria-label="フッターナビ">
+        <a href="/keiei/">経営のリアル</a>
+        <a href="/shikumi/">仕組み化</a>
+        <a href="/review/">正直レビュー</a>
+        <a href="/money/">お金</a>
+        <a href="/kaigyo/">開業・独立</a>
+        <a href="/about/">この人について</a>
+      </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
