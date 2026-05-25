@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>弁当屋2店舗をほぼ1人で3年回している——「何でも屋」をやめて仕組みに任せるまで｜火加減手帖</title>
+<meta name="description" content="経理・発注・製造指示・採用・スタッフ管理・配送予約管理の6種類をほぼ1人でこなす弁当屋の経営実態。「何でも屋」になってしんどかった時期と、スタッフへの指示の定型化で脱出できた経緯を一次情報でまとめます。">
+<link rel="canonical" href="https://hikagen-techo.com/keiei/hitori-unei/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="弁当屋2店舗をほぼ1人で3年回している——「何でも屋」をやめて仕組みに任せるまで｜火加減手帖">
+<meta property="og:description" content="6種類の業務をほぼ1人でこなす弁当屋3年目。何でも屋から脱出した核心はスタッフ指示の定型化だった。">
+<meta property="og:url" content="https://hikagen-techo.com/keiei/hitori-unei/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "弁当屋2店舗をほぼ1人で3年回している——「何でも屋」をやめて仕組みに任せるまで",
+  "description": "経理・発注・製造指示・採用・スタッフ管理・配送予約管理の6種類をほぼ1人でこなす弁当屋の経営実態。何でも屋から脱出できた核心はスタッフ指示の定型化だった。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/keiei/hitori-unei/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-05-25",
+  "dateModified": "2026-05-25",
+  "inLanguage": "ja",
+  "articleSection": "経営のリアル"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "経営のリアル", "item": "https://hikagen-techo.com/keiei/" },
+    { "@type": "ListItem", "position": 3, "name": "弁当屋2店舗をほぼ1人で3年回している", "item": "https://hikagen-techo.com/keiei/hitori-unei/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "飲食店を1人で2店舗経営するのは現実的ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "私の場合は可能でした。ただし「自分が何でもやる」前提では破綻します。調理は専属の調理担当に任せ、繰り返し業務は仕組みに流し、自分は経営判断と仕組みの整備だけに集中する——この設計があってはじめて成立しています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "1人経営でいちばんしんどいことは何ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "「何でも屋になってしまうこと」です。経理・発注・製造指示・採用・スタッフ管理・配送予約管理と、私が担う業務は6種類以上あります。仕組みが整っていない段階では、どれか1つが詰まると全体が止まります。この「何でも屋」から抜け出す設計が、1人経営の核心だと思っています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "スタッフへの指示を定型化するにはどこから始めればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "「自分が毎回口頭で言っていること」を書き出すことから始めました。特別なツールは要りません。繰り返している言葉を紙に書き出し、1枚に整理するだけです。最初は粗くていい。まず「言葉にして残す」と、自分が何を毎回説明していたかが見えてきます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "調理を自分でやらないのに、品質管理はどうしているのですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "製造指示とレシピの標準化を仕組みにしています。「何をどの数量で、どの手順で作る」を文書化し、調理担当が再現できる状態にすること——これが私の役割です。元の職が生産技術職だったこともあり、「工程を設計して人に渡す」考え方は自然に身についていました。" }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/keiei/">経営のリアル</a>
+    <span class="sep">/</span>
+    <span aria-current="page">弁当屋2店舗をほぼ1人で3年回している</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">経営のリアル</span>
+    <h1 class="post-title">弁当屋2店舗をほぼ1人で3年回している——「何でも屋」をやめて仕組みに任せるまで</h1>
+    <div class="post-meta">
+      <time datetime="2026-05-25">2026年5月25日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-05-25">2026年5月25日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>私が担う業務は<strong>経理・発注・製造指示・採用・スタッフ管理・配送予約管理の6種類</strong>。2店舗をほぼ1人で3年回してこられた理由は、体力でも根性でもなく、<strong>「自分がやらなくて済む仕組みを先に作ったから」</strong>です。</p>
+      <p>一番しんどかったのは、何でも自分に集まってくる「何でも屋」状態でした。そこから抜け出せた核心は、<strong>スタッフへの指示を定型化・マニュアル化したこと</strong>。この記事では、その考え方と実際の方法を書きます。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="基本データ">
+      <div class="stat"><div class="stat__num">2<span style="font-size:1rem">店舗</span></div><div class="stat__label">経営店舗数</div></div>
+      <div class="stat"><div class="stat__num">6<span style="font-size:1rem">種類</span></div><div class="stat__label">1人で担う業務</div></div>
+      <div class="stat"><div class="stat__num">1<span style="font-size:1rem">枚</span></div><div class="stat__label">指示マニュアルで標準化</div></div>
+    </div>
+
+    <!-- ③ 前提（一次情報） -->
+    <h2>私が1人でやっている6種類の業務</h2>
+    <p>まず「ほぼ1人」の中身を正直に書きます。私は人口5万人未満の地方都市で弁当・惣菜店を2店舗やっています（詳しくは<a href="/about/">この人について</a>）。調理だけは専属の調理担当に任せていますが、それ以外のほぼすべてを私が担っています。</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>業務</th><th>主な内容</th></tr></thead>
+        <tbody>
+          <tr><td>経理・確定申告</td><td>帳簿入力、マネーフォワードでの月次管理、年1回の確定申告</td></tr>
+          <tr><td>発注・仕入れ</td><td>食材・消耗品の在庫確認と発注、仕入れ先との調整</td></tr>
+          <tr><td>仕込み・製造の指示</td><td>メニューと数量の決定、調理担当への製造指示</td></tr>
+          <tr><td>採用・スタッフ管理</td><td>求人掲載、面接、シフト作成、教育</td></tr>
+          <tr><td>配送・予約管理</td><td>法人向け配送の受付・管理、個別予約の対応</td></tr>
+          <tr><td>仕組み・ツール整備</td><td>GASやPythonを使った自動化、マニュアル整備</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>「それ全部1人で？」と思われるかもしれません。実際、最初は私もそう感じていました。ただ今は、これらのうち<strong>大半を「仕組みが回す」状態</strong>にできています。人手ではなく、仕組みが動いている部分がほとんどです。</p>
+
+    <!-- ④ 何でも屋のしんどさ -->
+    <h2>「何でも屋」になると、何がしんどいのか</h2>
+    <p>正直に書きます。仕組みが整っていない時期の1人経営は、<strong>本当にしんどい</strong>です。</p>
+    <p>何がしんどいかというと、業務の種類が多いこと自体より、<strong>「すべての判断が自分に集まってくる」こと</strong>です。スタッフが「これどうすればいいですか？」と聞くたびに私が答えなければならない。私が答えられる状況でないと、その場が止まる。何かイレギュラーが起きたとき、対応できるのも私だけ。</p>
+    <p>元の職は自動車部品メーカーの生産技術職でした。製造ラインの工程設計をやっていた経験から、<strong>「人依存のプロセスはどこかで必ず詰まる」</strong>ことは知っていたつもりでした。でも、自分の店でそれが起きたとき、頭で分かっていることと体で感じることの差を思い知らされました。</p>
+    <p>何でも屋の状態では、自分が倒れたら全部止まります。2店舗を抱えていれば、その影響範囲はさらに広い。「これは設計を変えるしかない」と腹を決めたのは、開業から半年ほどが過ぎた頃でした。</p>
+
+    <!-- ⑤ 生産技術職の視点 -->
+    <h2>生産技術職で身についた考え方が、ここで生きた</h2>
+    <p>生産技術職の仕事は、一言でいうと<strong>「工程を設計して、人に渡す」</strong>ことです。作業者が毎回考えなくていいように、手順を標準化する。判断が必要な場面を減らし、流れに乗るだけで正しい結果が出るプロセスを作る。</p>
+    <p>飲食店の経営もまったく同じ構造だと気づきました。スタッフが毎回私に聞かなくていいように、判断の基準を文書に落とす。私がいなくても動く部分を増やし、私がやるべきは<strong>「例外への対応」と「仕組みの整備」</strong>だけにする。</p>
+    <p>工場ではこれを「標準化」と呼びます。小さな店でも、やることは同じです。</p>
+
+    <!-- ⑥ 仕組みで解決した核心 -->
+    <h2>何でも屋から抜け出せた核心：スタッフへの指示の定型化</h2>
+    <p>6種類の業務のうち、最初に手をつけたのが<strong>スタッフへの指示の定型化</strong>でした。理由は単純で、<strong>毎日必ず発生する業務</strong>だったからです。</p>
+    <p>以前の私はこうしていました。その日の朝、頭の中にある「今日作るもの・数量・手順の注意点」を口頭でスタッフに伝える。記録はなし。スタッフも私も、毎日同じ会話を繰り返していました。</p>
+    <p>これを変えたのが<strong>製造指示書の1枚マニュアル化</strong>です。「何をどの数量で、どの手順で、どのタイミングで作るか」を書式に落とし、その日の数字だけ埋めれば指示が完成する形にしました。口頭で毎回説明していた内容が、1枚の紙に集約されました。</p>
+    <p>変化は明確でした。<strong>「これどうすればいいですか？」の質問が大幅に減り、私がその場にいなくてもスタッフが動ける場面が増えた</strong>のです。私の時間が解放された分で、次の仕組みを作ることができました。</p>
+
+    <h3>定型化は「書き出す」ことから始まる</h3>
+    <p>最初から完璧なマニュアルは要りません。私がやったのはシンプルで、<strong>「自分が毎回口頭で言っていること」を紙に書き出す</strong>ことだけです。特別なツールも、フォーマットも最初は不要です。</p>
+    <p>書き出してみると、自分が毎日同じことを言い続けていたことに気づきます。そのリストを整理して1枚にまとめると、それがそのままマニュアルになります。粗くていい。スタッフが「これを見れば動ける」状態になれば、それで十分です。</p>
+
+    <!-- GASとの組み合わせ -->
+    <h2>スタッフ指示の定型化 ＋ GASによる自動化の組み合わせ</h2>
+    <p>スタッフへの指示を定型化すると、その前段——「何をどれだけ作るか」の計算——も自動化できるようになりました。注文データから翌日の生産計画を自動生成するGASを作ったのが、次のステップです（詳しくは<a href="/shikumi/gas-order/">GASで注文管理を自動化した話</a>に書きました）。</p>
+    <p>自動生成された生産計画の数字を、定型化された指示書に転記するだけで、その日の製造指示が完成する。<strong>「スタッフへの指示系統はマニュアル」「数字の計算はGAS」</strong>——この組み合わせが、いまの1人経営の骨格です。</p>
+
+    <!-- 今もしんどいこと -->
+    <h2>それでも、今もしんどいこと</h2>
+    <p>正直に書きます。仕組みが整ってきた今でも、<strong>完全に「何でも屋」から脱せてはいません</strong>。</p>
+    <p>採用と教育は、仕組みにしにくい業務の代表です。求人を出して、面接して、採用して、店のやり方を覚えてもらう——この流れは、ある程度の人的コストが避けられない。スタッフが辞めるたびに、私のリソースがそこに引っ張られます。</p>
+    <p>また、設備トラブルや予想外のクレームなど、例外への対応は仕組みでは吸収できません。これを「経営者が対応すべきこと」と割り切ることで、精神的には落ち着いてきましたが、しんどいものはしんどい。</p>
+    <p>「仕組みで全部解決できる」とは思っていません。<strong>仕組みができることは、繰り返しの業務を自分から切り離すことだけ</strong>。残った例外対応に、自分の時間とエネルギーを集中させること——これが、いまの私の経営観です。</p>
+
+    <!-- ⑥ まとめ -->
+    <h2>まとめ：1人経営の設計は「自分がやらなくていい部分を先に作る」</h2>
+    <p>2店舗をほぼ1人で3年回してこられた理由を一言でまとめると、<strong>「繰り返しの業務を先に仕組みに渡した」</strong>からです。体力でも根性でもありません。</p>
+    <p>核心は、スタッフへの指示を定型化して「私がいなくても動く部分」を作ったこと。そこに注文管理の自動化が加わり、私の時間が経営判断と仕組みの整備に使えるようになりました。</p>
+    <p>もし今、何でも屋になっていてしんどいなら、<strong>まず「毎日口頭で言っていること」を1枚の紙に書き出してみてください</strong>。それが最初の定型化です。そこから仕組みは始まります。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>飲食店を1人で2店舗経営するのは現実的ですか？</summary>
+        <div class="faq__a"><p>私の場合は可能でした。ただし「自分が何でもやる」前提では破綻します。調理は専属の調理担当に任せ、繰り返し業務は仕組みに流し、自分は経営判断と仕組みの整備だけに集中する——この設計があってはじめて成立しています。</p></div>
+      </details>
+
+      <details>
+        <summary>1人経営でいちばんしんどいことは何ですか？</summary>
+        <div class="faq__a"><p>「何でも屋になってしまうこと」です。経理・発注・製造指示・採用・スタッフ管理・配送予約管理と、私が担う業務は6種類以上あります。仕組みが整っていない段階では、どれか1つが詰まると全体が止まります。この「何でも屋」から抜け出す設計が、1人経営の核心だと思っています。</p></div>
+      </details>
+
+      <details>
+        <summary>スタッフへの指示を定型化するにはどこから始めればいいですか？</summary>
+        <div class="faq__a"><p>「自分が毎回口頭で言っていること」を書き出すことから始めました。特別なツールは要りません。繰り返している言葉を紙に書き出し、1枚に整理するだけです。最初は粗くていい。まず「言葉にして残す」と、自分が何を毎回説明していたかが見えてきます。</p></div>
+      </details>
+
+      <details>
+        <summary>調理を自分でやらないのに、品質管理はどうしているのですか？</summary>
+        <div class="faq__a"><p>製造指示とレシピの標準化を仕組みにしています。「何をどの数量で、どの手順で作る」を文書化し、調理担当が再現できる状態にすること——これが私の役割です。元の職が生産技術職だったこともあり、「工程を設計して人に渡す」考え方は自然に身についていました。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/shikumi/gas-order/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">GASで注文管理を自動化したら、毎日30分の転記作業が5分になった話</div>
+        </a>
+        <a class="related__item" href="/about/">
+          <span class="related__cat">プロフィール</span>
+          <div class="related__title">地方で小商いを仕組み化する人の話</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+      <nav aria-label="フッターナビ">
+        <a href="/keiei/">経営のリアル</a>
+        <a href="/shikumi/">仕組み化</a>
+        <a href="/review/">正直レビュー</a>
+        <a href="/money/">お金</a>
+        <a href="/kaigyo/">開業・独立</a>
+        <a href="/about/">この人について</a>
+      </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
