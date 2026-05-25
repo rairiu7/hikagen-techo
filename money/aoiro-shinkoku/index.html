@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>税理士なしで青色申告を2年やりきった弁当屋——65万円控除を受けた手順とつまずいた2点｜火加減手帖</title>
+<meta name="description" content="人口5万人未満の地方都市で弁当・惣菜店を営む筆者が、マネーフォワードを使って税理士なしで青色申告を2年連続で完了した実体験。65万円の特別控除を受けた手順、事業主借/貸でつまずいた話、外部委託売上の手入力問題を一次情報で。">
+<link rel="canonical" href="https://hikagen-techo.com/money/aoiro-shinkoku/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="税理士なしで青色申告を2年やりきった弁当屋——65万円控除を受けた手順とつまずいた2点｜火加減手帖">
+<meta property="og:description" content="マネーフォワードで税理士なしの青色申告を2年完了。65万円控除の条件・事業主借/貸の壁・外部委託売上の手入力を本音で。">
+<meta property="og:url" content="https://hikagen-techo.com/money/aoiro-shinkoku/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "税理士なしで青色申告を2年やりきった弁当屋——65万円控除を受けた手順とつまずいた2点",
+  "description": "マネーフォワードを使って税理士なしで青色申告を2年完了した弁当屋の一次情報。65万円特別控除を受けた手順、事業主借/貸の壁、外部委託売上の手入力問題を本音でまとめる。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/money/aoiro-shinkoku/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-05-25",
+  "dateModified": "2026-05-25",
+  "inLanguage": "ja",
+  "articleSection": "個人事業主のお金"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "個人事業主のお金", "item": "https://hikagen-techo.com/money/" },
+    { "@type": "ListItem", "position": 3, "name": "税理士なしで青色申告を2年やりきった話", "item": "https://hikagen-techo.com/money/aoiro-shinkoku/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "個人事業主が青色申告を選ぶメリットは何ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "最大のメリットは最大65万円の「青色申告特別控除」です。複式簿記での記帳とe-Taxでの提出が条件ですが、マネーフォワードなどのクラウド会計ソフトを使えばこの条件を満たしやすくなります。私は2年連続でこの65万円控除を受けており、税負担を大きく減らせています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "青色申告を税理士なしで自分でやることはできますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "私の場合はできました。マネーフォワード クラウド会計を使えば、日々の仕訳から確定申告書類の生成まで一通りできます。つまずいたのは「事業主借/貸の使い方」と「自動連携できない売上の手入力」の2点でしたが、どちらも調べながら解決できました。" }
+    },
+    {
+      "@type": "Question",
+      "name": "「事業主借」「事業主貸」とは何ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "個人事業主特有の勘定科目で、事業のお金と個人のお金が行き来するときに使います。プライベートの口座から事業の経費を払ったときは「事業主借」、事業のお金を個人的な支出に使ったときは「事業主貸」を使います。私は最初ここで一番迷いました。" }
+    },
+    {
+      "@type": "Question",
+      "name": "マネーフォワードで自動取り込みできない売上はどう処理しますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "私の場合は外部委託先からの売上が自動連携されないため、毎月手動で仕訳を入力しています。委託先から届く明細を確認しながら、月に1回まとめて処理するルーティンにすることで抜け漏れを防いでいます。自動化できない部分は「月1回の作業日」を決めてしまうのが楽です。" }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/money/">個人事業主のお金</a>
+    <span class="sep">/</span>
+    <span aria-current="page">税理士なしで青色申告を2年やりきった話</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">個人事業主のお金</span>
+    <h1 class="post-title">税理士なしで青色申告を2年やりきった弁当屋——65万円控除を受けた手順とつまずいた2点</h1>
+    <div class="post-meta">
+      <time datetime="2026-05-25">2026年5月25日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-05-25">2026年5月25日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>マネーフォワード クラウド会計を使い、<strong>税理士なしで青色申告を2年連続で完了しました</strong>。受けた控除は最大の<strong>65万円</strong>。税理士費用はゼロです。</p>
+      <p>ただし正直につまずいた点が2つあります。<strong>マネーフォワードで自動取り込みできない外部委託先の売上処理</strong>と、<strong>事業主借/貸の使い方</strong>です。この2点の乗り越え方を含め、一次情報としてまとめます。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="基本データ">
+      <div class="stat"><div class="stat__num">65<span style="font-size:1rem">万円</span></div><div class="stat__label">青色申告特別控除額</div></div>
+      <div class="stat"><div class="stat__num">2<span style="font-size:1rem">回</span></div><div class="stat__label">自力で完了した申告</div></div>
+      <div class="stat"><div class="stat__num">0<span style="font-size:1rem">円</span></div><div class="stat__label">税理士費用</div></div>
+    </div>
+
+    <!-- ③ 前提（一次情報） -->
+    <h2>前提：弁当屋3年目、マネーフォワードで帳簿をつけている</h2>
+    <p>私は人口5万人未満の地方都市で弁当・惣菜店を2店舗やっています（詳しくは<a href="/about/">この人について</a>）。確定申告は開業1年目から自分でやっており、1年目は弥生会計、2年目に<a href="/review/moneyforward/">マネーフォワード クラウド会計</a>へ切り換えて以降2回の青色申告を自力でやりきっています。この2回の経験が、この記事の一次情報です。</p>
+    <p>なお私は税理士でも会計の専門家でもありません。この記事は「自分がやってみてどうだったか」の実体験であり、税務上の正確な判断は税理士や税務署に確認してください。</p>
+
+    <!-- ④ 青色申告を選んだ理由 -->
+    <h2>青色申告を選んだ理由：65万円控除のインパクト</h2>
+    <p>個人事業主の確定申告には白色申告と青色申告があります。私が青色申告を選んだ理由は明確で、<strong>最大65万円の「青色申告特別控除」</strong>を受けられるからです。</p>
+    <p>65万円の控除は、次の2条件を満たすことで受けられます。</p>
+    <ul>
+      <li><strong>複式簿記</strong>での記帳</li>
+      <li><strong>e-Tax（電子申告）</strong>または電子帳簿保存法に基づく保存での提出</li>
+    </ul>
+    <p>マネーフォワード クラウド会計は複式簿記に対応しており、e-Tax連携もできます。つまり<strong>ソフトの指示通りに作業を進めれば、自然と65万円控除の条件が整う</strong>仕組みになっています。税率によって変わりますが、65万円の所得控除は数万円〜十数万円単位の節税につながります。これを毎年受けられるなら、会計ソフトの月額費用は十分に回収できます。</p>
+
+    <!-- ⑤ マネーフォワードで自動化できた部分 -->
+    <h2>マネーフォワードで「ほぼ自動」になった部分</h2>
+    <p>Airレジの売上は毎日自動で取り込まれ、銀行口座・クレジットカードの明細も自動連携されます。仕訳の大半はソフトが提案してくれるので、私は確認・修正をするだけです。</p>
+    <p>この自動化のおかげで、月次の帳簿作業は以前の半日以上から1時間台に収まるようになりました。年度末の確定申告書類も、日々の仕訳が正しく入っていれば損益計算書・貸借対照表・青色申告決算書がボタン一つで生成されます。</p>
+    <p>「確定申告って大変そう」という印象は、帳簿が整っていないことへの不安からくる部分が大きいと感じます。日常の記帳が自動化されていれば、申告書類の作成自体はそれほど難しくありません。</p>
+
+    <!-- ⑥ つまずいた点 -->
+    <h2>正直につまずいた2点</h2>
+    <p>良いことばかり書くのは信用できないので、本音で書きます。2年やってきて実際に詰まったのは、はっきり2点です。</p>
+
+    <h3>つまずき①：外部委託先の売上は手入力が必要だった</h3>
+    <p>私の店では、Airレジを通さない外部の販路からも売上が発生します。この外部委託先からの売上は<strong>マネーフォワードに自動連携されません</strong>。つまり、毎月手動で仕訳を入力する必要があります。</p>
+    <p>最初はこれを見落としていて、年度末に「あれ、この売上が帳簿に入っていない」と気づいて焦りました。以来、<strong>月に1回、外部委託先からの明細が届いたタイミングで手入力する日を固定</strong>することにしました。ルーティン化してしまえば抜け漏れは防げます。</p>
+    <p>自動取り込みできないケースは自分のビジネスモデルによって異なります。銀行やカード以外の入金経路がある場合は、最初から「これは手入力が要る」と把握しておくと後が楽です。</p>
+
+    <h3>つまずき②：「事業主借」「事業主貸」の使い方が分からなかった</h3>
+    <p>個人事業主の帳簿には「事業主借」「事業主貸」という、法人には存在しない勘定科目があります。<strong>最初はここが一番意味不明でした。</strong></p>
+    <p>整理するとこうです。</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>場面</th><th>使う科目</th></tr></thead>
+        <tbody>
+          <tr><td>プライベートの口座・財布から事業の経費を払った</td><td>事業主借（事業主が事業にお金を「貸した」）</td></tr>
+          <tr><td>事業の口座から個人的な支出をした</td><td>事業主貸（事業が事業主にお金を「貸した」）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>つまり「事業と個人のお金が行き来するときに使う科目」です。個人事業主は事業と個人の財布が分かれていない場面が多いので、この科目が頻繁に登場します。</p>
+    <p>理解できてしまえばシンプルですが、最初に仕訳の候補に「事業主借」が出てきたとき、意味が全く分からず手が止まりました。「事業主借 使い方」で検索してようやく理解できたのですが、マネーフォワードを使っている個人事業主の解説記事が豊富で、すぐに解決できました。これがマネーフォワードを選んだ理由の一つでもあります（詳しくは<a href="/review/moneyforward/">マネーフォワードに乗り換えた理由</a>）。</p>
+
+    <!-- ⑦ やってみた結論 -->
+    <h2>やってみた結論：税理士に頼まなくてよかった</h2>
+    <p>2年やりきって正直な感想は、<strong>「税理士に頼まなくてよかった」</strong>です。</p>
+    <p>もちろん税理士に依頼すれば、節税の提案や複雑な処理を任せられるメリットはあります。ただ私の場合、年商規模が小さく、取引の種類もシンプルです。マネーフォワードとネット上の情報で対応できる範囲を超えた複雑さはありませんでした。</p>
+    <p>税理士費用がゼロになったことで、<strong>会計ソフトの月額費用は完全にペイできています</strong>。また自分で数字を把握することで、「今月は経費が多いな」「この売上は正しく計上されているか」という感覚が身につきました。これは税理士に丸投げしていたら得られなかった視点です。</p>
+    <p>ただし、事業規模が大きくなったり、不動産や複数の事業を組み合わせたりするケースでは、早めに税理士に相談する価値は高いと思います。「自分でやれる範囲」を見極めることが重要です。</p>
+
+    <!-- ⑥ まとめ -->
+    <h2>まとめ：つまずきポイントを知っておけば、自力でやれる</h2>
+    <p>青色申告の自力完了を阻む最大の壁は、<strong>「難しそう」という先入観</strong>だと思います。マネーフォワードで日々の帳簿を自動化しておけば、申告書類の生成は想像より簡単です。</p>
+    <p>つまずくとすれば、私の経験では<strong>「自動取り込みできない売上の見落とし」と「事業主借/貸の意味」</strong>の2点です。前者は月1回の手入力ルーティンで、後者は一度理解してしまえば以降は迷いません。</p>
+    <p>65万円控除は毎年確実に受けられる節税です。会計ソフトを使って自力でやれるなら、その分の税理士費用を本業に回せます。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>個人事業主が青色申告を選ぶメリットは何ですか？</summary>
+        <div class="faq__a"><p>最大のメリットは最大65万円の「青色申告特別控除」です。複式簿記での記帳とe-Taxでの提出が条件ですが、マネーフォワードなどのクラウド会計ソフトを使えばこの条件を満たしやすくなります。私は2年連続でこの65万円控除を受けており、税負担を大きく減らせています。</p></div>
+      </details>
+
+      <details>
+        <summary>青色申告を税理士なしで自分でやることはできますか？</summary>
+        <div class="faq__a"><p>私の場合はできました。マネーフォワード クラウド会計を使えば、日々の仕訳から確定申告書類の生成まで一通りできます。つまずいたのは「事業主借/貸の使い方」と「自動連携できない売上の手入力」の2点でしたが、どちらも調べながら解決できました。</p></div>
+      </details>
+
+      <details>
+        <summary>「事業主借」「事業主貸」とは何ですか？</summary>
+        <div class="faq__a"><p>個人事業主特有の勘定科目で、事業のお金と個人のお金が行き来するときに使います。プライベートの口座から事業の経費を払ったときは「事業主借」、事業のお金を個人的な支出に使ったときは「事業主貸」を使います。私は最初ここで一番迷いました。</p></div>
+      </details>
+
+      <details>
+        <summary>マネーフォワードで自動取り込みできない売上はどう処理しますか？</summary>
+        <div class="faq__a"><p>私の場合は外部委託先からの売上が自動連携されないため、毎月手動で仕訳を入力しています。委託先から届く明細を確認しながら、月に1回まとめて処理するルーティンにすることで抜け漏れを防いでいます。自動化できない部分は「月1回の作業日」を決めてしまうのが楽です。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/review/moneyforward/">
+          <span class="related__cat">正直レビュー</span>
+          <div class="related__title">弥生会計からマネーフォワード クラウド会計に乗り換えた理由と、弁当屋が2年使った正直な感想</div>
+        </a>
+        <a class="related__item" href="/keiei/hitori-unei/">
+          <span class="related__cat">経営のリアル</span>
+          <div class="related__title">弁当屋2店舗をほぼ1人で3年回している——「何でも屋」をやめて仕組みに任せるまで</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+      <nav aria-label="フッターナビ">
+        <a href="/keiei/">経営のリアル</a>
+        <a href="/shikumi/">仕組み化</a>
+        <a href="/review/">正直レビュー</a>
+        <a href="/money/">お金</a>
+        <a href="/kaigyo/">開業・独立</a>
+        <a href="/about/">この人について</a>
+      </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
