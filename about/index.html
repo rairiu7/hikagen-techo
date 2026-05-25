@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>地方で小商いを仕組み化する人の話｜火加減手帖</title>
+<meta name="description" content="人口5万人未満の地方都市で弁当・惣菜店を2店舗。元自動車部品メーカーの生産技術職が、製造・システム・経営をほぼ一人で回しながら業務を仕組み化してきた記録です。火加減手帖を書いている人の自己紹介。">
+<link rel="canonical" href="https://hikagen-techo.com/about/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="地方で小商いを仕組み化する人の話｜火加減手帖">
+<meta property="og:description" content="人口5万人未満の地方都市で弁当・惣菜店を2店舗。元メーカーの生産技術職が、製造・システム・経営をほぼ一人で回しながら仕組み化してきた記録。">
+<meta property="og:url" content="https://hikagen-techo.com/about/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person（著者情報） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "description": "人口5万人未満の地方都市で弁当・惣菜店を2店舗経営する個人事業主。元自動車部品メーカーの生産技術職。GAS・Python・VBAを用いた業務自動化を得意とし、製造・システム・経営管理をほぼ一人で担う。就労継続支援A型事業所を新規立ち上げ中。",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article（記事情報） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "地方で小商いを仕組み化する人の話",
+  "description": "火加減手帖を書いている人の自己紹介。元メーカーの生産技術職が、地方で弁当・惣菜店を2店舗運営しながら業務を仕組み化してきた背景を、公開できる範囲でまとめています。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/about/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "火加減手帖",
+    "url": "https://hikagen-techo.com/"
+  },
+  "datePublished": "2026-05-24",
+  "dateModified": "2026-05-24",
+  "inLanguage": "ja"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "この人について", "item": "https://hikagen-techo.com/about/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（GEOルール③） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "火加減手帖はどんな人が書いていますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "人口5万人未満の地方都市で弁当・惣菜店を2店舗経営している、開業3年目の個人事業主です。元は自動車部品メーカーの生産技術職で、製造・システム・経営管理をほぼ一人で担っています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "なぜ店名や所在地を公開していないのですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "実際の売上や経費といった一次情報を率直に書くために、店舗が特定されない形を選んでいます。地域は『人口5万人未満の地方都市』、規模は『年商800〜1,000万円規模』といったぼかした表現で、リアリティは保ちつつ匿名性を確保しています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "プログラミングは飲食店経営にどう役立っていますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "GAS・Python・VBAで注文管理や経理の集計を自動化しています。たとえば毎日45分かかっていた集計作業を約5分まで短縮（約89%削減）するなど、人手の作業を減らして本業に時間を回せるようにしています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "弁当屋以外の個人事業主が読んでも役に立ちますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "役に立つように書いています。題材は弁当屋の実体験ですが、経理の仕組み化・ツール選び・開業の手順などは、美容・整骨院・小売・フリーランスなど小規模で地方の事業者に共通する内容です。" }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <span aria-current="page">この人について</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">Profile</span>
+    <h1 class="post-title">地方で小商いを仕組み化する人の話</h1>
+    <div class="post-meta">
+      <time datetime="2026-05-24">2026年5月24日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-05-24">2026年5月24日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト（GEOルール①） -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>火加減手帖を書いているのは、<strong>人口5万人未満の地方都市で弁当・惣菜店を2店舗</strong>営む、開業3年目の個人事業主です。元は自動車部品メーカーの生産技術職で、製造もシステムも経営管理も、ほぼ一人で回しています。</p>
+      <p>このサイトでは「地方の小さな飲食店が、仕組みで勝つ」をテーマに、私が実際に使ったツール・実際に出た数字だけを書きます。大手の比較サイトには絶対に書けない<strong>一次情報</strong>が、ここの全部です。</p>
+    </div>
+
+    <!-- 数値ハイライト（GEOルール②） -->
+    <div class="stat-row" role="group" aria-label="基本データ">
+      <div class="stat"><div class="stat__num">2</div><div class="stat__label">店舗</div></div>
+      <div class="stat"><div class="stat__num">3<span style="font-size:1rem">年目</span></div><div class="stat__label">開業からの年数</div></div>
+      <div class="stat"><div class="stat__num">89<span style="font-size:1rem">%</span></div><div class="stat__label">集計作業の時間削減</div></div>
+    </div>
+
+    <!-- ③ 筆者の状況・前提（一次情報の担保） -->
+    <h2>まず、どこの誰が書いているのか</h2>
+    <p>名乗れる範囲で正直に書きます。私は<strong>人口5万人に満たない地方都市</strong>で、弁当と惣菜のお店を2店舗やっています。開業して3年目。規模はおおよそ<strong>年商800〜1,000万円規模</strong>の、ごく小さな商いです。</p>
+    <p>店名や正確な売上、住んでいる場所は、あえて伏せています。理由はシンプルで、<strong>「実際にいくら使って、いくら残ったか」を率直に書くため</strong>です。店が特定される状態だと、どうしても書けることが減ります。だから地域は「人口5万人未満」、規模は「年商800〜1,000万円規模」という<strong>ぼかした表現</strong>で、リアリティだけ残して匿名性を確保しています。</p>
+    <p>もう一つの前提として、私は<strong>元メーカーの生産技術職</strong>でした。自動車部品の製造現場で、「どうすればこの作業を速く・安く・ミスなくできるか」をずっと考える仕事です。飲食店をやっている今も、頭の中身はそのときから変わっていません。</p>
+
+    <!-- ④ 本文（体験談＋数字） -->
+    <h2>「料理人」ではなく「生産技術の人」が弁当屋をやると、こうなる</h2>
+    <p>正直に言うと、私は腕一本でのし上がった料理人ではありません。前職は工場で、図面とデータと改善提案に囲まれて過ごしていました。だから弁当屋を始めたとき、最初に気になったのは味そのものよりも<strong>「この作業、毎日同じことを手でやってないか？」</strong>という点でした。</p>
+    <p>小さな飲食店は、想像以上に「手作業の集合体」です。注文の集計、日々の売上の記録、仕入れの管理、経費の仕分け。一つひとつは数分でも、毎日積み重なれば膨大な時間になります。しかも、その時間は1円も生みません。</p>
+    <p>そこで私は、前職でやっていたことをそのまま持ち込みました。<strong>「人がやらなくていい作業は、全部プログラムに渡す」</strong>という発想です。</p>
+
+    <h3>たとえば、毎日45分の集計を5分にした話</h3>
+    <p>開業当初、私はある集計作業に毎日45分ほど使っていました。手で数えて、手で転記して、電卓を叩く。地味ですが、確実に毎日発生する作業です。</p>
+    <p>これを <strong>Google Apps Script（GAS）</strong> で自動化したところ、同じ作業が<strong>約5分</strong>で終わるようになりました。削減率にして<strong>約89%</strong>。1日40分でも、1か月で約20時間、1年で約240時間です。その時間を新メニューの試作や、本来やるべき経営の判断に回せるようになりました。</p>
+    <p>派手な話ではありません。でも、小商いの利益はこういう「地味な時間の積み重ね」で確実に変わります。火加減手帖で書きたいのは、まさにこの種のリアルな改善です。</p>
+
+    <h2>製造・システム・経営を、ほぼ一人で回している</h2>
+    <p>うちの体制は、世間でいう「ワンオペ経営」に近いものです。商品をつくる現場、業務を回す仕組み(システム)、お金を管理する経営、この3つを基本的に一人で見ています。足の不自由な共同経営者のパートナーと一緒に事業をやっていますが、製造とシステムまわりは私の担当です。</p>
+    <p>一人で全部を見るのは大変です。けれど、だからこそ<strong>「仕組み化」が生命線</strong>になります。人を増やせないなら、作業を減らすしかない。減らせないなら、自動化するしかない。この順番で考えるのが、私のやり方です。</p>
+
+    <h2>これからやろうとしていること：福祉という新しい挑戦</h2>
+    <p>いま私は、飲食事業とは別に <strong>就労継続支援A型事業所</strong>の立ち上げを進めています。障がいのある方が雇用契約を結んで働く、福祉と事業の真ん中にある仕組みです。</p>
+    <p>福祉の分野は、私にとってまったくの新領域で、現在進行形で学んでいます。ただ「人が働きやすい仕組みを設計する」という意味では、これまでやってきた業務改善と地続きだと感じています。この立ち上げの過程も、つまずきも含めて、いずれこのサイトで書いていくつもりです。</p>
+
+    <!-- ⑤ 使用ツールの自然な紹介 -->
+    <h2>このサイトで紹介するものの基準</h2>
+    <p>火加減手帖では、ツールやサービスを紹介することがあります。ただし基準は一つだけ。<strong>「私が実際に使っているもの・使ったことがあるものだけ」</strong>書きます。</p>
+    <p>「おすすめ10選」のような比較記事は作りません。使ったことのないものを並べても、それは大手の比較サイトと同じで、私が書く意味がないからです。代わりに、<strong>「私が実際にこれを選んだ理由」「2年使ってどうだったか」</strong>という形で、一次情報として正直に書きます。良かった点も、面倒だった点も、どちらも。</p>
+
+    <!-- ⑥ まとめ -->
+    <h2>まとめ：地方の小商いを、仕組みで強くする</h2>
+    <p>私は特別な経営者ではありません。地方都市で小さな店を2つやっている、元エンジニアの個人事業主です。武器があるとすれば、<strong>「現場のリアル」と「自動化のスキル」を両方持っている</strong>こと。この2つが交わる場所で起きたことを、できるだけ正直に記録していくのが火加減手帖です。</p>
+    <p>もしあなたが地方で小さな商いをしている、あるいはこれから始めるなら、ここに書くことのいくつかは役に立つはずです。弁当屋の話を入口にしていますが、中身は<strong>小規模・地方・個人事業</strong>に共通する話に広げていきます。どうぞ気軽に読んでいってください。</p>
+
+    <!-- 著者ボックス（Person） -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、製造・システム・経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ（GEOルール③） -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>火加減手帖はどんな人が書いていますか？</summary>
+        <div class="faq__a"><p>人口5万人未満の地方都市で弁当・惣菜店を2店舗経営している、開業3年目の個人事業主です。元は自動車部品メーカーの生産技術職で、製造・システム・経営管理をほぼ一人で担っています。</p></div>
+      </details>
+
+      <details>
+        <summary>なぜ店名や所在地を公開していないのですか？</summary>
+        <div class="faq__a"><p>実際の売上や経費といった一次情報を率直に書くために、店舗が特定されない形を選んでいます。地域は「人口5万人未満の地方都市」、規模は「年商800〜1,000万円規模」といったぼかした表現で、リアリティは保ちつつ匿名性を確保しています。</p></div>
+      </details>
+
+      <details>
+        <summary>プログラミングは飲食店経営にどう役立っていますか？</summary>
+        <div class="faq__a"><p>GAS・Python・VBAで注文管理や経理の集計を自動化しています。たとえば毎日45分かかっていた集計作業を約5分まで短縮（約89%削減）するなど、人手の作業を減らして本業に時間を回せるようにしています。</p></div>
+      </details>
+
+      <details>
+        <summary>弁当屋以外の個人事業主が読んでも役に立ちますか？</summary>
+        <div class="faq__a"><p>役に立つように書いています。題材は弁当屋の実体験ですが、経理の仕組み化・ツール選び・開業の手順などは、美容・整骨院・小売・フリーランスなど小規模で地方の事業者に共通する内容です。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事（公開後にリンク差し替え） -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/keiei/3nenme-real/">
+          <span class="related__cat">経営のリアル</span>
+          <div class="related__title">人口5万の地方都市で弁当屋を開業して3年目のリアル</div>
+        </a>
+        <a class="related__item" href="/shikumi/gas-order/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">GASで注文管理を自動化した話【コード公開】</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+      <nav aria-label="フッターナビ">
+        <a href="/keiei/">経営のリアル</a>
+        <a href="/shikumi/">仕組み化</a>
+        <a href="/review/">正直レビュー</a>
+        <a href="/money/">お金</a>
+        <a href="/kaigyo/">開業・独立</a>
+        <a href="/about/">この人について</a>
+      </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
