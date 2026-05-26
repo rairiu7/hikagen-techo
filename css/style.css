@@ -329,3 +329,30 @@ a:hover { color: var(--c-accent-dk); text-decoration: underline; text-underline-
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 .text-accent { color: var(--c-accent); }
+
+/* --- 19. PR表記ブロック（ステマ規制対応） --------------------------------- */
+.pr-notice {
+  display: flex; align-items: flex-start; gap: 0.6em;
+  margin: 1.25rem 0 2rem; padding: 0.75rem 1rem;
+  background: var(--c-sub); border-left: 3px solid var(--c-accent);
+  border-radius: 4px; font-family: var(--f-body);
+}
+.pr-notice__label {
+  flex-shrink: 0; padding: 0.15em 0.65em;
+  background: var(--c-accent); color: #fff;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+  line-height: 1.7; border-radius: 3px;
+}
+.pr-notice__text {
+  margin: 0; font-size: 0.83rem; line-height: 1.7; color: var(--c-text);
+}
+.pr-notice__text a { color: var(--c-accent); text-decoration: underline; }
+
+/* --- 20. アフィリエイトCTAボタン ----------------------------------------- */
+.aff-btn {
+  display: inline-block; margin: 1.5rem 0; padding: 0.9rem 2rem;
+  background: var(--c-accent); color: #fff; font-family: var(--f-body);
+  font-weight: 700; text-decoration: none; border-radius: 6px;
+  transition: opacity 0.2s ease;
+}
+.aff-btn:hover { opacity: 0.85; }
