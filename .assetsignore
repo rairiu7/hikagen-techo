@@ -13,6 +13,7 @@ wrangler.jsonc
 
 # --- ドキュメント類 ---
 README.md
+CLAUDE.md
 
 # --- このファイル自体 ---
 .assetsignore
