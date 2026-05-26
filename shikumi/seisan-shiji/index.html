@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>ホワイトボードと電卓をやめた日——弁当屋の生産指示をデジタル化したら、新人でも迷わず動けるようになった話｜火加減手帖</title>
+<meta name="description" content="ホワイトボードへの書き写し・電卓での容器計算をやめ、GAS＋スプレッドシート＋専用HTMLで生産指示をデジタル化した弁当屋の実録。2時間で生産数20個以上増加。新人でも即日対応可能になるまでの手順を一次情報で。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/seisan-shiji/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="ホワイトボードと電卓をやめた日——弁当屋の生産指示をデジタル化したら、新人でも迷わず動けるようになった話｜火加減手帖">
+<meta property="og:description" content="GAS＋スプレッドシート＋専用HTMLで生産指示をデジタル化。2時間で+20個以上、新人即日対応可能になった弁当屋の実録。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/seisan-shiji/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "生産管理", "業務デジタル化"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ホワイトボードと電卓をやめた日——弁当屋の生産指示をデジタル化したら、新人でも迷わず動けるようになった話",
+  "description": "GAS＋スプレッドシート＋専用HTMLで生産指示をデジタル化した弁当屋の実録。2時間で生産数20個以上増加、新人でも即日対応可能になるまでを一次情報でまとめる。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/seisan-shiji/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-05-26",
+  "dateModified": "2026-05-26",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化・デジタル化"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化・デジタル化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "生産指示のデジタル化", "item": "https://hikagen-techo.com/shikumi/seisan-shiji/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "生産指示のデジタル化に必要なものは何ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "私の場合はGAS・Googleスプレッドシート・専用HTML・大型モニターの4つです。データをスプレッドシートで管理し、GAS経由で専用HTMLに表示する構成にしました。大型モニターは40インチのものをキッチンに設置しています。プログラミングは必須ですが、今はAIに「こんな画面を作りたい」と投げれば雛形を作ってもらえるので、添削しながら完成させることができます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "プログラミングの知識がなくても生産指示画面は作れますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "AIを活用すれば知識がなくても取り組みやすくなりました。私自身もAIに画面のイメージを伝えて雛形を出してもらい、実際の運用に合わせて添削しながら作り上げました。完全にゼロ知識では難しいですが、「やりたいこと」を言語化できれば、AIが大部分を補ってくれる時代です。" }
+    },
+    {
+      "@type": "Question",
+      "name": "ホワイトボードからデジタル化して一番変わったことは何ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "スタッフが「確認のためにうろうろしなくなった」ことです。以前はホワイトボードを見るためにキッチン内を移動し、容器の数を電卓で計算していました。デジタル化後は画面を一度見れば必要な情報がすべて揃うため、移動と計算の手間がなくなりました。副次効果として、新人でも一度教えれば即日対応できるようになっています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "GASとスプレッドシートで生産指示を管理するデメリットはありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "GAS経由だと画面の初期表示にレスポンスの遅さを感じる点です。私の場合は現在データベースへの移行を検討しています。ただし一度表示してしまえば頻繁に切り替えることはないため、現時点では緊急度は低く運用上の支障はほぼありません。" }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/" aria-current="page">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化・デジタル化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">生産指示のデジタル化</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化・デジタル化</span>
+    <h1 class="post-title">ホワイトボードと電卓をやめた日——弁当屋の生産指示をデジタル化したら、新人でも迷わず動けるようになった話</h1>
+    <div class="post-meta">
+      <time datetime="2026-05-26">2026年5月26日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-05-26">2026年5月26日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>ホワイトボードへの書き写しと電卓での容器計算をやめ、<strong>GAS＋Googleスプレッドシート＋専用HTML</strong>で生産指示をデジタル化しました。40インチのモニターに表示することで、スタッフが確認のためにキッチン内をうろうろしなくなり、<strong>作業の迷いがなくなりました</strong>。</p>
+      <p>数字で言えば、<strong>2時間あたり20個以上の生産数増加</strong>（体感）。それ以上に大きかったのは、<strong>新人でも一度教えれば即日動けるようになった</strong>ことです。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="基本データ">
+      <div class="stat"><div class="stat__num">+20<span style="font-size:1rem">個以上</span></div><div class="stat__label">2時間あたりの生産数増加（体感）</div></div>
+      <div class="stat"><div class="stat__num">0<span style="font-size:1rem">回</span></div><div class="stat__label">容器確認のための移動・電卓計算</div></div>
+      <div class="stat"><div class="stat__num">1<span style="font-size:1rem">度</span></div><div class="stat__label">教えれば新人が即日対応できる</div></div>
+    </div>
+
+    <!-- ③ 前提 -->
+    <h2>前提：弁当屋の生産現場はアナログのかたまりだった</h2>
+    <p>私は人口5万人未満の地方都市で弁当・惣菜店を2店舗経営しています（詳しくは<a href="/about/">この人について</a>）。元々は製造業の生産技術職だったこともあり、飲食の現場のアナログさには開業当初から違和感がありました。</p>
+    <p>特に毎朝の生産指示まわりは、無駄な手間が積み重なっていました。この記事はその解消までの実録です。</p>
+
+    <!-- ④ 導入前の状況 -->
+    <h2>導入前：ノート→ホワイトボード→電卓という3段階の手間</h2>
+    <p>デジタル化する前の生産指示の流れはこうでした。</p>
+    <ol>
+      <li>前日または当日朝、注文内容をもとにノートで生産数を考える</li>
+      <li>その内容をキッチンのホワイトボードに書き写す</li>
+      <li>スタッフがホワイトボードを見るためにキッチン内に足を運び、容器の必要数を電卓で計算する</li>
+    </ol>
+    <p>問題はさらにありました。<strong>「この商品にはどの容器を使う」という情報はホワイトボードに書かれていなかった</strong>のです。容器の種類は各スタッフの経験と記憶に依存していました。結果、<strong>入社直後のスタッフは容器を用意できない</strong>という状況が常態化していました。</p>
+
+    <!-- ⑤ 何が問題だったか -->
+    <h2>問題の本質：「暗黙知」が新人の壁になっていた</h2>
+    <p>ホワイトボードには「○○弁当 30個」と書いてあっても、「その弁当にはどの容器を何個使うか」は書いていない。これは熟練スタッフには自明でも、新人にはまったく分からない情報です。</p>
+    <p>毎朝ベテランスタッフに確認しに行くか、間違えて作り直すかのどちらかです。小さな飲食店でこれが続くと、ベテランへの依存が高まり、育てる側も育てられる側も消耗します。私が<a href="/keiei/staff-saiyou/">採用・定着で苦労した</a>原因のひとつもここにありました。</p>
+
+    <!-- ⑥ 導入した仕組み -->
+    <h2>導入した仕組み：GAS＋スプレッドシート＋専用HTML＋40インチモニター</h2>
+    <p>構成はシンプルです。</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>役割</th><th>使ったもの</th></tr></thead>
+        <tbody>
+          <tr><td>データ管理</td><td>Googleスプレッドシート</td></tr>
+          <tr><td>データ取得・加工</td><td>Google Apps Script（GAS）</td></tr>
+          <tr><td>表示画面</td><td>専用HTML</td></tr>
+          <tr><td>表示デバイス</td><td>40インチモニター（キッチン設置）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>スプレッドシートに注文数を入力すると、GASが容器の必要数などを計算して専用HTMLの画面に反映される仕組みです。</p>
+
+    <h3>画面に表示している情報</h3>
+    <p>ホワイトボードには載っていなかった情報も含め、以下を一画面で表示しています。</p>
+    <ul>
+      <li>商品名・生産数量</li>
+      <li>どこへ持っていく商品か（予約・取り置き・配達の区別）</li>
+      <li>使用する容器の種類と必要数（自動計算）</li>
+      <li>生産順序</li>
+      <li>注意点・備考</li>
+    </ul>
+    <p>これらを40インチのモニターに一覧表示することで、<strong>スタッフはその場から動かずに全情報を把握できます</strong>。電卓も不要です。</p>
+
+    <!-- ⑦ AIを活用した開発 -->
+    <h2>専用HTML画面はAIと一緒に作った</h2>
+    <p>「こんな画面を作りたい」というイメージをAIに投げ、出てきた雛形を実際の運用に合わせて添削しながら仕上げました。完全にゼロから自分だけで書いたわけではありません。</p>
+    <p>プログラミングの知識がある程度あれば、AIが出すコードを読んで修正できます。「やりたいことを言語化する力」があれば、AIが大部分を補ってくれます。こういうツールを作るハードルは、以前と比べて格段に下がったと実感しています。</p>
+
+    <!-- ⑧ 導入後の変化 -->
+    <h2>導入後：スタッフがうろうろしなくなった</h2>
+    <p>一番目に見えて変わったのは、<strong>スタッフがキッチン内を確認のために歩き回らなくなった</strong>ことです。画面を一度見れば全情報が揃っているので、迷いなく作業に入れます。</p>
+    <p>生産数の増加は正確に計測したわけではありませんが、<strong>同じ時間で20個以上は増えた感覚</strong>があります。迷い・移動・電卓計算という「作業以外の時間」がなくなったことが積み重なっている結果です。</p>
+    <p>もうひとつの変化が、<strong>新人の即戦力化</strong>です。容器の種類と数が画面に出るので、経験がなくても「画面の通りに準備する」だけで動けます。一度使い方を教えれば、その日から生産準備に入ってもらえます。</p>
+
+    <!-- ⑨ 今後の課題 -->
+    <h2>現在の課題：GASのレスポンスとデータベース化</h2>
+    <p>現状の正直な課題は、<strong>GAS経由だと初期表示のレスポンスが遅い</strong>点です。データベースへの移行を検討中ですが、一度表示してしまえば頻繁に画面を切り替えることはないため、現時点では運用上の支障はほぼありません。緊急度は低く、環境は引き続き整えていく予定です。</p>
+    <p>リリース後に軽微なバグが出て都度修正するのも実態です。気づかないまま本番稼働してしまい、スタッフからの指摘で直すケースもあります。小さな店でシステムを自作する以上、ある程度は致し方ないことだと割り切っています。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>生産指示のデジタル化に必要なものは何ですか？</summary>
+        <div class="faq__a"><p>私の場合はGAS・Googleスプレッドシート・専用HTML・大型モニターの4つです。データをスプレッドシートで管理し、GAS経由で専用HTMLに表示する構成にしました。大型モニターは40インチのものをキッチンに設置しています。プログラミングは必須ですが、今はAIに「こんな画面を作りたい」と投げれば雛形を作ってもらえるので、添削しながら完成させることができます。</p></div>
+      </details>
+
+      <details>
+        <summary>プログラミングの知識がなくても生産指示画面は作れますか？</summary>
+        <div class="faq__a"><p>AIを活用すれば知識がなくても取り組みやすくなりました。私自身もAIに画面のイメージを伝えて雛形を出してもらい、実際の運用に合わせて添削しながら作り上げました。完全にゼロ知識では難しいですが、「やりたいこと」を言語化できれば、AIが大部分を補ってくれる時代です。</p></div>
+      </details>
+
+      <details>
+        <summary>ホワイトボードからデジタル化して一番変わったことは何ですか？</summary>
+        <div class="faq__a"><p>スタッフが「確認のためにうろうろしなくなった」ことです。以前はホワイトボードを見るためにキッチン内を移動し、容器の数を電卓で計算していました。デジタル化後は画面を一度見れば必要な情報がすべて揃うため、移動と計算の手間がなくなりました。副次効果として、新人でも一度教えれば即日対応できるようになっています。</p></div>
+      </details>
+
+      <details>
+        <summary>GASとスプレッドシートで生産指示を管理するデメリットはありますか？</summary>
+        <div class="faq__a"><p>GAS経由だと画面の初期表示にレスポンスの遅さを感じる点です。私の場合は現在データベースへの移行を検討しています。ただし一度表示してしまえば頻繁に切り替えることはないため、現時点では緊急度は低く運用上の支障はほぼありません。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/shikumi/gas-order/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">GASで注文管理を自動化したら、毎日30分の転記作業が5分になった話【コード公開】</div>
+        </a>
+        <a class="related__item" href="/keiei/staff-saiyou/">
+          <span class="related__cat">経営のリアル</span>
+          <div class="related__title">弁当屋が8人雇って3人辞めた話——採用・教育・定着の実録とマニュアル整備の苦労</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+      <nav aria-label="フッターナビ">
+        <a href="/keiei/">経営のリアル</a>
+        <a href="/shikumi/">仕組み化</a>
+        <a href="/review/">正直レビュー</a>
+        <a href="/money/">お金</a>
+        <a href="/kaigyo/">開業・独立</a>
+        <a href="/about/">この人について</a>
+      </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
