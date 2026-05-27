@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>予約経路5つ・集約先ひとつ——弁当屋が製造漏れをゼロにした予約管理の仕組み｜火加減手帖</title>
+<meta name="description" content="電話・LINE・Instagram・HP・店頭と5つある予約経路を専用HTMLフォーム＋GASで1か所に集約。半年に1度起きていた製造漏れをゼロにした弁当屋の仕組みを一次情報で解説します。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/yoyaku-kanri/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="予約経路5つ・集約先ひとつ——弁当屋が製造漏れをゼロにした予約管理の仕組み｜火加減手帖">
+<meta property="og:description" content="電話・LINE・Instagram・HP・店頭の5経路を集約。半年に1度の製造漏れをゼロにした弁当屋の仕組みを一次情報で。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/yoyaku-kanri/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "予約経路5つ・集約先ひとつ——弁当屋が製造漏れをゼロにした予約管理の仕組み",
+  "description": "電話・LINE・Instagram・HP・店頭と5つある予約経路を専用HTMLフォーム＋GASで1か所に集約。半年に1度起きていた製造漏れをゼロにした弁当屋の仕組みを一次情報で解説します。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/yoyaku-kanri/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-05-27",
+  "dateModified": "2026-05-27",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化・デジタル化"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化・デジタル化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "予約管理の仕組み化", "item": "https://hikagen-techo.com/shikumi/yoyaku-kanri/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "予約フォームはどのように作りましたか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "AIを使ってHTMLを生成し、必要事項をタップするだけで入力できるシンプルな構造にしました。Airレジを使っているタブレットに専用リンクを貼り付けてあり、誰でも同じ手順で入力できます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "電話や店頭など、デジタルが苦手な経路からの予約はどう対応していますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "スタッフが代わりに専用フォームへ打ち込む運用にしています。予約経路は問わず、最終的に同じフォームへ集約されます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "LINEグループやGoogleカレンダーではダメだったのはなぜですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "LINEグループはチャットが流れて情報が埋もれ、Googleカレンダーはスタッフに「手間」と言われて定着しませんでした。専用フォームに絞ることで「触るもの」を1つにしました。" }
+    },
+    {
+      "@type": "Question",
+      "name": "生産指示とはどう連携していますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "集約された予約情報は生産計画の画面に常時表示されます。製造担当が予約を見落とすことがなくなり、仕組み化後は製造漏れがゼロになりました。" }
+    },
+    {
+      "@type": "Question",
+      "name": "GASのレスポンスが遅い問題はどう解決する予定ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "現在、独自データベースの立ち上げを準備しています。レスポンス改善とともに、高年齢スタッフの入力負担を減らすOCR対応も視野に入れています。" }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/" aria-current="page">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化・デジタル化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">予約管理の仕組み化</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化・デジタル化</span>
+    <h1 class="post-title">予約経路5つ・集約先ひとつ——弁当屋が製造漏れをゼロにした予約管理の仕組み</h1>
+    <div class="post-meta">
+      <time datetime="2026-05-27">2026年5月27日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-05-27">2026年5月27日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>予約の入り口は<strong>電話・公式LINE・Instagram・HP・店頭の5つ</strong>。客層が多様なので絞れないが、集約先は専用HTMLフォーム1か所だけに統一しました。</p>
+      <p>この仕組みにしてから、<strong>半年に1度あった製造漏れがゼロになりました</strong>。入力の手間はほぼ変わらないのに、正確性が格段に上がり、再確認の手間もなくなっています。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="基本データ">
+      <div class="stat"><div class="stat__num">5</div><div class="stat__label">予約経路（入り口）の数</div></div>
+      <div class="stat"><div class="stat__num">1</div><div class="stat__label">集約先（フォーム）の数</div></div>
+      <div class="stat"><div class="stat__num">月50<span style="font-size:1rem">件</span></div><div class="stat__label">平均予約数</div></div>
+      <div class="stat"><div class="stat__num">0<span style="font-size:1rem">件</span></div><div class="stat__label">仕組み化後の製造漏れ</div></div>
+    </div>
+
+    <!-- ③ 前提 -->
+    <h2>前提：入り口を絞れない理由</h2>
+    <p>人口5万人未満の地方都市で弁当・惣菜店を営んでいます。予約は月平均50件ほどで、1件あたり弁当・惣菜が5〜8個程度です（詳しくは<a href="/about/">この人について</a>）。</p>
+    <p>客層は幅広く、スマートフォンが苦手な高齢のお客さまもいれば、「直接顔を見て話したい」という方もいる。一方でLINEやInstagramで気軽に問い合わせてくる方もいます。<strong>入り口を一つに絞ることは、現実的ではありませんでした。</strong></p>
+    <p>だから方針は「入り口は広く、集約先はひとつ」にしました。</p>
+
+    <!-- ④ 失敗した2つの方法 -->
+    <h2>失敗した2つの管理方法</h2>
+
+    <h3>① 手書きノート→LINEグループ共有</h3>
+    <p>最初は紙のノートに予約内容を手書きし、スタッフのLINEグループに写真で共有していました。しかしチャットが流れると情報が埋もれ、<strong>慎重に何度も確認していたにもかかわらず、半年に1度ペースで製造漏れが発生</strong>していました。人力によるカバーには限界がありました。</p>
+
+    <h3>② Googleカレンダー</h3>
+    <p>次に試したのがGoogleカレンダーへの入力。情報が流れないという点では改善しましたが、スタッフから「入力が手間」という声が出て定着しませんでした。慣れていないツールは、業務フローには乗りません。</p>
+
+    <!-- ⑤ 現在の仕組み -->
+    <h2>現在の仕組み：入り口は5つ、集約先は1つ</h2>
+
+    <h3>予約の入り口と集約の流れ</h3>
+    <p>現在の受付経路は5つで、集約先は統一されています。</p>
+    <ul>
+      <li><strong>公式LINE / HP（Webフォーム）</strong>——GASでスプレッドシートに自動集約</li>
+      <li><strong>電話 / 店頭 / Instagram</strong>——スタッフが専用HTMLフォームへ代入力</li>
+    </ul>
+    <p>デジタルに不慣れな経路からの予約は、スタッフが代わりにフォームへ打ち込みます。どの経路から入っても、最終的に同じスプレッドシートに集まります。</p>
+
+    <h3>専用フォームはAIで作った</h3>
+    <p>スタッフ用の入力フォームは、<strong>AIにHTMLを生成してもらいました</strong>。必要事項をタップするだけのシンプルな構造で、Airレジを使っているタブレットに専用リンクを貼り付けてあります。「このリンクを開いて、入力するだけ」なので、誰でも同じ手順で作業できます。</p>
+    <p>GoogleカレンダーがNGだった理由を振り返ると、「ツールが多い」「画面が複雑」でした。専用フォームは予約入力しか使えないので、迷いようがありません。</p>
+
+    <!-- ⑥ 生産指示との連携 -->
+    <h2>生産指示との連携：確認という行為をなくす</h2>
+    <p>集約された予約データは、<a href="/shikumi/seisan-shiji/">生産指示のデジタル化</a>で作った生産計画画面に常時表示されます。製造担当が生産量を決めるときに、当日・翌日の予約が一目でわかる状態になっています。</p>
+    <p>「予約があったのに製造が漏れた」という問題は、<strong>確認する人の注意力に頼っている限り必ず起きます</strong>。画面に常時表示することで、確認という行為そのものをなくしました。</p>
+
+    <!-- ⑦ 結果と課題 -->
+    <h2>導入してよかった点と、残っている課題</h2>
+
+    <h3>よかった点：漏れゼロと再確認の消滅</h3>
+    <p>製造漏れがゼロになったことが最大の成果です。入力作業の時間はほぼ変わっていませんが、<strong>「入力したあとに再確認しなくていい」という安心感</strong>が大きい。スタッフも「どこを見ればいいか」が明確になり、余計な確認のやり取りがなくなりました。</p>
+
+    <h3>課題①：GASのレスポンス</h3>
+    <p>公式LINEやHPからの予約がスプレッドシートへ書き込まれるまで、GASの処理で数秒〜十数秒かかることがあります。現在は独自データベースへの移行を準備中です。</p>
+
+    <h3>課題②：高年齢スタッフの入力ハードル</h3>
+    <p>タブレット操作に慣れていないスタッフから「タップするのが怖い」という声があります。ミスしても修正できることは説明していますが、心理的なハードルはゼロにはなっていません。手書き伝票をOCRで読み取って自動入力する仕組みも検討しています。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>予約フォームはどのように作りましたか？</summary>
+        <div class="faq__a"><p>AIを使ってHTMLを生成し、必要事項をタップするだけで入力できるシンプルな構造にしました。Airレジを使っているタブレットに専用リンクを貼り付けてあり、誰でも同じ手順で入力できます。</p></div>
+      </details>
+
+      <details>
+        <summary>電話や店頭など、デジタルが苦手な経路からの予約はどう対応していますか？</summary>
+        <div class="faq__a"><p>スタッフが代わりに専用フォームへ打ち込む運用にしています。予約経路は問わず、最終的に同じフォームへ集約されます。</p></div>
+      </details>
+
+      <details>
+        <summary>LINEグループやGoogleカレンダーではダメだったのはなぜですか？</summary>
+        <div class="faq__a"><p>LINEグループはチャットが流れて情報が埋もれ、Googleカレンダーはスタッフに「手間」と言われて定着しませんでした。専用フォームに絞ることで「触るもの」を1つにしました。</p></div>
+      </details>
+
+      <details>
+        <summary>生産指示とはどう連携していますか？</summary>
+        <div class="faq__a"><p>集約された予約情報は生産計画の画面に常時表示されます。製造担当が予約を見落とすことがなくなり、仕組み化後は製造漏れがゼロになりました。</p></div>
+      </details>
+
+      <details>
+        <summary>GASのレスポンスが遅い問題はどう解決する予定ですか？</summary>
+        <div class="faq__a"><p>現在、独自データベースの立ち上げを準備しています。レスポンス改善とともに、高年齢スタッフの入力負担を減らすOCR対応も視野に入れています。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/shikumi/seisan-shiji/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">ホワイトボードと電卓をやめた日——弁当屋の生産指示をデジタル化したら、新人でも迷わず動けるようになった話</div>
+        </a>
+        <a class="related__item" href="/shikumi/gas-order/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">GASで注文管理を自動化したら、毎日30分の転記作業が5分になった話【コード公開】</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+        <nav aria-label="フッターナビ">
+          <a href="/keiei/">経営のリアル</a>
+          <a href="/shikumi/">仕組み化</a>
+          <a href="/review/">正直レビュー</a>
+          <a href="/money/">お金</a>
+          <a href="/kaigyo/">開業・独立</a>
+          <a href="/about/">この人について</a>
+          <a href="/privacy/">プライバシーポリシー</a>
+          <a href="/contact/">お問い合わせ</a>
+          <a href="/disclaimer/">免責事項</a>
+          <a href="/disclosure/">運営方針</a>
+        </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
