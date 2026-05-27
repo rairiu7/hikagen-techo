@@ -1,0 +1,22 @@
+# Cloudflare Workers static assets 配信除外リスト
+# assets.directory が "./" のため、配信対象から明示的に外すファイル/ディレクトリを列挙する。
+# 書式: gitignore 形式（ディレクトリは末尾スラッシュ付き）
+
+# --- GitHub Actions（CI ワークフロー・スクリプト） ---
+.github/
+
+# --- 作業用テンプレート ---
+templates/
+
+# --- Cloudflare / Wrangler 設定ファイル ---
+wrangler.jsonc
+
+# --- ドキュメント類 ---
+README.md
+CLAUDE.md
+
+# --- このファイル自体 ---
+.assetsignore
+
+# --- シェルスクリプト（二重保険） ---
+*.sh

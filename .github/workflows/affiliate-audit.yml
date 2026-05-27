@@ -1,0 +1,24 @@
+name: Affiliate PR-notice audit
+
+on:
+  push:
+    paths:
+      - '**/*.html'
+      - '.github/scripts/affiliate-audit.sh'
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '.github/scripts/affiliate-audit.sh'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make audit script executable
+        run: chmod +x .github/scripts/affiliate-audit.sh
+
+      - name: Run affiliate PR-notice audit
+        run: bash .github/scripts/affiliate-audit.sh
