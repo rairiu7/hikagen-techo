@@ -13,6 +13,7 @@
 - 地域 →「人口5万人未満の地方都市」
 - 規模 →「年商800〜1,000万円規模」
 - 変化は率や時間で →「45分→5分（約89%削減）」のように
+- 共同経営者 →「料理担当のパートナー」「共同経営者」のみ。関係性・性別・名前・外見は一切出さない。
 迷ったら特定情報は出さない。新規ルールが必要になったらこのファイルに追記する。
 
 ## 著者・媒体
@@ -106,7 +107,27 @@
 
 ## 既存ファイル（構造・トーンの参照元）
 - `css/style.css` … 全コンポーネントのスタイル
-- `about/index.html` … プロフィール記事（#1）の完成形
-- `shikumi/gas-order/index.html` … コード公開記事（#7）の完成形
-- `review/airregi/index.html` … 正直レビュー記事（#8）の完成形
+- `about/index.html` … プロフィール記事の完成形
+- `shikumi/gas-order/index.html` … コード公開記事の完成形
+- `review/airregi/index.html` … 正直レビュー記事の完成形
 新記事はこれらのトーンと構造に合わせる。
+
+## 公開済み記事一覧（2026-05-30時点）
+| カテゴリ | slug | タイトル |
+|---|---|---|
+| keiei | nebuke | 大手と価格で戦わない——弁当屋が原価率35%・800円台の値付けにたどり着くまで |
+| keiei | staff-saiyou | 弁当屋が8人雇って3人辞めた話 |
+| keiei | hitori-unui | 弁当屋2店舗をほぼ1人で3年回している |
+| shikumi | yoyaku-kanri | 予約経路5つ・集約先ひとつ——製造漏れをゼロにした予約管理の仕組み |
+| shikumi | seisan-shiji | ホワイトボードと電卓をやめた日——生産指示のデジタル化 |
+| shikumi | gas-order | GASで注文管理を自動化したら毎日30分が5分になった話【コード公開】 |
+| review | airregi-erabu | SquareとAirレジ、深く比較しなかった私がAirレジを選んだ理由と3年後の結論 |
+| review | moneyforward | 弥生会計からマネーフォワード クラウド会計に乗り換えた理由と2年使った感想 |
+| review | airregi | 開業時にレジをAirレジにした理由と2年使った正直な感想 |
+| money | invoice | 消費税・インボイスに個人事業主として向き合った話 |
+| money | keihi-kanri | 弁当屋の経費管理は「9割自動・手入力月30分」 |
+| money | aoiro-shinkoku | 税理士なしで青色申告を2年やりきった弁当屋 |
+| kaigyo | yatte-okeba | 開業前にやっておけばよかったこと——3年後の正直な後悔リスト |
+| kaigyo | bukken-sagashi | 物件探し3年・内覧30件——立地選びで一番重視したのは駐車場だった |
+| kaigyo | tetsuzuki | 飲食店の開業手続きを全部やった |
+| kaigyo | sogyoshikin | 弁当屋が2回借りた創業資金の話 |
