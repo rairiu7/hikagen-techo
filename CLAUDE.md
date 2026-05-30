@@ -141,3 +141,4 @@
 | kaigyo | sogyoshikin | 弁当屋が2回借りた創業資金の話 |
 | shikumi | genka-kanri | 調味料をこっそり測るところから始めた——弁当屋の原価計算、どんぶりから抜け出すまで |
 | money | hoken-nenkin | サラリーマンから個人事業主になった1年目、税金で車を売った話 |
+| review | jigyo-card | 事業用カードを2枚に絞った理由——コストコカードとPayPayカードで仕入れと日常払いを完全分離 |
