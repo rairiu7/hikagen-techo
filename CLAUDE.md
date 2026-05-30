@@ -99,6 +99,13 @@
 - `/css/style.css` への参照が先頭スラッシュ付きで入っている
 - アフィリエイトリンクを含む記事に `<aside class="pr-notice">` が記事ヘッダー直後にあるか
 
+## 新記事公開時の必須作業（記事HTMLと同時に必ず更新）
+記事ファイルを作成したら、以下3か所を**必ずセットで更新してからpush**する：
+1. **カテゴリ一覧ページ** `<category>/index.html` の `<nav class="related__list">` に `<a class="related__item">` を追記
+2. **トップページ** `index.html` の `<div class="art-list">` に `<a class="art">` を追記（連番を振る）
+3. **sitemap.xml** に `<url>` エントリを追加
+これを怠ると直リンクではアクセスできてもサイト内の一覧に載らない。
+
 ## 作業ログ運用（オプション・新規提案）
 - 大きな作業の完了後は `docs/worklog/YYYY-MM-DD-{topic}.md` に以下を残し、main に push する（Claude.ai側との情報共有用）：
   - 実装内容のサマリ
@@ -131,3 +138,5 @@
 | kaigyo | bukken-sagashi | 物件探し3年・内覧30件——立地選びで一番重視したのは駐車場だった |
 | kaigyo | tetsuzuki | 飲食店の開業手続きを全部やった |
 | kaigyo | sogyoshikin | 弁当屋が2回借りた創業資金の話 |
+| shikumi | genka-kanri | 調味料をこっそり測るところから始めた——弁当屋の原価計算、どんぶりから抜け出すまで |
+| money | hoken-nenkin | サラリーマンから個人事業主になった1年目、税金で車を売った話 |
