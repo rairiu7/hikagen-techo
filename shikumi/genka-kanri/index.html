@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>調味料をこっそり測るところから始めた——弁当屋の原価計算、どんぶりから抜け出すまで｜火加減手帖</title>
+<meta name="description" content="感覚で料理する共同経営者と組んだ弁当屋が、全調味料の使用前後を測るところから原価計算を始めた記録。儲かっていると思っていた商品が実はほぼ利益ゼロだった——数字を見て初めてわかったことを正直に書きます。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/genka-kanri/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="調味料をこっそり測るところから始めた——弁当屋の原価計算、どんぶりから抜け出すまで｜火加減手帖">
+<meta property="og:description" content="感覚派の料理担当と組んだ弁当屋が、調味料の重さを測るところから原価計算を始めた話。想定と実際の利益率が違う商品があることに初めて気づいた。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/genka-kanri/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "調味料をこっそり測るところから始めた——弁当屋の原価計算、どんぶりから抜け出すまで",
+  "description": "感覚で料理する共同経営者と組んだ弁当屋が、全調味料の使用前後を測るところから原価計算を始めた記録。儲かっていると思っていた商品が実はほぼ利益ゼロだった——数字を見て初めてわかったことを正直に書きます。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/genka-kanri/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-05-30",
+  "dateModified": "2026-05-30",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化・デジタル化",
+  "keywords": "原価計算, 弁当屋, 飲食店, 原価管理, スプレッドシート, 調味料, 標準化, 小規模飲食店"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "調味料をこっそり測るところから始めた原価計算", "item": "https://hikagen-techo.com/shikumi/genka-kanri/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと文面一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "感覚で作る料理人と組んでいる場合、原価計算はどう始めればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "まず全材料を書き出すことから始めるのが現実的です。レシピを数字で教えてもらえない場合は、実際の調理中に使用前後の重量を測ることでデータを積み上げる方法があります。精度は低くても、どんぶり勘定よりは確実に改善します。" }
+    },
+    {
+      "@type": "Question",
+      "name": "調味料の原価はどう計算すればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "購入単価（円/g または円/ml）を出してから、使用グラム数をかけると1回分のコストが出ます。「どれくらい使うか」がわからない場合は、使用前後の重量を測ることで実測値を積み上げる方法が有効です。ばらつきがある場合は数回分の平均をとります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "ざっくりな原価計算でも、やる意味はありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "あります。完璧な数字でなくても「この商品は儲かっているか」の判断材料にはなります。私の店でも、ざっくり計算をするようになってから、想定と実際の利益率が大きく違う商品があることに初めて気づきました。どんぶり勘定のままでは、そもそも気づく機会がありません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "Googleスプレッドシートで原価管理を始めるなら、最低限どんな列が必要ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "商品名・材料名・購入単価・使用量・1個あたり材料費、の5列があれば計算は成立します。最初から完璧を目指さず、まず動く状態を作ることが大事です。精度は使い続けるなかで上げていけます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "原価計算を始めて、最初に気づいたことは何でしたか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "自分が「売れ筋で利益が出ている」と思っていた商品が、実はほぼ利益ゼロだったことです。直感や売上高だけでは、どの商品が本当に店の利益を作っているかはわかりません。計算することで、初めてそれが見えました。" }
+    }
+  ]
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N6KFC2LLS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9N6KFC2LLS');
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">調味料をこっそり測るところから始めた原価計算</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化</span>
+    <h1 class="post-title">調味料をこっそり測るところから始めた——弁当屋の原価計算、どんぶりから抜け出すまで</h1>
+    <div class="post-meta">
+      <time datetime="2026-05-30">2026年5月30日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-05-30">2026年5月30日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>原価計算は、完璧なレシピがなくても始められます。私は「どれくらい使うか自分でもわからない」という状況から、<strong>調味料の使用前後の重さを測ることでデータを積み上げ</strong>、ざっくりでも原価を把握できる状態にたどり着きました。</p>
+      <p>やってみて最初に気づいたのは、<strong>「儲かっている」と思っていた商品が、実はほぼ利益ゼロだった</strong>ことです。どんぶり勘定のままでは、そもそも気づく機会がありませんでした。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="この記事の数字">
+      <div class="stat"><div class="stat__num">0<span style="font-size:1rem">から</span></div><div class="stat__label">レシピなしのスタート</div></div>
+      <div class="stat"><div class="stat__num">全<span style="font-size:1rem">材料</span></div><div class="stat__label">書き出して可視化</div></div>
+      <div class="stat"><div class="stat__num">想定<span style="font-size:1rem">外</span></div><div class="stat__label">利益ゼロ商品を発見</div></div>
+    </div>
+
+    <!-- ③ 前提（一次情報） -->
+    <h2>うちの原価計算が難しかった理由</h2>
+    <p>私は人口5万人未満の地方都市で、弁当・惣菜店を2店舗やっています（詳しくは<a href="/about/">この人について</a>）。経営全般は私が担当し、調理はパートナーである共同経営者が担っています。</p>
+    <p>この共同経営者は、料理の腕前は人並み以上です。ただ、いわゆる<strong>感覚派</strong>です。「砂糖はどれくらい入れる？」と聞くと、「適量」と返ってくる。本人が悪いわけではなく、長年の経験が体に染み込んでいるので、数字で説明することが難しいのです。</p>
+    <p>さらに厄介なのが<strong>季節の問題</strong>です。野菜は季節によって水分量が変わります。夏の水分量が多いきゅうりと、冬のそれとでは炒め時間も味の染み込み方も違う。気温や湿度によっても調味料の効き方が変わる。同じ料理でも毎回まったく同じ分量では作れない——これが飲食の現実です。</p>
+    <p>そのため、「原価計算をしよう」と思っても<strong>そもそも数字の入力元がない</strong>という壁にぶつかりました。標準化ができない＝計算の土台がない、という状況です。</p>
+
+    <!-- ④ 対策 -->
+    <h2>こっそり測るところから始めた</h2>
+    <p>直接「使用量を教えて」と言うのは、調理の現場では摩擦が生まれやすい。「信用されていないのか」「やり方を否定されている」と受け取られることもある。だから私は別の方法を選びました。</p>
+    <p><strong>調理が始まる前に、調味料の重さをこっそり測る。調理が終わったら、また測る。</strong>その差が今日の使用量です。これを何度も繰り返してデータを積み上げました。</p>
+    <p>最初にやったことは次の2ステップです。</p>
+    <ol>
+      <li><strong>使っている材料を全て書き出す</strong>——食材・調味料・包材まで。まずはリストを作ることで「何を原価として計上すべきか」の全体像をつかみました。</li>
+      <li><strong>調味料の使用前後のグラム数を記録する</strong>——調理ごとに測り、何回かのデータを集めます。ばらつきがあるのは最初からわかっていたので、平均値ではなく「おおよそこの範囲」として把握することを目標にしました。</li>
+    </ol>
+    <p>正直、この作業は地味で大変でした。毎回測るのは手間がかかるし、調理のペースを乱さないように気を使いながらやる必要がありました。ある程度データが集まってから、共同経営者にも話してこの取り組みを共有しました。今では本人も「なるほど、そういうことか」と理解してくれています。</p>
+
+    <!-- スプレッドシート構成 -->
+    <h2>スプレッドシートに落とし込んだ構成</h2>
+    <p>集めたデータはGoogleスプレッドシートで管理しています。最初は完璧な計算式より「とにかく動く状態」を優先しました。今使っている列はこれだけです。</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>列</th><th>内容</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>商品名</td><td>計算対象のメニュー名</td></tr>
+          <tr><td>材料名</td><td>食材・調味料・包材など</td></tr>
+          <tr><td>購入単価</td><td>1g（または1ml）あたりの単価</td></tr>
+          <tr><td>使用量（下限〜上限）</td><td>実測データからのばらつき範囲</td></tr>
+          <tr><td>1個あたり材料費</td><td>使用量の中央値 × 購入単価 で自動計算</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>「ばらつき範囲」を持っているのがポイントです。感覚で作る以上、毎回同じ量にはなりません。だから<strong>「このメニューは1個あたり○○円〜○○円の材料費がかかる」</strong>という幅で把握することにしました。完璧な1点の数字を出そうとすると永遠に計算できないので、幅として持つほうが実態に合っています。</p>
+
+    <!-- 気づいたこと -->
+    <h2>計算してみて気づいたこと</h2>
+    <p>ざっくりでも原価を数字で見られるようになってわかったのは、<strong>自分の直感がかなりずれていた</strong>ことです。</p>
+    <p>「よく売れる商品＝利益が出ている商品」だと思っていました。ところが計算してみると、ある商品の利益はほぼゼロでした。売れているのに店の手元にほとんど残らない。逆に、それほど注目していなかった商品が実は利益率が高かった。</p>
+    <p>これは怖い話でもあります。どんぶり勘定のままでは、この事実に気づく機会がなかったのです。「なんとなく売上がある」状態でも、原価を引いたあとに残るものは別の話です。数字を見ることで、初めて<strong>「何を売ると、どれだけ手元に残るか」</strong>が見えるようになりました。</p>
+    <p>値付けについては<a href="/keiei/nebuke/">別の記事</a>に詳しく書いていますが、原価が見えていないと値付けの議論自体ができません。原価計算は経営判断の土台です。</p>
+
+    <!-- 課題 -->
+    <h2>まだ課題なこと：再現性を高める</h2>
+    <p>今の状態では、「おおよそこの範囲でこれくらいかかる」という把握はできています。一方でまだ解決できていないのが<strong>再現性</strong>の問題です。</p>
+    <p>今は料理担当のパートナーが作るから成立している部分が大きい。別のスタッフが同じメニューを作ろうとすると、どうしても差が出ます。感覚を持っていない人に「適量」は伝わらない。</p>
+    <p>目指しているのは「誰が作っても同じ味・同じ原価に近づく」状態です。そのためにはデータをさらに精緻化し、工程ごとの数字に落とし込んでいく必要があります。これはまだ道半ばです。</p>
+
+    <!-- 将来の展望 -->
+    <h2>これから：レシピのデジタル化→発注→原価の一元管理へ</h2>
+    <p>原価計算を始めたことで、次にやりたいことが見えてきました。今考えているのはこういう流れです。</p>
+    <ol>
+      <li><strong>レシピのデジタル化</strong>——工程・使用量を数字で記録し、誰でも参照できる状態にする</li>
+      <li><strong>発注との連携</strong>——レシピと注文数から必要な仕入れ量を逆算し、発注を自動化する（<a href="/shikumi/gas-order/">GASの注文管理</a>の延長）</li>
+      <li><strong>新メニュー開発時の試算</strong>——データベースを使い、試作前に原価計算ができる状態にする</li>
+    </ol>
+    <p>全部実現するにはまだ時間がかかりますが、まず「全材料を書き出して、調味料を測る」ところから始めたことで、この道筋が見えてきました。どんぶり勘定のままでは、次のステップすら考えられなかったと思います。</p>
+
+    <!-- まとめ -->
+    <h2>まとめ</h2>
+    <p>完璧なレシピがなくても、原価計算は始められます。感覚で作る料理人と組んでいても、実測データを地道に積み上げることでざっくりの把握はできます。</p>
+    <p>大事なのは「精度の高い計算」より「何かしら数字を持つこと」です。どんぶり勘定との違いは、判断の根拠があるかどうかです。ざっくりでも、数字を見る習慣が経営の土台を作ります。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>感覚で作る料理人と組んでいる場合、原価計算はどう始めればいいですか？</summary>
+        <div class="faq__a"><p>まず全材料を書き出すことから始めるのが現実的です。レシピを数字で教えてもらえない場合は、実際の調理中に使用前後の重量を測ることでデータを積み上げる方法があります。精度は低くても、どんぶり勘定よりは確実に改善します。</p></div>
+      </details>
+
+      <details>
+        <summary>調味料の原価はどう計算すればいいですか？</summary>
+        <div class="faq__a"><p>購入単価（円/g または円/ml）を出してから、使用グラム数をかけると1回分のコストが出ます。「どれくらい使うか」がわからない場合は、使用前後の重量を測ることで実測値を積み上げる方法が有効です。ばらつきがある場合は数回分の平均をとります。</p></div>
+      </details>
+
+      <details>
+        <summary>ざっくりな原価計算でも、やる意味はありますか？</summary>
+        <div class="faq__a"><p>あります。完璧な数字でなくても「この商品は儲かっているか」の判断材料にはなります。私の店でも、ざっくり計算をするようになってから、想定と実際の利益率が大きく違う商品があることに初めて気づきました。どんぶり勘定のままでは、そもそも気づく機会がありません。</p></div>
+      </details>
+
+      <details>
+        <summary>Googleスプレッドシートで原価管理を始めるなら、最低限どんな列が必要ですか？</summary>
+        <div class="faq__a"><p>商品名・材料名・購入単価・使用量・1個あたり材料費、の5列があれば計算は成立します。最初から完璧を目指さず、まず動く状態を作ることが大事です。精度は使い続けるなかで上げていけます。</p></div>
+      </details>
+
+      <details>
+        <summary>原価計算を始めて、最初に気づいたことは何でしたか？</summary>
+        <div class="faq__a"><p>自分が「売れ筋で利益が出ている」と思っていた商品が、実はほぼ利益ゼロだったことです。直感や売上高だけでは、どの商品が本当に店の利益を作っているかはわかりません。計算することで、初めてそれが見えました。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/keiei/nebuke/">
+          <span class="related__cat">経営のリアル</span>
+          <div class="related__title">大手と価格で戦わない——弁当屋が原価率35%・800円台の値付けにたどり着くまで</div>
+        </a>
+        <a class="related__item" href="/shikumi/gas-order/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">GASで注文管理を自動化したら毎日30分が5分になった話【コード公開】</div>
+        </a>
+        <a class="related__item" href="/money/keihi-kanri/">
+          <span class="related__cat">お金</span>
+          <div class="related__title">弁当屋の経費管理は「9割自動・手入力月30分」</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+        <nav aria-label="フッターナビ">
+          <a href="/keiei/">経営のリアル</a>
+          <a href="/shikumi/">仕組み化</a>
+          <a href="/review/">正直レビュー</a>
+          <a href="/money/">お金</a>
+          <a href="/kaigyo/">開業・独立</a>
+          <a href="/about/">この人について</a>
+          <a href="/privacy/">プライバシーポリシー</a>
+          <a href="/contact/">お問い合わせ</a>
+          <a href="/disclaimer/">免責事項</a>
+          <a href="/disclosure/">運営方針</a>
+        </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
