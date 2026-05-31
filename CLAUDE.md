@@ -56,7 +56,7 @@
 - 全記事に必ず：**Person**（`@id` = `https://hikagen-techo.com/#person` で共通）、**Article**、**FAQPage**、**BreadcrumbList**
 - レビュー記事は **Review**（itemReviewed + reviewRating）も追加
 - **FAQPage の Q&A 文面は、本文の `.faq` の文面と完全一致させる**（不一致は不可）
-- カテゴリ一覧ページ（keiei / shikumi / review / money / kaigyo の各 index.html）には **BreadcrumbList** を設置する。**CollectionPage + BreadcrumbList** が推奨（GEO・E-E-A-T補強）。
+- カテゴリ一覧ページ（keiei / shikumi / review / money / kaigyo の各 index.html）には **CollectionPage + BreadcrumbList** を `@graph` で設置する（実装済み）。
 - トップページには **WebSite**（`@id` = `https://hikagen-techo.com/#website`）+ **Person** を `@graph` で設置（実装済み）。新たに Organization schema は不要（個人事業主のため Person が publisher）。
 
 ## 文章方針
@@ -65,9 +65,10 @@
 - 良い点だけでなく正直な弱点も書く（信頼の核）。
 
 ## OGP / SNS シェア
-- `og:image` は現状未設定（TODO）。写真不使用方針のため、テキストベースのOGP画像（サイト名＋キャッチコピー）を作成して全ページに設置するのが理想。
-- `twitter:card` は現在 `summary`。`og:image` が設定されたら `summary_large_image` に変更する。
-- 未対応でもSNSシェア時にサイト名・descriptionは表示されるため最低限は担保されている。
+- `og:image` は全21記事に実装済み（1200×630 PNG、`/ogp/<cat>-<slug>.png`）。
+- `twitter:card` は全記事 `summary_large_image` に設定済み。
+- 生成スクリプト：`generate_ogp.py`（Pillow + Noto Sans JP）。新記事追加時は「新記事公開時の必須作業」手順5を参照。
+- **Playfair Display は日本語グリフを持たない**。OGP画像の日本語テキストは必ず Noto Sans JP で描画すること（generate_ogp.py はこの設定で実装済み）。
 
 ## デザイントークン（style.css に定義済み・勝手に変えない）
 - 色：ベース #FAFAF8 / 文字 #2D2D2D / アクセント(オリーブ) #6B7F5E / サブ #F5F5F3
@@ -107,6 +108,7 @@
 ## GEO土台チェック（初期設定・随時確認）
 - **robots.txt**（`/robots.txt`）で `User-agent: * / Allow: /` が維持されているか確認。AIクローラー（GPTBot / OAI-SearchBot / ClaudeBot / PerplexityBot / Google-Extended / Amazonbot）を個別に Disallow していないか。
 - **Cloudflare ダッシュボード** → Security → Bots で「Block AI Bots」が OFF のまま保たれているか定期確認。
+- **Crawler Hints（IndexNow）** → Cloudflare → Caching → Configuration → Crawler Hints を ON（設定済み）。新記事公開時に Bing へ自動通知される。
 - **Bing Webmaster Tools** に `sitemap.xml` を提出する（ChatGPT検索はBingインデックスを参照するため、GEO目的ではGoogleより優先度高）（提出済み・処理完了後はインデックス状況を定期確認）。
 - **Google Search Console** に `sitemap.xml` を提出する（登録済み）。
 - 上記4点は一度設定すれば基本的に変わらないが、Cloudflareのアップデートで設定が変わる場合があるため月1回確認推奨。
