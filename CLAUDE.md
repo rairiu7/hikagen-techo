@@ -120,12 +120,16 @@
 - アフィリエイトリンクを含む記事に `<aside class="pr-notice">` が記事ヘッダー直後にあるか
 
 ## 新記事公開時の必須作業（記事HTMLと同時に必ず更新）
-記事ファイルを作成したら、以下3か所を**必ずセットで更新してからpush**する：
+記事ファイルを作成したら、以下を**必ずセットで更新してからpush**する：
 1. **カテゴリ一覧ページ** `<category>/index.html` の `<nav class="related__list">` に `<a class="related__item">` を追記
 2. **トップページ** `index.html` の `<div class="art-list">` に `<a class="art">` を**先頭に**追記し、既存の連番を1ずつ繰り下げる（新しい記事が常に上＝小さい番号になるよう、末尾ではなく先頭に挿入する）
 3. **sitemap.xml** に `<url>` エントリを追加
 これを怠ると直リンクではアクセスできてもサイト内の一覧に載らない。
 4. **このCLAUDE.md** の「公開済み記事一覧」テーブルにも行を追加し、日付を更新する
+5. **OGP画像の生成と og:image タグの追加**（必須）：
+   - リポジトリ直下で `py generate_ogp.py` を実行 → `/ogp/<cat>-<slug>.png` が生成される
+   - 続けて `py add_ogp_tags.py` を実行 → 新記事の HTML に og:image / twitter:card タグが自動挿入される
+   - 生成された PNG と更新された HTML を git add してから push する
 
 ## 作業ログ運用（オプション・新規提案）
 - 大きな作業の完了後は `docs/worklog/YYYY-MM-DD-{topic}.md` に以下を残し、main に push する（Claude.ai側との情報共有用）：
