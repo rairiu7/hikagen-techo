@@ -20,10 +20,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
-    { "@type": "ListItem", "position": 2, "name": "経営のリアル", "item": "https://hikagen-techo.com/keiei/" }
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+        { "@type": "ListItem", "position": 2, "name": "経営のリアル", "item": "https://hikagen-techo.com/keiei/" }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://hikagen-techo.com/keiei/",
+      "url": "https://hikagen-techo.com/keiei/",
+      "name": "経営のリアル",
+      "description": "人口5万人未満の地方都市で弁当・惣菜店を2店舗営む筆者が、地方の小商いを続ける現実を体験ベースで書くカテゴリ。比較ではなく「私が実際に経験したこと」だけを一次情報で。",
+      "inLanguage": "ja",
+      "publisher": { "@id": "https://hikagen-techo.com/#person" },
+      "hasPart": [
+        { "@type": "Article", "url": "https://hikagen-techo.com/keiei/nebuke/", "name": "大手と価格で戦わない——弁当屋が原価率35%・800円台の値付けにたどり着くまで" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/keiei/staff-saiyou/", "name": "弁当屋が8人雇って3人辞めた話" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/keiei/hitori-unui/", "name": "弁当屋2店舗をほぼ1人で3年回している" }
+      ]
+    }
   ]
 }
 </script>

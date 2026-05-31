@@ -20,10 +20,29 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
-    { "@type": "ListItem", "position": 2, "name": "個人事業主のお金", "item": "https://hikagen-techo.com/money/" }
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+        { "@type": "ListItem", "position": 2, "name": "個人事業主のお金", "item": "https://hikagen-techo.com/money/" }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://hikagen-techo.com/money/",
+      "url": "https://hikagen-techo.com/money/",
+      "name": "個人事業主のお金",
+      "description": "個人事業主・小規模飲食店のお金にまつわる一次情報カテゴリ。確定申告・経費管理・資金繰りなど、実際にやって分かったことだけを書きます。比較記事は作りません。",
+      "inLanguage": "ja",
+      "publisher": { "@id": "https://hikagen-techo.com/#person" },
+      "hasPart": [
+        { "@type": "Article", "url": "https://hikagen-techo.com/money/hoken-nenkin/", "name": "サラリーマンから個人事業主になった1年目、税金で車を売った話" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/money/invoice/", "name": "消費税・インボイスに個人事業主として向き合った話" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/money/keihi-kanri/", "name": "弁当屋の経費管理は「9割自動・手入力月30分」" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/money/aoiro-shinkoku/", "name": "税理士なしで青色申告を2年やりきった弁当屋" }
+      ]
+    }
   ]
 }
 </script>

@@ -20,10 +20,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
-    { "@type": "ListItem", "position": 2, "name": "使ってみた正直レビュー", "item": "https://hikagen-techo.com/review/" }
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+        { "@type": "ListItem", "position": 2, "name": "使ってみた正直レビュー", "item": "https://hikagen-techo.com/review/" }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://hikagen-techo.com/review/",
+      "url": "https://hikagen-techo.com/review/",
+      "name": "使ってみた正直レビュー",
+      "description": "実際に使ったものだけを書く正直レビューカテゴリ。「おすすめ比較」ではなく「私が選んだ理由と使った感想」の一次情報のみ。良い点だけでなく惜しい点も本音で。",
+      "inLanguage": "ja",
+      "publisher": { "@id": "https://hikagen-techo.com/#person" },
+      "hasPart": [
+        { "@type": "Article", "url": "https://hikagen-techo.com/review/alexa/", "name": "弁当屋がAlexaを2店舗に置いている理由——タイマー・計算・トランシーバーまで、調理現場で使い続けている正直な感想" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/review/food-processor/", "name": "フードプロセッサーで仕込みが1時間から10分に——ティファールからクイジナートに買い替えた弁当屋の正直レビュー" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/review/jigyo-card/", "name": "事業用カードを2枚に絞った理由——コストコカードとPayPayカードで仕入れと日常払いを完全分離" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/review/airregi-erabu/", "name": "SquareとAirレジ、深く比較しなかった私がAirレジを選んだ理由と3年後の結論" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/review/moneyforward/", "name": "弥生会計からマネーフォワード クラウド会計に乗り換えた理由と2年使った感想" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/review/airregi/", "name": "開業時にレジをAirレジにした理由と2年使った正直な感想" }
+      ]
+    }
   ]
 }
 </script>

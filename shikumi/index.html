@@ -20,10 +20,29 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
-    { "@type": "ListItem", "position": 2, "name": "仕組み化・デジタル化", "item": "https://hikagen-techo.com/shikumi/" }
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+        { "@type": "ListItem", "position": 2, "name": "仕組み化・デジタル化", "item": "https://hikagen-techo.com/shikumi/" }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://hikagen-techo.com/shikumi/",
+      "url": "https://hikagen-techo.com/shikumi/",
+      "name": "仕組み化・デジタル化",
+      "description": "実際に導入したツールと業務自動化の実例を公開するカテゴリ。GAS・Python・VBAのサンプルコードも掲載。弁当屋の現場で動いている仕組みを一次情報で。",
+      "inLanguage": "ja",
+      "publisher": { "@id": "https://hikagen-techo.com/#person" },
+      "hasPart": [
+        { "@type": "Article", "url": "https://hikagen-techo.com/shikumi/yoyaku-kanri/", "name": "予約経路5つ・集約先ひとつ——製造漏れをゼロにした予約管理の仕組み" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/shikumi/seisan-shiji/", "name": "ホワイトボードと電卓をやめた日——生産指示のデジタル化" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/shikumi/gas-order/", "name": "GASで注文管理を自動化したら毎日30分が5分になった話【コード公開】" },
+        { "@type": "Article", "url": "https://hikagen-techo.com/shikumi/genka-kanri/", "name": "調味料をこっそり測るところから始めた——弁当屋の原価計算、どんぶりから抜け出すまで" }
+      ]
+    }
   ]
 }
 </script>
