@@ -56,11 +56,18 @@
 - 全記事に必ず：**Person**（`@id` = `https://hikagen-techo.com/#person` で共通）、**Article**、**FAQPage**、**BreadcrumbList**
 - レビュー記事は **Review**（itemReviewed + reviewRating）も追加
 - **FAQPage の Q&A 文面は、本文の `.faq` の文面と完全一致させる**（不一致は不可）
+- カテゴリ一覧ページ（keiei / shikumi / review / money / kaigyo の各 index.html）には **BreadcrumbList** を設置する。**CollectionPage + BreadcrumbList** が推奨（GEO・E-E-A-T補強）。
+- トップページには **WebSite**（`@id` = `https://hikagen-techo.com/#website`）+ **Person** を `@graph` で設置（実装済み）。新たに Organization schema は不要（個人事業主のため Person が publisher）。
 
 ## 文章方針
 - 結論ファースト。一次情報を前面に。曖昧表現より具体的な数字。
 - 「おすすめ◯選」「徹底比較」などの比較記事は作らない。「私が実際に選んだ理由／使った感想」の一次情報記事のみ。
 - 良い点だけでなく正直な弱点も書く（信頼の核）。
+
+## OGP / SNS シェア
+- `og:image` は現状未設定（TODO）。写真不使用方針のため、テキストベースのOGP画像（サイト名＋キャッチコピー）を作成して全ページに設置するのが理想。
+- `twitter:card` は現在 `summary`。`og:image` が設定されたら `summary_large_image` に変更する。
+- 未対応でもSNSシェア時にサイト名・descriptionは表示されるため最低限は担保されている。
 
 ## デザイントークン（style.css に定義済み・勝手に変えない）
 - 色：ベース #FAFAF8 / 文字 #2D2D2D / アクセント(オリーブ) #6B7F5E / サブ #F5F5F3
@@ -96,6 +103,13 @@
 - 「〜する場合があります」等の条件付き表現は使わない（断定形）。
 - アフィリエイトリンクが無いページ（about / privacy / contact / disclaimer / disclosure / カテゴリ一覧 / トップ）には PR表記を付けない。
 - `.pr-notice` / `.pr-notice__tag` の CSS は `css/style.css` に 1か所だけ定義（重複定義しない）。
+
+## GEO土台チェック（初期設定・随時確認）
+- **robots.txt**（`/robots.txt`）で `User-agent: * / Allow: /` が維持されているか確認。AIクローラー（GPTBot / OAI-SearchBot / ClaudeBot / PerplexityBot / Google-Extended / Amazonbot）を個別に Disallow していないか。
+- **Cloudflare ダッシュボード** → Security → Bots で「Block AI Bots」が OFF のまま保たれているか定期確認。
+- **Bing Webmaster Tools** に `sitemap.xml` を提出する（ChatGPT検索はBingインデックスを参照するため、GEO目的ではGoogleより優先度高）。
+- **Google Search Console** に `sitemap.xml` を提出する。
+- 上記4点は一度設定すれば基本的に変わらないが、Cloudflareのアップデートで設定が変わる場合があるため月1回確認推奨。
 
 ## 公開前チェック（新規・更新記事で必ず実行）
 - 各 JSON-LD が正しくパースできる
