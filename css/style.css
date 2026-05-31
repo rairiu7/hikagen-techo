@@ -337,16 +337,15 @@ a:hover { color: var(--c-accent-dk); text-decoration: underline; text-underline-
   background: var(--c-sub); border-left: 3px solid var(--c-accent);
   border-radius: 4px; font-family: var(--f-body);
 }
-.pr-notice__label {
+.pr-notice__tag {
   flex-shrink: 0; padding: 0.15em 0.65em;
   background: var(--c-accent); color: #fff;
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
   line-height: 1.7; border-radius: 3px;
 }
-.pr-notice__text {
+.pr-notice span:not(.pr-notice__tag) {
   margin: 0; font-size: 0.83rem; line-height: 1.7; color: var(--c-text);
 }
-.pr-notice__text a { color: var(--c-accent); text-decoration: underline; }
 
 /* --- 20. アフィリエイトCTAボタン ----------------------------------------- */
 .aff-btn {
