@@ -107,7 +107,7 @@
 ## GEO土台チェック（初期設定・随時確認）
 - **robots.txt**（`/robots.txt`）で `User-agent: * / Allow: /` が維持されているか確認。AIクローラー（GPTBot / OAI-SearchBot / ClaudeBot / PerplexityBot / Google-Extended / Amazonbot）を個別に Disallow していないか。
 - **Cloudflare ダッシュボード** → Security → Bots で「Block AI Bots」が OFF のまま保たれているか定期確認。
-- **Bing Webmaster Tools** に `sitemap.xml` を提出する（ChatGPT検索はBingインデックスを参照するため、GEO目的ではGoogleより優先度高）。
+- **Bing Webmaster Tools** に `sitemap.xml` を提出する（ChatGPT検索はBingインデックスを参照するため、GEO目的ではGoogleより優先度高）（提出済み・処理完了後はインデックス状況を定期確認）。
 - **Google Search Console** に `sitemap.xml` を提出する（登録済み）。
 - 上記4点は一度設定すれば基本的に変わらないが、Cloudflareのアップデートで設定が変わる場合があるため月1回確認推奨。
 
