@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>発注量を感覚で決めてきた弁当屋が、廃棄と緊急買い出しで仕組み化を決意するまで｜火加減手帖</title>
+<meta name="description" content="「だいたいこれくらい」で発注して3年。大きなトラブルにはならなかったけれど、月数千円の廃棄と月1〜2回の緊急スーパー買い出しが積み重なり、仕組み化を考え始めました。完成した答えではなく、どんぶり勘定から抜け出すための設計途中を正直に書きます。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/hacchu-kanri/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="発注量を感覚で決めてきた弁当屋が、廃棄と緊急買い出しで仕組み化を決意するまで｜火加減手帖">
+<meta property="og:description" content="「だいたいこれくらい」で発注して3年。月数千円の廃棄と緊急スーパー買い出しが積み重なり、仕組み化に踏み出した。完成形ではなく設計途中を正直に書く記録。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/hacchu-kanri/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://hikagen-techo.com/ogp/shikumi-hacchu-kanri.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hikagen-techo.com/ogp/shikumi-hacchu-kanri.png">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "発注量を感覚で決めてきた弁当屋が、廃棄と緊急買い出しで仕組み化を決意するまで",
+  "description": "「だいたいこれくらい」で発注して3年。大きなトラブルにはならなかったけれど、月数千円の廃棄と月1〜2回の緊急スーパー買い出しが積み重なり、仕組み化を考え始めました。完成した答えではなく、どんぶり勘定から抜け出すための設計途中を正直に書きます。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/hacchu-kanri/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-06-01",
+  "dateModified": "2026-06-01",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化・デジタル化",
+  "keywords": "発注管理, 食材管理, 弁当屋, 在庫管理, 廃棄ロス, 仕組み化, 小規模飲食店, 食材発注"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "発注量を感覚で決めてきた弁当屋が仕組み化を決意するまで", "item": "https://hikagen-techo.com/shikumi/hacchu-kanri/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと文面一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "小規模飲食店の発注量は、どうやって決めればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "予約・注文数をベースに「生産計画＋予約数－現在庫数＋発注点（最低在庫）」という考え方が出発点になります。完璧な精度より「廃棄が出た・足りなかった」を記録し続けることで、自分の店に合った発注量の感覚が数字に変わっていきます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "食材の廃棄ロスを減らすには、まず何から始めるべきですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "まず「何を、どれくらい廃棄しているか」を記録することです。感覚ではなく記録することで、どの食材で廃棄が多いか、どの曜日・時期にずれが出やすいかが見えてきます。廃棄の実態を把握しないまま削減策を立てても、的外れになりがちです。" }
+    },
+    {
+      "@type": "Question",
+      "name": "仕入先が複数あって配達日がバラバラな場合、発注をどう管理すればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "仕入先ごとに「配達日」と「発注締め日」を一覧化しておくことが基本です。そのうえで、各食材の発注点（最低在庫量）を決めておけば、配達日の前日に在庫を確認して数量を決めるだけになります。頭の中だけで管理しようとするとミスが起きやすいので、スプレッドシートで一覧化することをすすめます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "発注の半自動化とは、具体的にどういうことですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "「発注日になったら必要な食材と数量の候補をシステムが計算してくれる」状態を指します。最終的な発注数の確認・変更は人が行うため「半」自動です。GASやスプレッドシートを使えば、予約数・在庫数・生産計画を入力するだけで発注候補リストを自動生成することは現実的に実現できます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "在庫管理と発注管理は別々に考えた方がいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "実務上は連動させた方が精度が上がります。在庫数が正確でないと発注量の計算がずれるためです。ただし両方を同時に作ろうとすると複雑になりすぎるので、まず発注の考え方（計算式）を固めてから、在庫の棚卸をシンプルに仕組み化する順番が現実的です。" }
+    }
+  ]
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N6KFC2LLS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9N6KFC2LLS');
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">発注量を感覚で決めてきた弁当屋が仕組み化を決意するまで</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化</span>
+    <h1 class="post-title">発注量を感覚で決めてきた弁当屋が、廃棄と緊急買い出しで仕組み化を決意するまで</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-01">2026年6月1日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-06-01">2026年6月1日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>発注量を感覚で決めていても、大きな問題にはなりませんでした。でも<strong>月数千円の廃棄が毎月積み重なり、予約が想定を超えると近所のスーパーへ緊急買い出しに走る</strong>——このパターンが続いて、どんぶり勘定から抜け出すことを決めました。</p>
+      <p>完成した仕組みはまだありません。今は「<strong>生産計画＋予約数－在庫数＋余剰数（発注点）</strong>」という計算式をベースに、仕入先の配達日に合わせた半自動発注を設計中です。この記事は、その途中経過の正直な記録です。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="この記事の数字">
+      <div class="stat"><div class="stat__num">月<span style="font-size:1rem">数千円</span></div><div class="stat__label">廃棄ロス（推測）</div></div>
+      <div class="stat"><div class="stat__num">月<span style="font-size:1rem">1〜2回</span></div><div class="stat__label">緊急スーパー買い出し</div></div>
+      <div class="stat"><div class="stat__num">週<span style="font-size:1rem">1〜4回</span></div><div class="stat__label">仕入先の配達頻度</div></div>
+    </div>
+
+    <!-- ③ 前提（一次情報） -->
+    <h2>どんぶり勘定で3年、回っていた理由</h2>
+    <p>人口5万人未満の地方都市で弁当・惣菜店を2店舗やっています（詳しくは<a href="/about/">この人について</a>）。調理は料理担当のパートナーが担い、経営・仕組み化は私が一人でやっています。</p>
+    <p>開業から3年、食材の発注量は感覚で決めてきました。ルールと言えるほどのものでもないのですが、大まかにはこんな基準です。</p>
+    <ul>
+      <li><strong>ボトル系の調味料・油類</strong>——常に手元に1本は在庫がある状態をキープする。なくなる前に発注。</li>
+      <li><strong>肉・魚などのメイン食材</strong>——「これだけあれば足りるだろう」という感覚的なグラム数を基準にしている。</li>
+      <li><strong>野菜・副菜食材</strong>——その週の予約状況を見ながら目分量で決める。</li>
+    </ul>
+    <p>予約ベースで生産数をある程度把握してから発注するため、<strong>大きく外れることは少ない</strong>のが実態です。この方法で致命的なミスが起きたことは今のところありません。</p>
+    <p>ではなぜ仕組み化するのか。問題は「大きなミス」ではなく、<strong>小さなロスが毎月確実に出ていること</strong>です。</p>
+
+    <!-- ④ 問題1：廃棄 -->
+    <h2>問題①：毎月出ている廃棄ロス、でも正確な額がわからない</h2>
+    <p>廃棄は月に数千円程度は出ているだろうと感じています。ただ正直に言うと、<strong>正確な額を把握できていません</strong>。廃棄した食材を記録する仕組みがないからです。</p>
+    <p>廃棄が生まれる主なパターンは2つです。</p>
+    <ol>
+      <li><strong>仕入れすぎ</strong>——予約が少なかった日や、仕入れ時点では想定していなかった変化が起きたとき。</li>
+      <li><strong>生産計画の変更</strong>——「このメニューを作る予定だったが、急な予約が入って別のメニューに切り替えた」結果、先に仕入れていた食材が余る。</li>
+    </ol>
+    <p>特に②は防ぎにくい。予約は直前に入ることがあり、そのたびに生産計画が動きます。計画が変わった後の食材をそのまま使い切れればいいのですが、翌日以降に持ち越せない食材はそのまま廃棄になります。</p>
+    <p>「月数千円なら大したことない」と思われるかもしれません。でも<strong>これが「推測」である点が問題</strong>です。正確に計算できていないということは、実際にはもっと出ている可能性があるし、改善したかどうかも判断できません。どんぶり勘定の廃棄はどんぶり勘定のままでは減らせない。</p>
+
+    <!-- ④ 問題2：緊急買い出し -->
+    <h2>問題②：月1〜2回の緊急スーパー買い出しが地味にきつい</h2>
+    <p>もう一つの問題が予約超過による食材不足です。頻度は月1回あるかないか程度ですが、起きると地味にきつい。</p>
+    <p><strong>近所のスーパーへ買い出しに行って対応します</strong>。これは二重のコストです。</p>
+    <ul>
+      <li><strong>時間コスト</strong>——調理の合間に買い出しに行く時間。段取りが崩れる。</li>
+      <li><strong>金額コスト</strong>——業者からの仕入れ単価よりスーパーの方が割高になることが多い。</li>
+    </ul>
+    <p>金額の差は1回数百円程度でも、精神的なコストが大きいのです。「また足りなかった」という感覚と、急いで買い出しに走る手間。<strong>機会損失としての痛みは、数字以上にきます</strong>。</p>
+    <p>足りなくなるのは、予約が直前に集中したときです。朝の時点で「この予約数なら足りる」と計算していたのが、昼に追加予約が入ってラインを超える。こういうケースが月に1度前後あります。</p>
+
+    <!-- ⑤ なぜ今か -->
+    <h2>なぜ今、仕組み化するのか</h2>
+    <p>2店舗をほぼ1人で回している（詳しくは<a href="/keiei/hitori-unui/">この記事</a>）ので、ミスのリカバリーに使えるリソースが少ない。体が2つないぶん、<strong>判断の精度を上げることが唯一の対策</strong>です。</p>
+    <p>もう一つは、原価計算に手をつけたことで（詳しくは<a href="/shikumi/genka-kanri/">この記事</a>）、「数字を見て判断する」という習慣ができてきたことです。発注量も同じはずで、感覚より数字の方が再現性が高い。</p>
+    <p>廃棄の正確な額がわからないこと、緊急買い出しが月1〜2回あること——この2点が「今のままでいいか」という問いへの答えになりました。大きな事故が起きてから動くより、小さなロスが見えているうちに直す方がいい。</p>
+
+    <!-- ⑥ 考えている仕組み -->
+    <h2>設計中の仕組み：発注量の計算式と半自動化</h2>
+    <p>今考えている発注量の基本式はこうです。</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>要素</th><th>内容</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>生産計画</td><td>その期間に作る予定のメニューと数量</td></tr>
+          <tr><td>＋ 予約数</td><td>確定している予約分の必要量</td></tr>
+          <tr><td>－ 現在庫数</td><td>棚卸で把握している手元在庫</td></tr>
+          <tr><td>＋ 余剰数（発注点）</td><td>不測の予約増・計画変更への備え</td></tr>
+          <tr><td>＝ 発注量（候補）</td><td>これを仕入先に発注する</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>シンプルに見えますが、実運用には課題があります。特に<strong>「現在庫数」の把握</strong>が難しい。今は正確な在庫数を把握する仕組みがないため、棚卸の仕組み化も同時に進めています。</p>
+
+    <h3>仕入先の配達日に合わせた発注タイミング</h3>
+    <p>仕入先は複数あり、配達頻度は週1回〜週4回とバラバラです。食材によって仕入先が違うため、それぞれの配達日に合わせて発注タイミングが変わります。</p>
+    <p>これを頭の中だけで管理しているのが現状の問題点です。目指しているのは、<strong>「配達日の前日に、その仕入先の食材について自動で発注候補が出てくる」</strong>状態です。GASかスプレッドシートで実現できると考えています。最終的な発注数は人が確認して調整するため、あくまで「半自動」です。</p>
+
+    <h3>棚卸の仕組みも同時並行</h3>
+    <p>発注量の計算に在庫数が必要なため、簡易な棚卸システムも並行して設計中です。毎日精密に棚卸する必要はなく、<strong>「主要な食材について、発注日前に素早く確認できる」</strong>ことを目標にしています。タブレットかスマホで入力できるシンプルなものを考えています。</p>
+
+    <!-- ⑦ 正直な現在地 -->
+    <h2>正直な現在地：まだ設計段階</h2>
+    <p>この記事を書いている時点では、仕組みはまだ完成していません。計算式の考え方は固まっていますが、実際のシステムとしては動いていない段階です。</p>
+    <p>なぜ途中経過を記事にするかというと、<strong>「完成形だけ書くより、考えている過程の方が同じ立場の人の参考になる</strong>」と思っているからです。小規模飲食店の発注管理に関する情報は、大手向けのシステム紹介か、理想論的な解説ばかりで、「感覚でやってきたが限界を感じている」というリアルな話が少ない。</p>
+    <p>仕組みが完成したら続編を書きます。うまくいかなかったことも正直に書くつもりです。</p>
+
+    <!-- まとめ -->
+    <h2>まとめ</h2>
+    <p>感覚での発注は、予約情報と照らし合わせることである程度機能します。ただし廃棄ロスと緊急買い出しという二つの小さなコストが毎月確実に出続けます。</p>
+    <p>大切なのは「大きな事故がないから今のままでいい」ではなく、<strong>「小さなロスが見えているうちに数字で管理できる状態に変える」</strong>判断です。発注量の計算式は「生産計画＋予約数－在庫数＋余剰数」。この式を実際に動かす仕組みを、今作っています。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>小規模飲食店の発注量は、どうやって決めればいいですか？</summary>
+        <div class="faq__a"><p>予約・注文数をベースに「生産計画＋予約数－現在庫数＋発注点（最低在庫）」という考え方が出発点になります。完璧な精度より「廃棄が出た・足りなかった」を記録し続けることで、自分の店に合った発注量の感覚が数字に変わっていきます。</p></div>
+      </details>
+
+      <details>
+        <summary>食材の廃棄ロスを減らすには、まず何から始めるべきですか？</summary>
+        <div class="faq__a"><p>まず「何を、どれくらい廃棄しているか」を記録することです。感覚ではなく記録することで、どの食材で廃棄が多いか、どの曜日・時期にずれが出やすいかが見えてきます。廃棄の実態を把握しないまま削減策を立てても、的外れになりがちです。</p></div>
+      </details>
+
+      <details>
+        <summary>仕入先が複数あって配達日がバラバラな場合、発注をどう管理すればいいですか？</summary>
+        <div class="faq__a"><p>仕入先ごとに「配達日」と「発注締め日」を一覧化しておくことが基本です。そのうえで、各食材の発注点（最低在庫量）を決めておけば、配達日の前日に在庫を確認して数量を決めるだけになります。頭の中だけで管理しようとするとミスが起きやすいので、スプレッドシートで一覧化することをすすめます。</p></div>
+      </details>
+
+      <details>
+        <summary>発注の半自動化とは、具体的にどういうことですか？</summary>
+        <div class="faq__a"><p>「発注日になったら必要な食材と数量の候補をシステムが計算してくれる」状態を指します。最終的な発注数の確認・変更は人が行うため「半」自動です。GASやスプレッドシートを使えば、予約数・在庫数・生産計画を入力するだけで発注候補リストを自動生成することは現実的に実現できます。</p></div>
+      </details>
+
+      <details>
+        <summary>在庫管理と発注管理は別々に考えた方がいいですか？</summary>
+        <div class="faq__a"><p>実務上は連動させた方が精度が上がります。在庫数が正確でないと発注量の計算がずれるためです。ただし両方を同時に作ろうとすると複雑になりすぎるので、まず発注の考え方（計算式）を固めてから、在庫の棚卸をシンプルに仕組み化する順番が現実的です。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/shikumi/genka-kanri/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">調味料をこっそり測るところから始めた——弁当屋の原価計算、どんぶりから抜け出すまで</div>
+        </a>
+        <a class="related__item" href="/shikumi/gas-order/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">GASで注文管理を自動化したら毎日30分が5分になった話【コード公開】</div>
+        </a>
+        <a class="related__item" href="/keiei/hitori-unui/">
+          <span class="related__cat">経営のリアル</span>
+          <div class="related__title">弁当屋2店舗をほぼ1人で3年回している</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+        <nav aria-label="フッターナビ">
+          <a href="/keiei/">経営のリアル</a>
+          <a href="/shikumi/">仕組み化</a>
+          <a href="/review/">正直レビュー</a>
+          <a href="/money/">お金</a>
+          <a href="/kaigyo/">開業・独立</a>
+          <a href="/about/">この人について</a>
+          <a href="/privacy/">プライバシーポリシー</a>
+          <a href="/contact/">お問い合わせ</a>
+          <a href="/disclaimer/">免責事項</a>
+          <a href="/disclosure/">運営方針</a>
+        </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
