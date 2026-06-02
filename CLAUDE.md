@@ -33,6 +33,10 @@
 - `wrangler deploy`（Workers向け）は使わない（`wrangler.toml` が無い・自動デプロイと競合の恐れ）。
 - push 後 2〜3 分経っても本番に反映されない場合は、空コミットで再トリガーする：
   `git commit --allow-empty -m "chore: trigger deploy" && git push origin main`
+- **sitemap.xml のコンフリクト対処**：CI が sitemap.xml を自動更新するコミットを push するため、複数記事を続けて追加すると `git pull --rebase` 時にコンフリクトが発生する場合がある。その際は以下の手順で解消する：
+  1. `sitemap.xml` のコンフリクトマーカー（`<<<<<<<` / `=======` / `>>>>>>>` 行）を手動で除去し、両方の変更を取り込んだ正しい内容にする
+  2. 重複エントリが生じていないか確認して削除する
+  3. `git add sitemap.xml` → `git rebase --continue` → `git push origin main`
 - HTML は Cloudflare エッジでキャッシュされる（`cf-cache-status: HIT`）。反映確認・トラブル時は Cloudflare ダッシュボード → Caching → Purge Everything。
 - **「Block AI bots」は必ず OFF のまま**。GEO戦略上、AIクローラー（GPTBot / OAI-SearchBot / ClaudeBot / PerplexityBot 等）のアクセスを遮断してはいけない。
 
@@ -120,11 +124,23 @@
 - 個人特定情報（店名・地名・実数字・個人名・実URL）が混入していない
 - `/css/style.css` への参照が先頭スラッシュ付きで入っている
 - アフィリエイトリンクを含む記事に `<aside class="pr-notice">` が記事ヘッダー直後にあるか
+- **JSON-LD 内のダブルクォート**：記事タイトルや `name` フィールドに `"` （直ダブルクォート U+0022）が含まれると JSON パースエラーになる。必ずカーリークォート（`"` U+201C / `"` U+201D）に置き換えること。カテゴリ一覧の CollectionPage `hasPart` でも同様。
 
 ## 新記事公開時の必須作業（記事HTMLと同時に必ず更新）
 記事ファイルを作成したら、以下を**必ずセットで更新してpushまで一気に完了**させる。ユーザーへの確認は不要：
 1. **カテゴリ一覧ページ** `<category>/index.html` の `<nav class="related__list">` に `<a class="related__item">` を追記
-2. **トップページ** `index.html` の `<div class="art-list">` に `<a class="art">` を**先頭に**追記し、既存の連番を1ずつ繰り下げる（新しい記事が常に上＝小さい番号になるよう、末尾ではなく先頭に挿入する）
+2. **トップページ** `index.html` の `<div class="art-list">` に `<a class="art">` を**先頭に**追記し、既存の連番を1ずつ繰り下げる（新しい記事が常に上＝小さい番号になるよう、末尾ではなく先頭に挿入する）。連番の繰り下げは単純な数値置換だと同番号が複数ある場合に重複するため、以下の Python スクリプトで行う：
+   ```python
+   # 例：新記事を01に挿入し、既存の02以降を03以降に繰り下げる場合
+   # ① 保護したいエントリ（新記事の直後＝02）をSKIPマーカーで退避
+   protect = 'href="/new-article/"><span class="ano">02</span>'
+   content = content.replace(protect, 'href="/new-article/"><span class="ano">SKIP</span>')
+   # ② 02以降を逆順で繰り下げ（逆順でないと多重置換が起きる）
+   for n in range(MAX, 1, -1):
+       content = content.replace(f'<span class="ano">{n:02d}</span>', f'<span class="ano">{n+1:02d}</span>')
+   # ③ SKIPを正しい番号に戻す
+   content = content.replace('<span class="ano">SKIP</span>', '<span class="ano">02</span>')
+   ```
 3. **sitemap.xml** に `<url>` エントリを追加
 これを怠ると直リンクではアクセスできてもサイト内の一覧に載らない。
 4. **このCLAUDE.md** の「公開済み記事一覧」テーブルにも行を追加し、日付を更新する
