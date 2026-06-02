@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>ボタン1つで200枚——食品表示ラベルをExcel VBAで自動化した弁当屋の記録【コード公開】｜火加減手帖</title>
+<meta name="description" content="1枚ずつ手作業で印刷していた食品表示ラベルを、Excel VBA＋ブラザーラベルプリンターで全自動化。50枚30分以上→200枚5分に。原材料・アレルゲン・消費期限・QRコードまで自動出力するサンプルコードを公開します。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/label-jidoka/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="ボタン1つで200枚——食品表示ラベルをExcel VBAで自動化した弁当屋の記録【コード公開】｜火加減手帖">
+<meta property="og:description" content="食品表示ラベルをExcel VBA＋ブラザープリンターで全自動化。50枚30分以上→200枚5分に。サンプルコード付き。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/label-jidoka/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://hikagen-techo.com/ogp/shikumi-label-jidoka.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hikagen-techo.com/ogp/shikumi-label-jidoka.png">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ボタン1つで200枚——食品表示ラベルをExcel VBAで自動化した弁当屋の記録【コード公開】",
+  "description": "1枚ずつ手作業で印刷していた食品表示ラベルを、Excel VBA＋ブラザーラベルプリンターで全自動化。50枚30分以上→200枚5分に。原材料・アレルゲン・消費期限・QRコードまで自動出力するサンプルコードを公開します。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/label-jidoka/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-06-02",
+  "dateModified": "2026-06-02",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化・デジタル化"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "ボタン1つで200枚", "item": "https://hikagen-techo.com/shikumi/label-jidoka/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "b-PAC SDKとは何ですか？どこで入手できますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "ブラザー工業が提供する、ラベルプリンターをプログラムから操作するための無料ライブラリです。ブラザーの公式サイト（developer.brother.com）からダウンロードできます。インストール後はExcel VBAから「CreateObject(\"bpac.Document\")」で呼び出せます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "VBAが書けなくても使えますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "記事内のサンプルコードをそのままExcelに貼り付けて、シート名・列番号・テンプレートパスを自分の環境に合わせれば動きます。VBAの基本的なコピー＆ペーストと定数の書き換えができれば、ゼロから書く必要はありません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "このシステムはブラザー以外のラベルプリンターでも使えますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "b-PAC SDKはブラザー製ラベルプリンター専用です。他メーカーの場合はそのメーカーのSDKを使う必要があります。ただし「商品DBから当日生産数を読んで印刷を自動化する」という設計の考え方は、プリンターに関係なく応用できます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "食品表示法に必要な項目はすべてラベルに入れられますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "商品DBに登録する項目を増やすことで対応できます。私の場合は商品名・原材料・アレルゲン・消費期限・価格・販売者情報・QRコードを出力しています。表示義務項目は食品の種類によって異なるため、所轄の保健所に確認したうえで必要な列をDBに追加してください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "委託販売先ごとにラベル内容を変えるにはどうすればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "商品DBに「販売区分」列（自店／委託）と「委託先固有テキスト」列を設けて、印刷時に区分を判定して出力内容を切り替えます。記事内のサンプルコードにこの処理が含まれています。一度登録すれば以後はメンテナンス不要です。" }
+    }
+  ]
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N6KFC2LLS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9N6KFC2LLS');
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/" aria-current="page">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">ボタン1つで200枚</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化</span>
+    <h1 class="post-title">ボタン1つで200枚——食品表示ラベルをExcel VBAで自動化した弁当屋の記録【コード公開】</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-02">2026年6月2日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-06-02">2026年6月2日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>食品表示ラベルを1枚ずつ手作業で印刷していた作業を、<strong>Excel VBA＋ブラザーラベルプリンターで全自動化</strong>しました。ボタンを1つ押すだけで、当日の生産数分のラベルがすべて出てきます。</p>
+      <p>商品名・原材料・アレルゲン・消費期限・価格・QRコードまで自動出力。<strong>50枚の印刷に30分以上かかっていたのが、200枚でも約5分</strong>に変わりました。日付の手入力ミスも、委託販売先ごとのラベル切り替え忘れも、構造的に起きなくなっています。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="基本データ">
+      <div class="stat"><div class="stat__num">200<span style="font-size:1rem">枚/日</span></div><div class="stat__label">1日の印刷枚数</div></div>
+      <div class="stat"><div class="stat__num">30<span style="font-size:1rem">分→5分</span></div><div class="stat__label">50枚→200枚で逆に短縮</div></div>
+      <div class="stat"><div class="stat__num">0<span style="font-size:1rem">件</span></div><div class="stat__label">日付ミス・切り替え漏れ</div></div>
+    </div>
+
+    <!-- ③ 前提 -->
+    <h2>前提：弁当屋の食品表示は量が多く、毎日変わる</h2>
+    <p>私は人口5万人未満の地方都市で弁当・惣菜店を2店舗営んでいます（詳しくは<a href="/about/">この人について</a>）。弁当・惣菜には食品表示法に基づくラベルが必要です。商品名・原材料・アレルゲン・消費期限・価格など、決まった項目を毎日印刷して貼る作業が発生します。</p>
+    <p>厄介なのは<strong>「毎日枚数が変わる」</strong>こと。その日の生産数によって印刷枚数が変わるため、前日や当日の朝に決まった数だけ印刷する必要があります。</p>
+
+    <!-- ④ 導入前の問題 -->
+    <h2>以前：商品を1つずつ呼び出して、日付を毎回手入力していた</h2>
+    <p>導入前はスマートフォンと連携するラベルライターを使っていました。操作は、印刷したい商品をアプリで呼び出し、枚数を指定して送信する——これを商品の数だけ繰り返す手順です。</p>
+    <p>毎回、<strong>日付を手入力で変更する必要</strong>がありました。忘れたり、前日の日付のまま印刷してしまうミスが起きていました。委託販売先へ納品する商品は表示内容が一部異なるため、切り替えも手作業でした。</p>
+    <p>50枚の印刷に<strong>30分以上</strong>かかっていました。仕込みの時間を食う、毎日の地味な重荷でした。</p>
+
+    <div class="cta">
+      <div class="cta__label">以前使っていたもの</div>
+      <p class="cta__title">スマートフォン連携ラベルライター</p>
+      <p class="cta__body">1商品ずつアプリで呼び出す操作が必要で、日付変更も毎回手入力。枚数が増えると時間がかかる構造でした。</p>
+      <a class="btn" href="https://amzn.to/4vpuqhj" rel="sponsored nofollow noopener" target="_blank">Amazonで見る</a>
+      <small>※ 当サイトはアフィリエイト広告（Amazon.co.jp）を利用しています。</small>
+    </div>
+
+    <!-- ⑤ 仕組みの概要 -->
+    <h2>仕組みの概要：2枚のシートとボタン1つ</h2>
+    <p>Excelで2種類のシートを用意しています。</p>
+    <ul>
+      <li><strong>商品DB</strong>：商品ごとの原材料・アレルゲン・消費期限（製造日からの日数）・価格・販売区分などを登録したマスタ</li>
+      <li><strong>生産指示</strong>：その日に作る商品名と生産数が入るシート（<a href="/shikumi/gas-order/">GASの注文管理システム</a>と連動）</li>
+    </ul>
+    <p>ボタンを1つ押すと、VBAが「生産指示」シートを上から読み、各商品の生産数分のラベルを順番に印刷します。<strong>消費期限は当日の日付＋DBの日数で自動計算</strong>されるため、手入力は一切不要です。委託販売先向けの商品は、販売区分の設定に従って出力内容が自動で切り替わります。</p>
+    <p>QRコードはラベルのテンプレートに埋め込み済みで、毎回自動的に印刷されます。お客さんがスキャンすると店のページに飛ぶため、ラベルが広告としても機能しています。</p>
+
+    <!-- ⑥ コード公開 -->
+    <h2>【コード公開】Excel VBAのサンプルコード</h2>
+    <p>使用ライブラリは<strong>ブラザー公式の b-PAC SDK</strong>（無料）です。ブラザーの開発者向けサイトからダウンロードしてインストールすると、ExcelからCreateObjectで呼び出せます。</p>
+    <p>先にP-touch Editorでラベルのテンプレート（.lbxファイル）を作り、テキストオブジェクトに名前を付けておきます。VBAはそのオブジェクト名を指定して文字を差し込む仕組みです。</p>
+
+    <pre><code>' ===================================================
+' 食品表示ラベル 自動印刷システム
+' 使用環境: Excel VBA + ブラザー b-PAC SDK 3.x
+' ===================================================
+Option Explicit
+
+' ---- シート名 ----
+Private Const WS_DB   As String = "商品DB"
+Private Const WS_PROD As String = "生産指示"
+
+' ---- 商品DBの列（1始まり）----
+Private Const DB_NAME         As Long = 1  ' 商品名
+Private Const DB_MATERIAL     As Long = 2  ' 原材料
+Private Const DB_ALLERGEN     As Long = 3  ' アレルゲン（カンマ区切り）
+Private Const DB_EXPIRY       As Long = 4  ' 消費期限（製造日からの日数）
+Private Const DB_PRICE        As Long = 5  ' 価格（税込）
+Private Const DB_CHANNEL      As Long = 6  ' 販売区分（"自店" or "委託"）
+Private Const DB_CHANNEL_INFO As Long = 7  ' 委託先固有テキスト
+
+' ---- 生産指示の列 ----
+Private Const PROD_NAME As Long = 1  ' 商品名
+Private Const PROD_QTY  As Long = 2  ' 当日生産数
+
+' ---- テンプレートファイルパス ----
+Private Const TEMPLATE_PATH As String = "C:\Labels\food_label.lbx"
+
+'=====================================================
+' メイン：ボタンに割り当てて使う
+' 当日の生産指示シートを読み、全商品分を一括印刷する
+'=====================================================
+Public Sub PrintAllLabels()
+    Dim wsProd  As Worksheet
+    Dim wsDb    As Worksheet
+    Dim lastRow As Long
+    Dim i       As Long
+    Dim qty     As Long
+    Dim itemName As String
+
+    Set wsProd = ThisWorkbook.Worksheets(WS_PROD)
+    Set wsDb   = ThisWorkbook.Worksheets(WS_DB)
+    lastRow    = wsProd.Cells(wsProd.Rows.Count, PROD_NAME).End(xlUp).Row
+
+    For i = 2 To lastRow
+        itemName = wsProd.Cells(i, PROD_NAME).Value
+        qty      = CLng(wsProd.Cells(i, PROD_QTY).Value)
+        If qty > 0 Then
+            Call PrintLabel(itemName, qty, wsDb)
+        End If
+    Next i
+
+    MsgBox "印刷完了（合計 " & _
+           Application.WorksheetFunction.Sum(wsProd.Columns(PROD_QTY)) & _
+           " 枚）", vbInformation
+End Sub
+
+'=====================================================
+' 1商品分のラベルをqty枚印刷する
+'=====================================================
+Private Sub PrintLabel(itemName As String, qty As Long, wsDb As Worksheet)
+    Dim dbRow   As Long
+    Dim expDate As String
+    Dim doc     As Object
+
+    dbRow = FindProduct(itemName, wsDb)
+    If dbRow = 0 Then
+        Debug.Print "商品マスタに存在しません: " & itemName
+        Exit Sub
+    End If
+
+    ' 消費期限：今日 ＋ DBに登録した日数
+    expDate = Format(Date + CLng(wsDb.Cells(dbRow, DB_EXPIRY).Value), "yyyy年mm月dd日")
+
+    ' b-PAC でテンプレートを開いてフィールドを埋める
+    Set doc = CreateObject("bpac.Document")
+    If Not doc.Open(TEMPLATE_PATH) Then
+        MsgBox "テンプレートを開けませんでした: " & TEMPLATE_PATH, vbCritical
+        Exit Sub
+    End If
+
+    With doc
+        .GetObject("NAME").Text     = itemName
+        .GetObject("MATERIAL").Text = wsDb.Cells(dbRow, DB_MATERIAL).Value
+        .GetObject("ALLERGEN").Text = FormatAllergen(wsDb.Cells(dbRow, DB_ALLERGEN).Value)
+        .GetObject("EXPIRY").Text   = "消費期限　" & expDate
+        .GetObject("PRICE").Text    = Format(wsDb.Cells(dbRow, DB_PRICE).Value, "￥#,##0") & "（税込）"
+
+        ' 委託販売先は固有テキストを差し込む（自店なら空欄）
+        If wsDb.Cells(dbRow, DB_CHANNEL).Value = "委託" Then
+            .GetObject("EXTRA").Text = wsDb.Cells(dbRow, DB_CHANNEL_INFO).Value
+        Else
+            .GetObject("EXTRA").Text = ""
+        End If
+
+        ' qty枚 印刷
+        .StartPrint "", bpacPrintOptionNone
+        .PrintOut 1, qty, bpacPrintOptionNone
+        .EndPrint
+        .Close False
+    End With
+
+    Set doc = Nothing
+End Sub
+
+'=====================================================
+' 商品名で商品DBを検索して行番号を返す（なければ0）
+'=====================================================
+Private Function FindProduct(itemName As String, wsDb As Worksheet) As Long
+    Dim lastRow As Long
+    Dim i       As Long
+    lastRow = wsDb.Cells(wsDb.Rows.Count, DB_NAME).End(xlUp).Row
+    For i = 2 To lastRow
+        If wsDb.Cells(i, DB_NAME).Value = itemName Then
+            FindProduct = i : Exit Function
+        End If
+    Next i
+    FindProduct = 0
+End Function
+
+'=====================================================
+' アレルゲン文字列を「（〇〇・〇〇を含む）」形式に整形
+'=====================================================
+Private Function FormatAllergen(raw As String) As String
+    If Len(Trim(raw)) = 0 Then
+        FormatAllergen = "アレルゲン：なし"
+    Else
+        FormatAllergen = "（" & raw & "を含む）"
+    End If
+End Function</code></pre>
+    <p class="code-caption">シート名・列番号・テンプレートパスは定数にまとめているので、自分の環境に合わせてここだけ書き換えれば動きます。b-PAC SDKのインストールとP-touch Editorでのテンプレート作成が事前準備として必要です。</p>
+
+    <!-- ⑦ 商品DBの構造 -->
+    <h2>商品DBシートの構造</h2>
+    <p>マスタは普通のExcelシートです。1行目をヘッダーにして、2行目以降に商品を1行ずつ登録します。</p>
+    <ul>
+      <li><strong>A列：商品名</strong>（生産指示シートの商品名と完全一致させる）</li>
+      <li><strong>B列：原材料</strong>（例：米、鶏肉、醤油…）</li>
+      <li><strong>C列：アレルゲン</strong>（例：小麦・卵・大豆）</li>
+      <li><strong>D列：消費期限（日数）</strong>（製造当日なら0、翌日なら1）</li>
+      <li><strong>E列：価格</strong>（税込金額）</li>
+      <li><strong>F列：販売区分</strong>（"自店" または "委託"）</li>
+      <li><strong>G列：委託先固有テキスト</strong>（委託先名や表示追加情報）</li>
+    </ul>
+    <p>商品を追加・変更するときはこのシートを編集するだけです。VBAのコードは触りません。</p>
+
+    <!-- ⑧ 結果 -->
+    <h2>結果：50枚30分以上→200枚5分、ミスがゼロに</h2>
+    <p>仕組みが動き始めてから、変化は明確でした。</p>
+    <ul>
+      <li>50枚で30分以上かかっていたのが、<strong>200枚でも約5分</strong>（ボタンを押して5分後に全部出てくる）</li>
+      <li>毎日変わる消費期限を手入力していたミスが<strong>ゼロ</strong>に</li>
+      <li>委託先ごとのラベル切り替え漏れも<strong>ゼロ</strong>に</li>
+      <li>生産数が増えても作業時間がほぼ変わらない</li>
+    </ul>
+    <p>量が増えた（50枚→200枚）のに時間が短くなったのが、この仕組みの特徴です。手作業は量に比例して時間が増えますが、自動化は量が増えても時間はほぼ変わりません。</p>
+
+    <!-- ⑨ QRコード -->
+    <h2>おまけ：QRコードで広告にもなっている</h2>
+    <p>P-touch Editorのテンプレートにはあらかじめ店のQRコードを埋め込んでいます。毎日200枚のラベルに自動でQRコードが印刷されることになります。</p>
+    <p>委託販売先に並ぶ商品のラベルにもQRコードが入るため、買った人が手に取るたびに店のページに誘導できます。<strong>ラベルが印刷物の広告として機能している</strong>、と気づいたのは仕組みを作ってからです。最初から狙ったわけではありませんでした。</p>
+
+    <!-- ⑩ つまずいた点 -->
+    <h2>つまずいた点・注意したこと</h2>
+    <ul>
+      <li><strong>商品名の表記ゆれ</strong>：生産指示シートの商品名と商品DBの商品名が1文字でも違うと「商品が見つかりません」になります。生産指示シートは入力規則でリスト選択にして根本から防いでいます。</li>
+      <li><strong>b-PAC SDKのインストール</strong>：初回のみ必要な作業ですが、ダウンロード先がわかりにくいです。ブラザーの開発者向けサイト（developer.brother.com）で「b-PAC」を検索すると見つかります。</li>
+      <li><strong>テンプレートのオブジェクト名</strong>：P-touch Editorでテキストオブジェクトを配置したあと、プロパティでオブジェクト名を設定する手順を忘れがちです。VBAのGetObject("NAME")の引数と完全一致させる必要があります。</li>
+    </ul>
+
+    <!-- まとめ -->
+    <h2>まとめ：商品を登録すれば、以後はボタン1つ</h2>
+    <p>食品表示ラベルの印刷は毎日必ず発生する作業です。量が増えるほど、手作業のコストが膨らみます。一度仕組みを作れば、商品DBの登録だけで以後はメンテナンスがほぼ不要です。</p>
+    <p>コードは公開していますので、ブラザーのラベルプリンターをお使いであれば定数とテンプレートを合わせるだけで動くはずです。生産管理システムとの連動や委託先ごとの切り替えが必要ない場合は、DBと生産指示の2シートだけでシンプルに使えます。</p>
+
+    <div class="cta">
+      <div class="cta__label">現在使っているラベルプリンター</div>
+      <p class="cta__title">ブラザー ラベルプリンター</p>
+      <p class="cta__body">b-PAC SDKに対応したブラザー製ラベルプリンター。VBAからの自動印刷が可能で、飲食店の食品表示ラベルに使っています。</p>
+      <a class="btn" href="https://amzn.to/49CpywV" rel="sponsored nofollow noopener" target="_blank">Amazonで見る</a>
+      <small>※ 当サイトはアフィリエイト広告（Amazon.co.jp）を利用しています。</small>
+    </div>
+
+    <div class="cta">
+      <div class="cta__label">使っているラベル用紙</div>
+      <p class="cta__title">ブラザー ラベル用紙</p>
+      <p class="cta__body">食品ラベル用に使っているラベル用紙。サイズ・素材は用途に合わせて選んでください。</p>
+      <a class="btn" href="https://amzn.to/4o2L3wA" rel="sponsored nofollow noopener" target="_blank">Amazonで見る</a>
+      <small>※ 当サイトはアフィリエイト広告（Amazon.co.jp）を利用しています。</small>
+    </div>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>b-PAC SDKとは何ですか？どこで入手できますか？</summary>
+        <div class="faq__a"><p>ブラザー工業が提供する、ラベルプリンターをプログラムから操作するための無料ライブラリです。ブラザーの公式サイト（developer.brother.com）からダウンロードできます。インストール後はExcel VBAから「CreateObject("bpac.Document")」で呼び出せます。</p></div>
+      </details>
+
+      <details>
+        <summary>VBAが書けなくても使えますか？</summary>
+        <div class="faq__a"><p>記事内のサンプルコードをそのままExcelに貼り付けて、シート名・列番号・テンプレートパスを自分の環境に合わせれば動きます。VBAの基本的なコピー＆ペーストと定数の書き換えができれば、ゼロから書く必要はありません。</p></div>
+      </details>
+
+      <details>
+        <summary>このシステムはブラザー以外のラベルプリンターでも使えますか？</summary>
+        <div class="faq__a"><p>b-PAC SDKはブラザー製ラベルプリンター専用です。他メーカーの場合はそのメーカーのSDKを使う必要があります。ただし「商品DBから当日生産数を読んで印刷を自動化する」という設計の考え方は、プリンターに関係なく応用できます。</p></div>
+      </details>
+
+      <details>
+        <summary>食品表示法に必要な項目はすべてラベルに入れられますか？</summary>
+        <div class="faq__a"><p>商品DBに登録する項目を増やすことで対応できます。私の場合は商品名・原材料・アレルゲン・消費期限・価格・販売者情報・QRコードを出力しています。表示義務項目は食品の種類によって異なるため、所轄の保健所に確認したうえで必要な列をDBに追加してください。</p></div>
+      </details>
+
+      <details>
+        <summary>委託販売先ごとにラベル内容を変えるにはどうすればいいですか？</summary>
+        <div class="faq__a"><p>商品DBに「販売区分」列（自店／委託）と「委託先固有テキスト」列を設けて、印刷時に区分を判定して出力内容を切り替えます。記事内のサンプルコードにこの処理が含まれています。一度登録すれば以後はメンテナンス不要です。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/shikumi/gas-order/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">GASで注文管理を自動化したら毎日30分が5分になった話【コード公開】</div>
+        </a>
+        <a class="related__item" href="/shikumi/hacchu-kanri/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">発注量を感覚で決めてきた弁当屋が、廃棄と緊急買い出しで仕組み化を決意するまで</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+        <nav aria-label="フッターナビ">
+          <a href="/keiei/">経営のリアル</a>
+          <a href="/shikumi/">仕組み化</a>
+          <a href="/review/">正直レビュー</a>
+          <a href="/money/">お金</a>
+          <a href="/kaigyo/">開業・独立</a>
+          <a href="/about/">この人について</a>
+          <a href="/privacy/">プライバシーポリシー</a>
+          <a href="/contact/">お問い合わせ</a>
+          <a href="/disclaimer/">免責事項</a>
+          <a href="/disclosure/">運営方針</a>
+        </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
