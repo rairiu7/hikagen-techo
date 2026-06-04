@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>売上管理はAirレジだけで完結させている——弁当屋の日次・生産計画・来客数対策と、仕組み化の正直な現在地｜火加減手帖</title>
+<meta name="description" content="日次売上・品目・支払い方法別の確認から、前年同時期データを使った生産計画、来客数の減少を感知してのイベント発動まで。Airレジ一本に集約して3年、意図せず"仕組み"になっていた部分と、まだできていない自動化の正直な記録。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/uriago-kanri/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="売上管理はAirレジだけで完結させている——弁当屋の日次・生産計画・来客数対策と、仕組み化の正直な現在地｜火加減手帖">
+<meta property="og:description" content="日次売上・品目・支払い方法別の確認から、前年同時期データを使った生産計画、来客数の減少を感知してのイベント発動まで。Airレジ一本で3年、仕組み化の正直な現在地。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/uriago-kanri/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://hikagen-techo.com/ogp/shikumi-uriago-kanri.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hikagen-techo.com/ogp/shikumi-uriago-kanri.png">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "売上管理はAirレジだけで完結させている——弁当屋の日次・生産計画・来客数対策と、仕組み化の正直な現在地",
+  "description": "日次売上・品目・支払い方法別の確認から、前年同時期データを使った生産計画、来客数の減少を感知してのイベント発動まで。Airレジ一本に集約して3年、意図せず仕組みになっていた部分と、まだできていない自動化の正直な記録。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/uriago-kanri/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-06-04",
+  "dateModified": "2026-06-04",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化・デジタル化",
+  "keywords": "売上管理, Airレジ, 飲食店 売上管理, 小規模飲食店, 生産計画, 来客数管理, 弁当屋, POSレジ 活用, 仕組み化"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "売上管理はAirレジだけで完結させている", "item": "https://hikagen-techo.com/shikumi/uriago-kanri/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと文面一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "小規模飲食店の売上管理は、どのツールから始めればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "POSレジと会計ソフトを連携させるのが最も効率的です。POSレジで日々の売上データを自動記録し、会計ソフトに連携することで、転記作業なしに経理まで完結します。私はAirレジとマネーフォワード クラウド会計の組み合わせで、3年間この体制で動いています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "Airレジの分析機能では、過去データはどのくらい遡れますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "私の使用環境では1年前のデータを確認できます。「去年の今頃、何がどれだけ売れていたか」を品目別に確認できるため、季節性のある商品の生産計画を立てるときに役立っています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "来客数が減ってきたとき、どうやって気づいて対策を立てていますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "Airレジで日々の来店人数を確認する習慣から気づきます。「ここ最近、来店数が少ないな」と感じたら、子ども向けのちょっとしたゲームイベント（店内マーク探し、ミニクレーンゲームなど）を打ちます。大がかりなキャンペーンより、気軽に立ち寄ってもらえるきっかけを作ることを重視しています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "複数店舗の売上を一人で管理するには、どうすればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "ツールを店舗間で共通化し、同じ画面で両店舗を確認できる状態にすることです。店舗ごとに別のシステムを使うと管理工数が2倍になります。Airレジは複数店舗の売上を一つのアカウントで確認できるため、一人での管理に向いています。" }
+    }
+  ]
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N6KFC2LLS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9N6KFC2LLS');
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">売上管理はAirレジだけで完結させている</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化</span>
+    <h1 class="post-title">売上管理はAirレジだけで完結させている——弁当屋の日次・生産計画・来客数対策と、仕組み化の正直な現在地</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-04">2026年6月4日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-06-04">2026年6月4日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>売上管理のツールは、3年間ずっとAirレジだけです。日次の売上確認から品目別の分析、生産計画のための前年比較、来客数モニタリングまで、すべてAirレジで完結しています。</p>
+      <p>ただし正直に言うと、<strong>「仕組み化できている」とは思っていません</strong>。データはAirレジにあるのですが、今の状態は「自分が見に行っている」段階です。データが自動でアラートを出してくれたり、意思決定のタイミングに先回りして並んでいたりする状態——それが私が考える仕組み化で、そこにはまだ届いていません。この記事は、できていることとできていないことを両方正直に書く記録です。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="この記事の数字">
+      <div class="stat"><div class="stat__num">毎日</div><div class="stat__label">日次売上チェックの頻度</div></div>
+      <div class="stat"><div class="stat__num">3<span style="font-size:1rem">項目</span></div><div class="stat__label">日次で確認する指標</div></div>
+      <div class="stat"><div class="stat__num">1<span style="font-size:1rem">年前</span></div><div class="stat__label">生産計画で参照する期間</div></div>
+    </div>
+
+    <!-- ③ 前提 -->
+    <h2>前提：2店舗の売上管理を一人でやっている</h2>
+    <p>人口5万人未満の地方都市で弁当・惣菜店を2店舗やっています（詳しくは<a href="/about/">この人について</a>）。調理は料理担当のパートナーが担い、経営・仕組み化は私が一人で見ています。</p>
+    <p>売上管理については、最初から<a href="/review/airregi/">Airレジ</a>を使っています（選んだ理由と3年後の評価は<a href="/review/airregi-erabu/">こちらの記事</a>に書きました）。2店舗分の売上をAirレジの一つのアカウントで確認できるため、管理の手間が2倍に増えることなく回せています。</p>
+
+    <!-- ④ 日次でやっていること -->
+    <h2>毎日確認している3つのこと</h2>
+    <p>閉店後か翌朝、その日の数字を3つ確認します。</p>
+
+    <h3>① 各店舗の日次売上</h3>
+    <p>2店舗それぞれの売上を確認します。「今日はよかった・悪かった」という感覚値の確認でもあるのですが、<strong>曜日別・時期別の傾向を肌感覚でつかむために続けています</strong>。何か月も積み上げると「この曜日はこのくらい」という基準が自分の中にできてきます。</p>
+
+    <h3>② 品目別の売上</h3>
+    <p>何が何個売れたかを確認します。「今日はこのメニューが動いたな」という気づきがあるのはもちろんですが、<strong>長期的に見ると「売れているものと売れていないもの」が明確になってきます</strong>。死に筋のメニューを整理する判断材料になっています。</p>
+
+    <h3>③ 支払い方法別の内訳</h3>
+    <p>現金とPayPay等キャッシュレスの比率を確認します。これは特に何かに使っているというより、<strong>資金繰りの感覚を持つためです</strong>。現金売上が多い日と少ない日では、翌日の釣り銭準備の量が変わります。また「キャッシュレス比率が上がってきたな」という長期的な変化も、この習慣があるから気づけます。</p>
+
+    <!-- ⑤ 生産計画での使い方 -->
+    <h2>生産計画を立てるとき：1年前のデータが便利</h2>
+    <p>弁当・惣菜の生産計画を立てるとき、<strong>「去年の今頃、何がどれだけ売れていたか」をAirレジで確認します</strong>。1年前の同時期の品目別データがそのまま出てくるので、季節性のあるメニューや特定の時期に需要が上がる商品を把握するときに重宝しています。</p>
+    <p>たとえばお盆前後、年末、新生活の時期など、弁当需要が変動しやすいタイミングでは、前年のデータを参考に仕込み量と品目構成を調整します。感覚だけで判断するより、数字で裏付けがある方が過不足を減らしやすいです。</p>
+    <p>ただし、これも「見に行く」という行動が前提になっています。生産計画を立てるタイミングで自動的にデータが整理されて出てくる、という状態ではありません。そこが正直なところです。</p>
+
+    <!-- ⑥ 来客数モニタリング → イベント発動 -->
+    <h2>来客数の傾向が落ちてきたら、イベントを打つ</h2>
+    <p>Airレジでは日々の来店人数も確認できます。この数字を日々見ていると、<strong>「ここ最近、お客さんが少ない気がする」という傾向に気づけます</strong>。</p>
+    <p>この感覚が続いたとき、私は小さなイベントを打ちます。大がかりな販促ではなく、子どもを連れたお客さんが「ちょっと行ってみようか」と思えるような仕掛けです。</p>
+    <ul>
+      <li><strong>店内マーク探し</strong>——店のどこかに隠してあるマークを見つけたら、お菓子のプレゼント</li>
+      <li><strong>ミニクレーンゲーム</strong>——景品は小さなお菓子</li>
+      <li><strong>じゃんけん</strong>——レジでじゃんけんして、勝ったらお菓子</li>
+    </ul>
+    <p>コストは小さく、子ども連れのお客さんに「また来たい」と思ってもらうきっかけを作ることが目的です。地方の小商いにとって、<strong>リピーターは広告より確実な集客</strong>だと3年間で感じてきました。</p>
+    <p>来客数の落ち込みに気づいてイベントを打つ、というループは機能しています。ただしこれも、自分が日々データを見ている前提の話です。「来客数がX人を下回ったら通知が来る」という仕組みにはなっていません。</p>
+
+    <!-- ⑦ マネーフォワードとの関係 -->
+    <h2>マネーフォワードとの連携：会計処理に使う</h2>
+    <p>AirレジはマネーフォワードCloud会計と連携しています（<a href="/review/moneyforward/">マネーフォワードの使用感はこちら</a>）。売上データはAirレジからマネーフォワードに自動で流れるため、会計帳簿や確定申告のためのデータ転記は不要です。</p>
+    <p>日々の売上管理・分析はAirレジで完結し、会計・経理処理はマネーフォワードが受け取る——という分担になっています。どちらか一方だけでも機能しますが、連携することで<strong>入力の手間をほぼゼロにできる</strong>のがこの組み合わせの利点です。</p>
+    <p>売上の詳細を確認したいときはAirレジだけ開けばいい。マネーフォワードに行くのは、経費の仕訳や試算表を確認するときです。</p>
+
+    <!-- ⑧ まだできていないこと -->
+    <h2>まだできていない仕組み化の話</h2>
+    <p>冒頭でも触れましたが、私が思う「仕組み化」は<strong>「意思決定のタイミングで、必要なデータが先に並んでいる状態」</strong>です。今はデータを見に行く習慣があるというだけで、仕組みとは言い切れません。</p>
+    <p>具体的に目指しているのは2つです。</p>
+    <ul>
+      <li><strong>生産計画を立てるタイミングで、前年データが自動で整理されて出てくる</strong>——今は自分でAirレジを開いて確認しています</li>
+      <li><strong>来客数が一定を下回ったとき、自動でアラートが来る</strong>——今は自分が毎日見て感覚で気づいています</li>
+    </ul>
+    <p>この2点ができれば、「売上管理の仕組み化ができた」と言えると思っています。どちらも技術的には実現できるはずで（GASとAirレジのAPIを組み合わせるなど）、設計中の段階です。</p>
+    <p>仕組みが動いたら、またここに書きます。</p>
+
+    <!-- まとめ -->
+    <h2>まとめ</h2>
+    <p>3年間、売上管理はAirレジだけで完結してきました。日次の売上・品目・支払い方法別確認、生産計画のための前年データ参照、来客数の傾向把握からのイベント発動——これだけのことが一つのツールで済んでいます。</p>
+    <p>ただし「できている」と「仕組み化できている」は違います。今は<strong>「データがある」「習慣がある」段階</strong>であって、データが先回りしてくれる状態ではありません。その正直さを書き残しておきたかったのが、この記事を書いた理由です。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>小規模飲食店の売上管理は、どのツールから始めればいいですか？</summary>
+        <div class="faq__a"><p>POSレジと会計ソフトを連携させるのが最も効率的です。POSレジで日々の売上データを自動記録し、会計ソフトに連携することで、転記作業なしに経理まで完結します。私はAirレジとマネーフォワード クラウド会計の組み合わせで、3年間この体制で動いています。</p></div>
+      </details>
+
+      <details>
+        <summary>Airレジの分析機能では、過去データはどのくらい遡れますか？</summary>
+        <div class="faq__a"><p>私の使用環境では1年前のデータを確認できます。「去年の今頃、何がどれだけ売れていたか」を品目別に確認できるため、季節性のある商品の生産計画を立てるときに役立っています。</p></div>
+      </details>
+
+      <details>
+        <summary>来客数が減ってきたとき、どうやって気づいて対策を立てていますか？</summary>
+        <div class="faq__a"><p>Airレジで日々の来店人数を確認する習慣から気づきます。「ここ最近、来店数が少ないな」と感じたら、子ども向けのちょっとしたゲームイベント（店内マーク探し、ミニクレーンゲームなど）を打ちます。大がかりなキャンペーンより、気軽に立ち寄ってもらえるきっかけを作ることを重視しています。</p></div>
+      </details>
+
+      <details>
+        <summary>複数店舗の売上を一人で管理するには、どうすればいいですか？</summary>
+        <div class="faq__a"><p>ツールを店舗間で共通化し、同じ画面で両店舗を確認できる状態にすることです。店舗ごとに別のシステムを使うと管理工数が2倍になります。Airレジは複数店舗の売上を一つのアカウントで確認できるため、一人での管理に向いています。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/review/airregi/">
+          <span class="related__cat">正直レビュー</span>
+          <div class="related__title">開業時にレジをAirレジにした理由と2年使った正直な感想</div>
+        </a>
+        <a class="related__item" href="/review/moneyforward/">
+          <span class="related__cat">正直レビュー</span>
+          <div class="related__title">弥生会計からマネーフォワード クラウド会計に乗り換えた理由と2年使った感想</div>
+        </a>
+        <a class="related__item" href="/shikumi/hacchu-kanri/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">発注量を感覚で決めてきた弁当屋が、廃棄と緊急買い出しで仕組み化を決意するまで</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+        <nav aria-label="フッターナビ">
+          <a href="/keiei/">経営のリアル</a>
+          <a href="/shikumi/">仕組み化</a>
+          <a href="/review/">正直レビュー</a>
+          <a href="/money/">お金</a>
+          <a href="/kaigyo/">開業・独立</a>
+          <a href="/about/">この人について</a>
+          <a href="/privacy/">プライバシーポリシー</a>
+          <a href="/contact/">お問い合わせ</a>
+          <a href="/disclaimer/">免責事項</a>
+          <a href="/disclosure/">運営方針</a>
+        </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
