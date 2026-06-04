@@ -43,6 +43,12 @@
 
 ## ディレクトリ / URL 設計
 - 共通CSS：`/css/style.css`（全ページがこれを `<link rel="stylesheet" href="/css/style.css">` で参照）
+- **ファビコン**：`/favicon.svg`（炎・オリーブグリーン）/ `/favicon-32x32.png` / `/apple-touch-icon.png`（180×180）設置済み。再生成は `py generate_favicon.py`。新記事HTMLには `<meta name="viewport">` の直後に必ず以下の3行を含める：
+  ```html
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  ```
 - プロフィール：`/about/index.html`
 - カテゴリと slug：記事は `<category>/<slug>/index.html`、URL は末尾スラッシュ
   - keiei（経営のリアル） / shikumi（仕組み化） / review（正直レビュー） / money（個人事業主のお金） / kaigyo（開業・独立）
@@ -125,6 +131,7 @@
 - HTML タグの開閉が揃っている
 - 個人特定情報（店名・地名・実数字・個人名・実URL）が混入していない
 - `/css/style.css` への参照が先頭スラッシュ付きで入っている
+- ファビコンの `<link rel="icon">` 3行が `<head>` 内（viewport直後）に含まれているか
 - アフィリエイトリンクを含む記事に `<aside class="pr-notice">` が記事ヘッダー直後にあるか
 - **JSON-LD 内のダブルクォート**：記事タイトルや `name` フィールドに `"` （直ダブルクォート U+0022）が含まれると JSON パースエラーになる。必ずカーリークォート（`"` U+201C / `"` U+201D）に置き換えること。カテゴリ一覧の CollectionPage `hasPart` でも同様。
 
