@@ -28,7 +28,7 @@
 ## 技術構成
 - 静的 HTML/CSS/JS のみ。ビルド工程なし。Cloudflare がアセットを配信（assets root = リポジトリ直下 `./`）。
 - GitHub（main ブランチ）への push で Cloudflare が自動デプロイ。
-- push は内容を確認のうえ、ユーザー承認後に行う。
+- push は原則ユーザー承認後に行う。ただし記事公開の一連作業（新記事公開時の必須作業 手順1〜6）は「確認なしで push」が正ルール。その他の変更（CSS・テンプレート・設定ファイル等）は事前確認する。
 
 ## デプロイ運用（Cloudflare）
 - `wrangler deploy`（Workers向け）は使わない（`wrangler.toml` が無い・自動デプロイと競合の恐れ）。
@@ -74,6 +74,7 @@
 - 結論ファースト。一次情報を前面に。曖昧表現より具体的な数字。
 - 「おすすめ◯選」「徹底比較」などの比較記事は作らない。「私が実際に選んだ理由／使った感想」の一次情報記事のみ。
 - 良い点だけでなく正直な弱点も書く（信頼の核）。
+- **まだ結論が出ていない経験は「進行中」として書く**。結論が出るまで記事にしないのではなく、現在地を正直に書いて「追記予定」で出す方が一次情報として強い。「半年後どうなったか」を結論として書くと、実際は3ヶ月の話なのに違う記事になってしまう。
 - **記事本文の口調は「です・ます体」で統一する**。だ・である調の短文連打は「偉そう」な印象を与えやすい。強調したい箇所も「〜です」「〜でした」で十分に伝わる。
 
 ## OGP / SNS シェア
@@ -140,15 +141,12 @@
 1. **カテゴリ一覧ページ** `<category>/index.html` の `<nav class="related__list">` に `<a class="related__item">` を追記
 2. **トップページ** `index.html` の `<div class="art-list">` に `<a class="art">` を**先頭に**追記し、既存の連番を1ずつ繰り下げる（新しい記事が常に上＝小さい番号になるよう、末尾ではなく先頭に挿入する）。連番の繰り下げは単純な数値置換だと同番号が複数ある場合に重複するため、以下の Python スクリプトで行う：
    ```python
-   # 例：新記事を01に挿入し、既存の02以降を03以降に繰り下げる場合
-   # ① 保護したいエントリ（新記事の直後＝02）をSKIPマーカーで退避
-   protect = 'href="/new-article/"><span class="ano">02</span>'
-   content = content.replace(protect, 'href="/new-article/"><span class="ano">SKIP</span>')
-   # ② 02以降を逆順で繰り下げ（逆順でないと多重置換が起きる）
-   for n in range(MAX, 1, -1):
+   # 全エントリを1つ繰り下げ（逆順で多重置換を防ぐ）
+   for n in range(MAX, 0, -1):
        content = content.replace(f'<span class="ano">{n:02d}</span>', f'<span class="ano">{n+1:02d}</span>')
-   # ③ SKIPを正しい番号に戻す
-   content = content.replace('<span class="ano">SKIP</span>', '<span class="ano">02</span>')
+   # 先頭に新記事エントリを挿入
+   new_art = '    <a class="art" href="/category/slug/">...<span class="ano">01</span>...\n'
+   content = content.replace('    <div class="art-list reveal">\n', '    <div class="art-list reveal">\n' + new_art)
    ```
 3. **sitemap.xml** に `<url>` エントリを追加
 これを怠ると直リンクではアクセスできてもサイト内の一覧に載らない。
@@ -175,7 +173,7 @@
 ## 公開済み記事一覧（最終更新：2026-06-11・36記事）
 | カテゴリ | slug | タイトル |
 |---|---|---|
-| keiei | neage | 弁当屋が値上げしたら客も売上も半年落ちた——それでも「もっと早く上げるべきだった」と思う理由 |
+| keiei | neage | 値上げして3ヶ月。売上は維持できたが利益は改善していない——弁当屋の正直な現在地（※進行中・半年後追記予定） |
 | keiei | nebiki-nashi | 開業3年、値引きゼロ。弁当屋が一度もタイムセールをしなかった理由と、売れ残りの正直な処分方法 |
 | keiei | event-shutten | 来場者200人・売上10万円——弁当屋がイベント出店の誘いに使う7つのフィルターと、それでも出ない理由 |
 | keiei | jikyu-keisan | 時給286円。弁当屋が事業3年目で初めて計算した自分の労働単価と、それでも続ける理由 |
