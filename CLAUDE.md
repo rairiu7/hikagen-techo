@@ -65,7 +65,23 @@
 
 ## 構造化データ（JSON-LD）
 - 全記事に必ず：**Person**（`@id` = `https://hikagen-techo.com/#person` で共通）、**Article**、**FAQPage**、**BreadcrumbList**
-- レビュー記事は **Review**（itemReviewed + reviewRating）も追加
+- レビュー記事のSchema構造：**Product（または SoftwareApplication）をトップレベルに置き、`review` プロパティの中に Review を入れる**。逆（Review をトップに、itemReviewed に Product）は Google がエラーとして扱うため使わない。
+  ```json
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "商品名",
+    "brand": { "@type": "Brand", "name": "メーカー名" },
+    "review": {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "4", "bestRating": "5", "worstRating": "1" },
+      "author": { "@id": "https://hikagen-techo.com/#person" },
+      "datePublished": "YYYY-MM-DD",
+      "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" }
+    }
+  }
+  ```
+  ソフトウェア・アプリは `"@type": "SoftwareApplication"` に置き換え、`applicationCategory` / `operatingSystem` を追加する（構造は同じ）。
 - **FAQPage の Q&A 文面は、本文の `.faq` の文面と完全一致させる**（不一致は不可）
 - カテゴリ一覧ページ（keiei / shikumi / review / money / kaigyo の各 index.html）には **CollectionPage + BreadcrumbList** を `@graph` で設置する（実装済み）。
 - トップページには **WebSite**（`@id` = `https://hikagen-techo.com/#website`）+ **Person** を `@graph` で設置（実装済み）。新たに Organization schema は不要（個人事業主のため Person が publisher）。
