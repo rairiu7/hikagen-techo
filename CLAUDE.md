@@ -197,7 +197,7 @@
 | keiei | itaku-hanbai | もう一店舗持った感覚——弁当屋が委託販売4か所で学んだ選び方・条件交渉・正直な数字 |
 | keiei | nebuke | 大手と価格で戦わない——弁当屋が原価率35%・800円台の値付けにたどり着くまで |
 | keiei | staff-saiyou | 弁当屋が8人雇って3人辞めた話 |
-| keiei | hitori-unui | 弁当屋2店舗をほぼ1人で3年回している |
+| keiei | hitori-unei | 弁当屋2店舗をほぼ1人で3年回している |
 | shikumi | yoyaku-kanri | 予約経路5つ・集約先ひとつ——製造漏れをゼロにした予約管理の仕組み |
 | shikumi | seisan-shiji | ホワイトボードと電卓をやめた日——生産指示のデジタル化 |
 | shikumi | gas-order | GASで注文管理を自動化したら毎日30分が5分になった話【コード公開】 |
