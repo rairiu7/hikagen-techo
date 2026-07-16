@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>毎日10時半、翌日の予約一覧がLINEに届く——GASで通知を自動化し、Gmail照合で登録漏れまで見張る弁当屋の仕組み【コード公開】｜火加減手帖</title>
+<meta name="description" content="LINE公式アカウント（Messaging API）＋GASで、毎日10時半に翌日の予約一覧を関係者のLINEへ自動通知。さらにHP予約の受付メールと予約DBをGmail照合して登録漏れを検知する見張りも自動化した弁当屋の実例。そのまま動かせるサンプルコード付き。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/gas-line-tsuchi/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="毎日10時半、翌日の予約一覧がLINEに届く——GASで通知を自動化し、Gmail照合で登録漏れまで見張る弁当屋の仕組み【コード公開】｜火加減手帖">
+<meta property="og:description" content="LINE公式アカウント＋GASで翌日の予約一覧を毎日10時半に自動通知。Gmail照合で登録漏れまで見張る仕組みをサンプルコード付きで公開。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/gas-line-tsuchi/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://hikagen-techo.com/ogp/shikumi-gas-line-tsuchi.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hikagen-techo.com/ogp/shikumi-gas-line-tsuchi.png">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "毎日10時半、翌日の予約一覧がLINEに届く——GASで通知を自動化し、Gmail照合で登録漏れまで見張る弁当屋の仕組み【コード公開】",
+  "description": "LINE公式アカウント（Messaging API）＋GASで、毎日10時半に翌日の予約一覧を関係者のLINEへ自動通知。さらにHP予約の受付メールと予約DBをGmail照合して登録漏れを検知する見張りも自動化した弁当屋の実例。そのまま動かせるサンプルコード付き。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/gas-line-tsuchi/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化",
+  "keywords": "GAS, Google Apps Script, LINE通知, LINE Messaging API, LINE公式アカウント, スプレッドシート, 自動化, 飲食店, Gmail照合"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "毎日10時半、翌日の予約一覧がLINEに届く——GASで通知を自動化し、Gmail照合で登録漏れまで見張る弁当屋の仕組み【コード公開】", "item": "https://hikagen-techo.com/shikumi/gas-line-tsuchi/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "GASからLINEに通知を送るには何が必要ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "LINE公式アカウント（無料で作成できます）とMessaging APIのチャネルアクセストークン、そして通知を受け取る人にそのアカウントを友だち追加してもらうことの3つです。GAS側はUrlFetchAppでMessaging APIを呼ぶだけなので、コード自体は数十行で済みます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "LINE Notifyでも同じことができますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "LINE Notifyは2025年3月にサービスを終了しています。これから作るならLINE公式アカウント＋Messaging APIの構成をすすめます。私の仕組みもこの構成で、関係者だけが友だち追加した通知専用の公式アカウントに配信しています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "LINE公式アカウントの無料プランで通知は足りますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "私は足りています。無料プランで送れるのは月200通までで、配信数は「メッセージ数×受信者数」で数えられます。関係者数人に1日1通なら月150通前後に収まる計算です。通知先の人数や通知の種類が増えると超えるので、設計の段階で計算しておくべきポイントです。" }
+    },
+    {
+      "@type": "Question",
+      "name": "通知に載せる情報は絞ったほうがいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "私は全部載せる方を選び、正解だったと思っています。作る前は煩雑になるかと心配でしたが、受取時間・品名・数量・経路・備考まで載っていると通知だけで一つ一つ確認ができ、結局スプレッドシートを開かずに済みます。絞るより「通知だけで完結する」ことを優先しました。" }
+    },
+    {
+      "@type": "Question",
+      "name": "Gmailとの照合はどういう仕組みですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "HPから予約が入ると店側にも受付メールが届くので、GASでGmailを検索してメール側の受付番号を取り出し、予約DB（スプレッドシート）に同じ番号が存在するかを毎日照合しています。DBに見つからない番号があったときだけ、LINEに警告が飛ぶ仕組みです。" }
+    }
+  ]
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N6KFC2LLS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9N6KFC2LLS');
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/" aria-current="page">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">GASでLINE通知を自動化した話</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化</span>
+    <h1 class="post-title">毎日10時半、翌日の予約一覧がLINEに届く——GASで通知を自動化し、Gmail照合で登録漏れまで見張る弁当屋の仕組み【コード公開】</h1>
+    <div class="post-meta">
+      <time datetime="2026-07-16">2026年7月16日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-07-16">2026年7月16日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>予約の状況を、人が見に行くのをやめました。GASとLINE公式アカウント（Messaging API）で、<strong>毎日10時半に翌日の予約一覧が関係者のLINEへ自動で届く</strong>ようにしたからです。生産計画は、届いた通知を元にそのまま立てられます。</p>
+      <p>さらに、HP予約の受付メールと予約DB（スプレッドシート）をGASで毎日照合し、<strong>登録漏れがあったときだけ警告が飛ぶ「見張り」</strong>も作りました。この記事では、その考え方とそのまま動かせるサンプルコードを公開します。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="この記事の数字">
+      <div class="stat"><div class="stat__num">10<span style="font-size:1rem">時半</span></div><div class="stat__label">毎日の自動通知時刻</div></div>
+      <div class="stat"><div class="stat__num">0<span style="font-size:1rem">回</span></div><div class="stat__label">予約DBを見に行く回数</div></div>
+      <div class="stat"><div class="stat__num">2<span style="font-size:1rem">つ</span></div><div class="stat__label">自動で動く仕組み（通知＋照合）</div></div>
+    </div>
+
+    <!-- ③ 前提 -->
+    <h2>通知を作る前は、生産計画のたびに「見に行く」作業をしていた</h2>
+    <p>私は人口5万人未満の地方都市で弁当・惣菜店を2店舗やっています。注文は<a href="/shikumi/gas-order/">GASで1枚のスプレッドシートに集約</a>し、5つある予約経路も<a href="/shikumi/yoyaku-kanri/">1か所の予約DBに集約</a>しました。データは1か所に揃っています。</p>
+    <p>それでも、残っていた作業があります。<strong>生産計画を立てるたびに、翌日・翌々日の状況はどうなっているかを、カレンダーと予約DBへ自分から確認しに行くこと</strong>です。</p>
+    <p>データが1か所にあるのは大きな前進でした。でも「人が見に行く」構造のままだと、見に行くという手間と、見忘れるというリスクが残ります。次にやるべきことは明確でした。<strong>人が見に行くのではなく、データの方から人に届くようにする</strong>。それがこの記事の仕組みです。</p>
+
+    <!-- ④ 設計 -->
+    <h2>設計の考え方：「見に行く」を「向こうから届く」に変える</h2>
+    <p>作ったのは、通知専用のLINE公式アカウントを軸にした3つの動きです。お客さま向けの公式LINE（<a href="/shikumi/line-koushiki/">この記事</a>）とは別に、<strong>関係者だけが友だち追加した通知専用アカウント</strong>をもうひとつ用意しています。</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>動き</th><th>タイミング</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>予約一覧の通知</td><td>毎日10時半（自動）</td><td>翌日の予約全件をLINEへpush配信</td></tr>
+          <tr><td>登録漏れの見張り</td><td>毎日（自動）</td><td>Gmailの受付メールと予約DBを照合し、漏れがあれば警告</td></tr>
+          <tr><td>リッチメニュー</td><td>欲しいとき（手動）</td><td>タップすれば予約状況などを自分のタイミングで取得</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>基本は「向こうから届く」push型ですが、通知を待たずに知りたい場面もあるので、リッチメニューをタップすればある程度の情報を取りに行けるようにもしてあります。push（受け取る）とpull（取りに行く）の両方を用意しておくと、運用が窮屈になりません。</p>
+
+    <!-- ⑤ 仕組み① -->
+    <h2>仕組み①：毎日10時半、翌日の予約一覧がLINEに届く</h2>
+    <p>GASの時間主導型トリガーで、毎日10時半に関数を実行します。予約DBから受取日が「明日」の予約を抜き出し、1通のメッセージに整形して、LINE公式アカウントのMessaging APIでpush配信する——それだけの仕組みです。</p>
+
+    <pre><code>// 毎日10時半に実行：翌日の予約一覧をLINEへ通知する
+function sendTomorrowReservations() {
+  const ss   = SpreadsheetApp.openById(SS_ID);
+  const rows = ss.getSheetByName(SHEET_RESERVE).getDataRange().getValues().slice(1); // 見出し除く
+  const tz   = Session.getScriptTimeZone();
+  const target = Utilities.formatDate(new Date(Date.now() + 86400000), tz, 'yyyy-MM-dd');
+
+  // 受取日が「明日」の予約だけ抜き出す
+  const list = rows.filter(function (r) {
+    return Utilities.formatDate(new Date(r[1]), tz, 'yyyy-MM-dd') === target;
+  });
+
+  // 通知メッセージを組み立てる（情報は削らず全部載せる）
+  let text = '【明日の予約】' + target + '（' + list.length + '件）\n';
+  if (list.length === 0) {
+    text += '予約はありません';
+  } else {
+    list.forEach(function (r) {
+      // 列の並び：[受付日時, 受取日, 受取時間, 商品, 数量, 名前, 経路, 備考]
+      text += '\n' + r[2] + ' ' + r[5] + '様\n'
+            + '　' + r[3] + ' × ' + r[4] + '\n'
+            + '　経路：' + r[6] + (r[7] ? '／備考：' + r[7] : '');
+    });
+  }
+  pushToLine_(text);
+}
+
+// LINE公式アカウント（Messaging API）へ配信する共通関数
+function pushToLine_(text) {
+  const token = PropertiesService.getScriptProperties().getProperty('LINE_TOKEN');
+  UrlFetchApp.fetch('https://api.line.me/v2/bot/message/broadcast', {
+    method: 'post',
+    contentType: 'application/json',
+    headers: { Authorization: 'Bearer ' + token },
+    payload: JSON.stringify({ messages: [{ type: 'text', text: text }] })
+  });
+}</code></pre>
+    <p class="code-caption">実際に動かしているコードから、店固有の処理を除いて簡略化したサンプルです。SS_ID（スプレッドシートID）とシート名は自分の環境に合わせて定義し、チャネルアクセストークンはスクリプトプロパティ「LINE_TOKEN」に保存してから実行してください。</p>
+    <p>予約が0件の日も「予約はありません」と送る作りにしています。<strong>通知が来ないのか、予約がないのか</strong>を受け取る側が区別できるようにするためです。毎日決まった時刻に必ず届くからこそ、「今日は来ていない＝仕組みが止まっている」に気づけます。</p>
+
+    <h3>通知には「全部」載せる——煩雑になるかと思ったら、逆だった</h3>
+    <p>設計時に迷ったのが、通知に載せる情報量です。受取時間・品名・数量・お客さまの名前・予約経路・備考——全部載せると長くなるので、作る前は「煩雑になるかもしれない」と思っていました。</p>
+    <p>結果は逆でした。<strong>全部載せて正解でした。</strong>通知の中で一つ一つの予約を確認できるので、結局スプレッドシートを開きに行かずに済みます。情報を絞った通知は一見スマートですが、「詳細はDBを見に行く」が残るなら、見に行く作業をなくすという当初の目的が達成できません。</p>
+
+    <!-- ⑥ 仕組み② -->
+    <h2>仕組み②：Gmail照合の「見張り」——きっかけは、記憶の違和感だった</h2>
+    <p>もうひとつの仕組みは、通知の元データそのものを疑う「見張り」です。これを作ったきっかけは、ある日の違和感でした。</p>
+    <p>「あれ？　この日に注文が入っていたような……？」</p>
+    <p>記憶を頼りに予約DBを確認すると、載っていない。次にメールを確認すると、受付メールはちゃんと届いている。<strong>DBにデータが抜けていたのです。</strong>HPから予約が入るとGASがスプレッドシートに書き込む仕組みですが、その書き込みが漏れていました。</p>
+    <p>このときは記憶のおかげで拾えました。でも、記憶は仕組みではありません。「このチェックを毎日、人がやるのか……？」と考えて、無理だと即答できたので、<strong>チェックそのものをシステムに落とす</strong>ことにしました。</p>
+
+    <pre><code>// 毎日実行：HP予約の受付メールと予約DBを照合して「登録漏れ」を探す
+function auditReservations() {
+  const ss   = SpreadsheetApp.openById(SS_ID);
+  const rows = ss.getSheetByName(SHEET_RESERVE).getDataRange().getValues().slice(1);
+
+  // DB側にある受付番号を控える（HPの受付メールに必ず記載される番号）
+  const known = {};
+  rows.forEach(function (r) { known[String(r[8])] = true; });
+
+  // 直近3日分の受付メールをGmailから検索する
+  const threads = GmailApp.search('subject:(ご予約を受け付けました) newer_than:3d');
+  const missing = [];
+  threads.forEach(function (th) {
+    th.getMessages().forEach(function (msg) {
+      const m = msg.getPlainBody().match(/受付番号[:：]\s*([A-Z0-9-]+)/);
+      if (m &amp;&amp; !known[m[1]]) missing.push(m[1]);
+    });
+  });
+
+  // 漏れが見つかったときだけLINEへ警告する
+  if (missing.length) {
+    pushToLine_('【要確認】予約DBに登録が見つからない受付番号があります\n' + missing.join('\n'));
+  }
+}</code></pre>
+    <p class="code-caption">メールの件名・受付番号の形式は自分の環境に合わせて書き換えてください。「漏れゼロなら何も送らない」作りなので、普段この見張りは沈黙しています。</p>
+    <p>考え方はシンプルです。<strong>HPからの予約は、受付メールと予約DBの2か所に必ず痕跡が残る。だから2つを突き合わせれば、片方の漏れを機械的に検出できる。</strong>自動化した仕組みも失敗することがある——だからこそ、自動化の上にもう1枚「自動の見張り」を重ねています。</p>
+
+    <!-- ⑦ つまずき -->
+    <h2>つまずいた点・注意したこと</h2>
+    <ul>
+      <li><strong>無料プランの配信上限</strong>：LINE公式アカウントの無料プランは月200通までで、「メッセージ数×受信者数」で数えられます。関係者数人に1日1通なら収まりますが、通知の種類や人数を増やすと超えます。設計時に計算しておくべきポイントです。</li>
+      <li><strong>トークンの管理</strong>：チャネルアクセストークンはコードに直書きせず、GASのスクリプトプロパティに保存します。コードを公開・共有する前提なら特に必須です。</li>
+      <li><strong>「見張りの見張り」問題</strong>：照合の仕組み自体が止まったら気づけません。私は「予約0件でも毎日必ず届く通知」を生存確認代わりにしています。決まった時刻に来ないことが、そのまま異常のサインになります。</li>
+    </ul>
+
+    <!-- ⑧ 進行中 -->
+    <h2>試験運用中：勤怠の提出とフォローもLINEに寄せている</h2>
+    <p>同じ構成の応用として、<strong>勤怠管理のLINE化</strong>も試験運用中です。別の公式LINEアカウントで勤怠の提出を受け付け、未提出の人へのフォローを自動化し、月ごとの出勤回数と勤務時間を自分のタイミングでPDFとしてダウンロードできるようにしています。</p>
+    <p>まだ結論が出ている段階ではないので、運用が固まったら別の記事として書く予定です。「提出を受け取る」「未提出を追いかける」「集計して出力する」——通知と同じ道具立てで、意外なところまで届くというのが現時点の手応えです。</p>
+
+    <!-- ⑨ まとめ -->
+    <h2>まとめ：データを1か所に集めたら、次は「届く」ようにする</h2>
+    <p>注文と予約を1枚のスプレッドシートに集約した時点で、転記の手間とミスは消えました。今回の仕組みはその次の一歩で、<strong>「人がデータを見に行く」構造を「データが人に届く」構造に変える</strong>ものです。毎日10時半に翌日の予約一覧が届き、生産計画はそれを元に立てる。予約DBを開きに行く回数はゼロになりました。</p>
+    <p>そしてもうひとつ。自動化は完璧ではないので、<strong>自動化を見張る自動化</strong>を重ねました。記憶の違和感で登録漏れに気づいた日、「このチェックを毎日人がやるのは無理だ」と思えたことが、結果的にいちばんの収穫だったと思います。</p>
+    <p>手を付ける順番としては、まずデータを1か所に集める（<a href="/shikumi/gas-order/">注文管理の記事</a>）、次に届くようにする（この記事）、が私のおすすめです。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>GASからLINEに通知を送るには何が必要ですか？</summary>
+        <div class="faq__a"><p>LINE公式アカウント（無料で作成できます）とMessaging APIのチャネルアクセストークン、そして通知を受け取る人にそのアカウントを友だち追加してもらうことの3つです。GAS側はUrlFetchAppでMessaging APIを呼ぶだけなので、コード自体は数十行で済みます。</p></div>
+      </details>
+
+      <details>
+        <summary>LINE Notifyでも同じことができますか？</summary>
+        <div class="faq__a"><p>LINE Notifyは2025年3月にサービスを終了しています。これから作るならLINE公式アカウント＋Messaging APIの構成をすすめます。私の仕組みもこの構成で、関係者だけが友だち追加した通知専用の公式アカウントに配信しています。</p></div>
+      </details>
+
+      <details>
+        <summary>LINE公式アカウントの無料プランで通知は足りますか？</summary>
+        <div class="faq__a"><p>私は足りています。無料プランで送れるのは月200通までで、配信数は「メッセージ数×受信者数」で数えられます。関係者数人に1日1通なら月150通前後に収まる計算です。通知先の人数や通知の種類が増えると超えるので、設計の段階で計算しておくべきポイントです。</p></div>
+      </details>
+
+      <details>
+        <summary>通知に載せる情報は絞ったほうがいいですか？</summary>
+        <div class="faq__a"><p>私は全部載せる方を選び、正解だったと思っています。作る前は煩雑になるかと心配でしたが、受取時間・品名・数量・経路・備考まで載っていると通知だけで一つ一つ確認ができ、結局スプレッドシートを開かずに済みます。絞るより「通知だけで完結する」ことを優先しました。</p></div>
+      </details>
+
+      <details>
+        <summary>Gmailとの照合はどういう仕組みですか？</summary>
+        <div class="faq__a"><p>HPから予約が入ると店側にも受付メールが届くので、GASでGmailを検索してメール側の受付番号を取り出し、予約DB（スプレッドシート）に同じ番号が存在するかを毎日照合しています。DBに見つからない番号があったときだけ、LINEに警告が飛ぶ仕組みです。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/shikumi/gas-order/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">GASで注文管理を自動化したら毎日30分が5分になった話【コード公開】</div>
+        </a>
+        <a class="related__item" href="/shikumi/yoyaku-kanri/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">予約経路5つ・集約先ひとつ——製造漏れをゼロにした予約管理の仕組み</div>
+        </a>
+        <a class="related__item" href="/shikumi/line-koushiki/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">友だち800人超・配信ゼロ——地方の小商いがLINE公式を"受け取る道具"に使い続ける理由</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+        <nav aria-label="フッターナビ">
+          <a href="/keiei/">経営のリアル</a>
+          <a href="/shikumi/">仕組み化</a>
+          <a href="/review/">正直レビュー</a>
+          <a href="/money/">お金</a>
+          <a href="/kaigyo/">開業・独立</a>
+          <a href="/about/">この人について</a>
+          <a href="/privacy/">プライバシーポリシー</a>
+          <a href="/contact/">お問い合わせ</a>
+          <a href="/disclaimer/">免責事項</a>
+          <a href="/disclosure/">運営方針</a>
+        </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
