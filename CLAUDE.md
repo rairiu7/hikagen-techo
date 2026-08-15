@@ -153,6 +153,22 @@
 - アフィリエイトリンクを含む記事に `<aside class="pr-notice">` が記事ヘッダー直後にあるか
 - **JSON-LD 内のダブルクォート**：記事タイトルや `name` フィールドに `"` （直ダブルクォート U+0022）が含まれると JSON パースエラーになる。必ずカーリークォート（`"` U+201C / `"` U+201D）に置き換えること。カテゴリ一覧の CollectionPage `hasPart` でも同様。
 - **slug の一致確認**：カテゴリ一覧・トップページ・JSON-LD に記述した slug（href の値）が、実際のディレクトリ名と完全一致しているか確認する。`ls <category>/<slug>/` でディレクトリが存在することを必ず確認してからリンクを追加する。typo はGSC 404エラーの直接原因になる。
+- **内部リンクの実在確認（全ファイル走査）**：slug の typo を1箇所直しても、同じリンクが他ファイルに残っていることがある（2026-08-14、`hitori-unui` が3ファイル4箇所に生き残りGSCで404計上されていた）。リンクを修正したときと新記事公開時は、**個別確認で済ませず全HTMLを機械的に走査**して0件を確認する：
+  ```bash
+  py -X utf8 -c "
+  import io,re,os,glob
+  bad=[]
+  for p in glob.glob('**/*.html',recursive=True):
+      s=io.open(p,encoding='utf-8').read()
+      for href in re.findall(r'href=\"(/[^\"#?]*)\"',s):
+          t=href.strip('/')
+          if not t: continue
+          cand=os.path.join(t,'index.html') if not t.endswith(('.css','.png','.svg','.xml','.ico','.js')) else t
+          if not os.path.exists(cand) and not os.path.exists(t): bad.append((p,href))
+  print('内部リンク切れ:',len(bad))
+  for b in sorted(set(bad)): print(' ',b[0],'->',b[1])
+  "
+  ```
 
 ## 新記事公開時の必須作業（記事HTMLと同時に必ず更新）
 記事ファイルを作成したら、以下を**必ずセットで更新してpushまで一気に完了**させる。ユーザーへの確認は不要：
