@@ -58,7 +58,7 @@
   "author": { "@id": "https://hikagen-techo.com/#person" },
   "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
   "datePublished": "2026-07-16",
-  "dateModified": "2026-07-16",
+  "dateModified": "2026-08-22",
   "inLanguage": "ja",
   "articleSection": "仕組み化",
   "keywords": "GAS, Google Apps Script, LINE通知, LINE Messaging API, LINE公式アカウント, スプレッドシート, 自動化, 飲食店, Gmail照合"
@@ -120,6 +120,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 
@@ -161,7 +178,7 @@
     <div class="post-meta">
       <time datetime="2026-07-16">2026年7月16日 公開</time>
       <span class="dot"></span>
-      <time datetime="2026-07-16">2026年7月16日 更新</time>
+      <time datetime="2026-08-22">2026年8月22日 更新</time>
       <span class="dot"></span>
       <span>著者：HANABI</span>
     </div>
@@ -302,6 +319,8 @@ function auditReservations() {
     <p>まだ結論が出ている段階ではないので、運用が固まったら別の記事として書く予定です。「提出を受け取る」「未提出を追いかける」「集計して出力する」——通知と同じ道具立てで、意外なところまで届くというのが現時点の手応えです。</p>
 
     <!-- ⑨ まとめ -->
+    <p>なお、同じ「人の手を減らす」方向の取り組みとして、食品表示ラベルの印刷もExcel VBAで自動化しています（<a href="/shikumi/label-jidoka/">コード公開記事はこちら</a>）。使っている機材も含めて書きました。</p>
+
     <h2>まとめ：データを1か所に集めたら、次は「届く」ようにする</h2>
     <p>注文と予約を1枚のスプレッドシートに集約した時点で、転記の手間とミスは消えました。今回の仕組みはその次の一歩で、<strong>「人がデータを見に行く」構造を「データが人に届く」構造に変える</strong>ものです。毎日10時半に翌日の予約一覧が届き、生産計画はそれを元に立てる。予約DBを開きに行く回数はゼロになりました。</p>
     <p>そしてもうひとつ。自動化は完璧ではないので、<strong>自動化を見張る自動化</strong>を重ねました。記憶の違和感で登録漏れに気づいた日、「このチェックを毎日人がやるのは無理だ」と思えたことが、結果的にいちばんの収穫だったと思います。</p>

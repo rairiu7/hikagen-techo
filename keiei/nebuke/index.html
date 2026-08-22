@@ -58,7 +58,7 @@
   "author": { "@id": "https://hikagen-techo.com/#person" },
   "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
   "datePublished": "2026-05-28",
-  "dateModified": "2026-08-14",
+  "dateModified": "2026-08-22",
   "inLanguage": "ja",
   "articleSection": "経営のリアル",
   "keywords": "弁当屋 原価率, 原価率 目安, 原価率 相場, 仕出し弁当 原価率, 別注弁当 原価率, 高級弁当 原価率, 弁当 値付け"
@@ -140,6 +140,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 
@@ -181,7 +198,7 @@
     <div class="post-meta">
       <time datetime="2026-05-28">2026年5月28日 公開</time>
       <span class="dot"></span>
-      <time datetime="2026-08-14">2026年8月14日 更新</time>
+      <time datetime="2026-08-22">2026年8月22日 更新</time>
       <span class="dot"></span>
       <span>著者：HANABI</span>
     </div>
@@ -228,6 +245,10 @@
       <li><strong>高級弁当・見栄え重視の商品</strong>……35〜40%になることが多い</li>
     </ul>
     <p>つまり「目安30%・相場30〜35%」という数字自体は正しいのですが、<strong>見栄えを取ると実際は35〜40%帯に寄る</strong>——というのが、原価を毎日見ている立場からの正直なところです。数字を目安どおりに近づけたいなら、まず<a href="/shikumi/genka-kanri/">調味料まで測って原価計算する仕組み</a>を持つのが、私の場合は一番の近道でした。</p>
+
+    <h3>原価率を「毎月見られる状態」にしておく</h3>
+    <p>目安の数字を知ることより、自分の店の実際の数字を毎月見られるほうが大事だと考えています。私の場合は、<strong>仕入れの支払いを事業用カードに寄せて、その明細を会計ソフトに自動で取り込む</strong>形にしています。手で入力する場面をほとんど無くしたので、月末に原価率を確認する作業がそれほど負担になりません（<a href="/money/keihi-kanri/">経費管理の中身はこちら</a>）。</p>
+    <p>実際に使っているのは、仕入れの支払いを分ける<a href="/review/jigyo-card/">事業用カード2枚の使い分け</a>と、明細を取り込む<a href="/review/moneyforward/">マネーフォワード クラウド会計</a>です。売上側は<a href="/review/airregi/">Airレジ</a>から日次で見ています。原価率は「計算するもの」ではなく「勝手に出てくるもの」にしておくと、値付けを見直す判断が早くなります。</p>
 
     <!-- ⑤-2 別注・仕出し -->
     <h2>別注弁当・仕出しの原価率：40%を超えることもあるが、そもそも%で見ていない</h2>

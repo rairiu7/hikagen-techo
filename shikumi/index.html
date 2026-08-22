@@ -63,6 +63,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 <body>

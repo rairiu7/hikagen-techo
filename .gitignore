@@ -1,3 +1,4 @@
 CLAUDE.md
 article-template.html
 .wrangler/
+__pycache__/

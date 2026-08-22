@@ -58,7 +58,7 @@
   "author": { "@id": "https://hikagen-techo.com/#person" },
   "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
   "datePublished": "2026-05-25",
-  "dateModified": "2026-05-25",
+  "dateModified": "2026-08-22",
   "inLanguage": "ja",
   "articleSection": "仕組み化・デジタル化",
   "keywords": "GAS, Google Apps Script, 注文管理, 自動化, 飲食店, スプレッドシート, 生産計画"
@@ -115,6 +115,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 
@@ -156,7 +173,7 @@
     <div class="post-meta">
       <time datetime="2026-05-25">2026年5月25日 公開</time>
       <span class="dot"></span>
-      <time datetime="2026-05-25">2026年5月25日 更新</time>
+      <time datetime="2026-08-22">2026年8月22日 更新</time>
       <span class="dot"></span>
       <span>著者：HANABI</span>
     </div>
@@ -278,6 +295,8 @@ function onFormSubmit(e) {
     <h2>これから：発注・在庫・棚卸へ広げる（準備中）</h2>
     <p>注文の一元化ができると、その先が一気につながります。いま準備しているのは、この「注文ログ」を起点にした<strong>発注計画・在庫管理・棚卸</strong>の自動化です。必要な仕入れ量が注文から逆算でき、棚卸の手間も減らせる見込みです。動き出したら、また<a href="/shikumi/">仕組み化</a>カテゴリで報告します。</p>
 
+    <p>同じ考え方を、印刷側にも広げています。食品表示ラベルはExcel VBAから直接プリンターに流す形にしていて、こちらもコードを公開しました（<a href="/shikumi/label-jidoka/">ボタン1つで200枚——食品表示ラベルの自動化</a>）。発注側の検討状況は<a href="/shikumi/hacchu-kanri/">発注管理の仕組み化</a>にまとめています。</p>
+
     <!-- ⑥ まとめ -->
     <h2>まとめ</h2>
     <p>注文管理の自動化は、派手なAIの話ではありません。<strong>バラバラの入り口を1枚に集約し、人の手による転記をなくす</strong>。たったこれだけで、毎日30分と、ミスの不安が同時に消えました。</p>
@@ -321,13 +340,17 @@ function onFormSubmit(e) {
     <nav class="related" aria-label="関連記事">
       <h2 class="related__heading">あわせて読みたい</h2>
       <div class="related__list">
-        <a class="related__item" href="/about/">
-          <span class="related__cat">プロフィール</span>
-          <div class="related__title">地方で小商いを仕組み化する人の話</div>
-        </a>
-        <a class="related__item" href="/shikumi/">
+        <a class="related__item" href="/shikumi/label-jidoka/">
           <span class="related__cat">仕組み化</span>
-          <div class="related__title">小規模飲食店がまずやるべきデジタル化3選</div>
+          <div class="related__title">ボタン1つで200枚——食品表示ラベルをExcel VBAで自動化した弁当屋の記録【コード公開】</div>
+        </a>
+        <a class="related__item" href="/shikumi/gas-line-tsuchi/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">毎日10時半、翌日の予約一覧がLINEに届く——GASで通知を自動化し、Gmail照合で登録漏れまで見張る弁当屋の仕組み【コード公開】</div>
+        </a>
+        <a class="related__item" href="/shikumi/yoyaku-kanri/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">予約経路5つ・集約先ひとつ——弁当屋が製造漏れをゼロにした予約管理の仕組み</div>
         </a>
       </div>
     </nav>

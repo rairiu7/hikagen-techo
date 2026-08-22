@@ -50,6 +50,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 <body>
@@ -83,7 +100,7 @@
         <div class="post-meta">
           <time datetime="2026-05-27">2026年5月27日 公開</time>
           <span class="dot"></span>
-          <time datetime="2026-05-27">2026年5月27日 更新</time>
+          <time datetime="2026-08-22">2026年8月22日 更新</time>
         </div>
       </header>
 
@@ -98,7 +115,10 @@
         <ul>
           <li><strong>A8.net</strong>（株式会社ファンコミュニケーションズが運営）</li>
           <li><strong>もしもアフィリエイト</strong>（株式会社もしもが運営）</li>
+          <li><strong>バリューコマース</strong>（バリューコマース株式会社が運営）</li>
+          <li><strong>Amazonアソシエイト・プログラム</strong>（アマゾンジャパン合同会社が運営）</li>
         </ul>
+        <p>当サイトは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。また、もしもアフィリエイトを通じて楽天市場の商品を紹介する場合があります。</p>
         <p>アフィリエイトとは、当サイト内の広告リンク経由でサービスのお申し込みや商品のご購入があった場合に、ASPを通じて運営者が紹介料（成果報酬）を受け取る仕組みです。読者のみなさんが追加の費用を負担することはありません。</p>
         <p>成果計測のため、これらのASPがCookieを使用することがあります。Cookieによって個人を特定できる情報が当サイトに送信されることはありません。</p>
 
@@ -123,7 +143,7 @@
         <p>当サイトは、人口5万人未満の地方都市で弁当・惣菜店を経営している個人事業主が運営しています。著者ペンネームは <strong>HANABI</strong>（肩書き：地方で小商いを仕組み化する人）。実名・店名・住所などの個人を特定できる情報は、サイトポリシー上、公開しておりません。</p>
         <p>お問い合わせは<a href="/contact/">お問い合わせ</a>よりお願いいたします。</p>
 
-        <p><small>制定日：2026年5月27日 ／ 最終更新日：2026年5月27日</small></p>
+        <p><small>制定日：2026年5月27日 ／ 最終更新日：2026年8月22日</small></p>
       </div>
     </article>
   </main>

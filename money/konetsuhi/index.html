@@ -58,7 +58,7 @@
   "author": { "@id": "https://hikagen-techo.com/#person" },
   "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
   "datePublished": "2026-06-17",
-  "dateModified": "2026-06-17",
+  "dateModified": "2026-08-22",
   "inLanguage": "ja",
   "articleSection": "個人事業主のお金"
 }
@@ -119,6 +119,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 
@@ -160,7 +177,7 @@
     <div class="post-meta">
       <time datetime="2026-06-17">2026年6月17日 公開</time>
       <span class="dot"></span>
-      <time datetime="2026-06-17">2026年6月17日 更新</time>
+      <time datetime="2026-08-22">2026年8月22日 更新</time>
       <span class="dot"></span>
       <span>著者：HANABI</span>
     </div>
@@ -212,6 +229,8 @@
     <p>水道光熱費を少しでも抑えようと、200Vの業務用エアコンを導入しました。家庭用の100Vエアコンと比べると、同等の冷房能力に対して消費電力を抑えられるためです。</p>
     <p>正直な感想としては、<strong>「抑制にはなっているが、解決にはなっていない」</strong>という感じです。業務用を入れてもなお夏場は高く感じます。ただ、100Vエアコンだったらもっと高かったはずで、「まだましなのかもしれない」という割り切りをしています。</p>
     <p>業務用エアコンのもう一つの利点は、冷却能力の高さです。広い調理スペースを短時間で冷やせるため、朝の作業開始時に素早く適温にできます。電気代だけでなく作業効率にもつながっています。</p>
+
+    <p>使用量そのものを減らす方向では、<strong>「必要な時間だけ動かす」</strong>ことを機械側に任せています。エアコンと業務用炊飯器はスマートプラグとスマートリモコンで時間を決めて動かすようにしていて、点けっぱなし・消し忘れが構造的に起きません（<a href="/review/switchbot/">SwitchBotで炊飯器とエアコンをスマート化した話</a>）。単価は下げられませんが、使用時間はここで削れます。</p>
 
     <!-- ⑦ 副次効果 -->
     <h2>涼しい店内が、お客さんとの会話になる</h2>

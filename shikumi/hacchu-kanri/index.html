@@ -58,7 +58,7 @@
   "author": { "@id": "https://hikagen-techo.com/#person" },
   "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
   "datePublished": "2026-06-01",
-  "dateModified": "2026-06-01",
+  "dateModified": "2026-08-22",
   "inLanguage": "ja",
   "articleSection": "仕組み化・デジタル化",
   "keywords": "発注管理, 食材管理, 弁当屋, 在庫管理, 廃棄ロス, 仕組み化, 小規模飲食店, 食材発注"
@@ -120,6 +120,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 
@@ -161,7 +178,7 @@
     <div class="post-meta">
       <time datetime="2026-06-01">2026年6月1日 公開</time>
       <span class="dot"></span>
-      <time datetime="2026-06-01">2026年6月1日 更新</time>
+      <time datetime="2026-08-22">2026年8月22日 更新</time>
       <span class="dot"></span>
       <span>著者：HANABI</span>
     </div>
@@ -252,6 +269,8 @@
     <p>発注量の計算に在庫数が必要なため、簡易な棚卸システムも並行して設計中です。毎日精密に棚卸する必要はなく、<strong>「主要な食材について、発注日前に素早く確認できる」</strong>ことを目標にしています。タブレットかスマホで入力できるシンプルなものを考えています。</p>
 
     <!-- ⑦ 正直な現在地 -->
+    <p>なお、廃棄額そのものは今も正確に出せていませんが、仕入れ側の金額は<a href="/review/moneyforward/">マネーフォワード クラウド会計</a>に事業用カードの明細が自動で入るので、月ごとの仕入れ総額は追えています。「作りすぎているかどうか」を判断する材料としては、まずこれを見ています。</p>
+
     <h2>正直な現在地：まだ設計段階</h2>
     <p>この記事を書いている時点では、仕組みはまだ完成していません。計算式の考え方は固まっていますが、実際のシステムとしては動いていない段階です。</p>
     <p>なぜ途中経過を記事にするかというと、<strong>「完成形だけ書くより、考えている過程の方が同じ立場の人の参考になる</strong>」と思っているからです。小規模飲食店の発注管理に関する情報は、大手向けのシステム紹介か、理想論的な解説ばかりで、「感覚でやってきたが限界を感じている」というリアルな話が少ない。</p>

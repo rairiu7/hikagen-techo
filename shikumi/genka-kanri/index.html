@@ -58,7 +58,7 @@
   "author": { "@id": "https://hikagen-techo.com/#person" },
   "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
   "datePublished": "2026-05-30",
-  "dateModified": "2026-05-30",
+  "dateModified": "2026-08-22",
   "inLanguage": "ja",
   "articleSection": "仕組み化・デジタル化",
   "keywords": "原価計算, 弁当屋, 飲食店, 原価管理, スプレッドシート, 調味料, 標準化, 小規模飲食店"
@@ -120,6 +120,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 
@@ -161,7 +178,7 @@
     <div class="post-meta">
       <time datetime="2026-05-30">2026年5月30日 公開</time>
       <span class="dot"></span>
-      <time datetime="2026-05-30">2026年5月30日 更新</time>
+      <time datetime="2026-08-22">2026年8月22日 更新</time>
       <span class="dot"></span>
       <span>著者：HANABI</span>
     </div>
@@ -244,6 +261,8 @@
       <li><strong>新メニュー開発時の試算</strong>——データベースを使い、試作前に原価計算ができる状態にする</li>
     </ol>
     <p>全部実現するにはまだ時間がかかりますが、まず「全材料を書き出して、調味料を測る」ところから始めたことで、この道筋が見えてきました。どんぶり勘定のままでは、次のステップすら考えられなかったと思います。</p>
+
+    <p>もう一つ、原価を追ううえで土台になっているのが会計側です。仕入れの支払いを事業用カードに寄せ、明細を<a href="/review/moneyforward/">マネーフォワード クラウド会計</a>に自動で取り込んでいるので、仕入れ先ごとの支払額が月単位で並びます。レシピ側の実測が「1食あたりいくらか」なら、会計側は「月にいくら出ているか」で、両方あると数字のズレに気づけます（<a href="/money/keihi-kanri/">経費管理の中身</a>）。</p>
 
     <!-- まとめ -->
     <h2>まとめ</h2>

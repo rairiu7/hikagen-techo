@@ -58,7 +58,7 @@
   "author": { "@id": "https://hikagen-techo.com/#person" },
   "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
   "datePublished": "2026-06-18",
-  "dateModified": "2026-06-18",
+  "dateModified": "2026-08-22",
   "inLanguage": "ja",
   "articleSection": "経営のリアル"
 }
@@ -119,6 +119,23 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
 </script>
 </head>
 
@@ -160,7 +177,7 @@
     <div class="post-meta">
       <time datetime="2026-06-18">2026年6月18日 公開</time>
       <span class="dot"></span>
-      <time datetime="2026-06-18">2026年6月18日 更新</time>
+      <time datetime="2026-08-22">2026年8月22日 更新</time>
       <span class="dot"></span>
       <span>著者：HANABI</span>
     </div>
@@ -237,6 +254,10 @@
     <p>鶏肉・卵・野菜・米に加えて、最近は弁当容器やレジ袋、ラップ、保存袋といった副資材の値上がりも続いています。食材ではないので見落としがちですが、塵も積もれば利益を圧迫します。副資材の見直しも含めて、近いうちに追加の価格改定が必要な状況です。</p>
     <p>値上げについての考え方は<a href="/keiei/neage/">この記事</a>でも詳しく書いています。値上げは毎回エネルギーを使います。だからこそ、「いつ・どのくらい」を計画的に判断したいと思っています。</p>
     <p>食材高騰への対応は現在進行中です。解決策を見つけたわけでも、慣れたわけでもありません。新しい動きがあればこの記事に追記していく予定です。</p>
+
+    <h2>「いくら上がったか」を数字で言えるようにしておく</h2>
+    <p>値上がりに対応するうえで地味に効いているのが、<strong>仕入れがいくら上がったかを、感覚ではなく数字で言える状態にしておく</strong>ことです。値上げの判断も、メニューの組み替えも、結局はここが出発点になります。</p>
+    <p>私の場合は、仕入れの支払いを日常の支払いと分けて事業用カードに寄せ（<a href="/review/jigyo-card/">カード2枚の使い分けはこちら</a>）、その明細を<a href="/review/moneyforward/">マネーフォワード クラウド会計</a>に自動で取り込んでいます。仕入れ先ごとの支払額が月単位で並ぶので、「今年に入って肉がいくら上がったか」を後から追えます。仕入れ先そのものの使い分けは<a href="/keiei/shiire-tsukaiwake/">5系統の使い分け</a>にまとめました。</p>
 
     <!-- まとめ -->
     <h2>まとめ：「何とかする」には限界がある。でも動き続けるしかない</h2>
