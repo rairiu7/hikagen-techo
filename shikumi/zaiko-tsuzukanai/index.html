@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>在庫の仕組みをAIと作ったのに続かない——弁当屋が「押す記録」をやめ、1日1回数える形に変えた現在地（※進行中）｜火加減手帖</title>
+<meta name="description" content="発注漏れと段取り漏れをなくすため、AI（Claude）と在庫の仕組みを作りました。でも「できた」を押す記録は回らず、1日1回だけ今ある数を入れる形に変えました。通知は毎日届くのに、それでもまだやれていない。次に直すのは画面の文字の多さです。途中経過を正直に書きます。">
+<link rel="canonical" href="https://hikagen-techo.com/shikumi/zaiko-tsuzukanai/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="在庫の仕組みをAIと作ったのに続かない——弁当屋が「押す記録」をやめ、1日1回数える形に変えた現在地（※進行中）">
+<meta property="og:description" content="発注漏れと段取り漏れをなくすためにAIと作った在庫の仕組み。押す記録は回らず、1日1回数える形に変えても、まだ続いていない。次に直すのは文字の多さ。">
+<meta property="og:url" content="https://hikagen-techo.com/shikumi/zaiko-tsuzukanai/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://hikagen-techo.com/ogp/shikumi-zaiko-tsuzukanai.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hikagen-techo.com/ogp/shikumi-zaiko-tsuzukanai.png">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap"></noscript>
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": ["小規模飲食店経営", "業務自動化", "Google Apps Script", "Python", "個人事業の経理", "就労継続支援A型"]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "在庫の仕組みをAIと作ったのに続かない——弁当屋が「押す記録」をやめ、1日1回数える形に変えた現在地（※進行中）",
+  "description": "発注漏れと段取り漏れをなくすため、AI（Claude）と在庫の仕組みを作りました。でも「できた」を押す記録は回らず、1日1回だけ今ある数を入れる形に変えました。通知は毎日届くのに、それでもまだやれていない。次に直すのは画面の文字の多さです。途中経過を正直に書きます。",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hikagen-techo.com/shikumi/zaiko-tsuzukanai/" },
+  "author": { "@id": "https://hikagen-techo.com/#person" },
+  "publisher": { "@type": "Organization", "name": "火加減手帖", "url": "https://hikagen-techo.com/" },
+  "datePublished": "2026-10-27",
+  "dateModified": "2026-10-27",
+  "inLanguage": "ja",
+  "articleSection": "仕組み化・デジタル化",
+  "keywords": "在庫管理, 弁当屋, 段取り, 発注漏れ, 仕組み化, 小規模飲食店, AI, Claude, 棚卸"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://hikagen-techo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "仕組み化", "item": "https://hikagen-techo.com/shikumi/" },
+    { "@type": "ListItem", "position": 3, "name": "在庫の仕組みをAIと作ったのに続かない（進行中）", "item": "https://hikagen-techo.com/shikumi/zaiko-tsuzukanai/" }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと文面一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "小さな飲食店の在庫管理は、何から数えればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "段取りや発注の判断に実際に使う物だけから始めるのがよいと思います。私の店では、在庫の数を使って段取りを決めているのは冷凍の作り置きや使いかけの具材など10品前後で、それ以外は生産計画だけで決まっていました。全部を数えようとすると続きません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "「使ったら押す」在庫の記録が続かないのはなぜですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "押し忘れが1回あるだけで、記録が実物からずれ、そのずれが積み重なるからです。ずれた記録は信用されなくなり、誰も見なくなります。私の店では、忙しい時間に「あとで押そう」として忘れることと、押す物が多すぎることが原因でした。" }
+    },
+    {
+      "@type": "Question",
+      "name": "毎日数える形と、使うたびに押す形はどちらがいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "私は毎日1回数える形に変えました。数えた時点で記録が実物に戻るので、忘れた日があっても次に数えた日に正しくなります。変わっていない物は「見込みどおり」を1回押すだけにして、手間を減らしました。ただ、それでもまだ続けられていないのが正直なところです。" }
+    },
+    {
+      "@type": "Question",
+      "name": "アルバイトの人にも在庫の画面を使ってもらうには、どうすればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "まだ答えは出ていません。私の画面は文字が多く、作った私でも読むのがきつい状態でした。アルバイトの人は、理解しようとする前に拒否反応が出ると思っています。次は、文字を減らして見ただけで分かる画面に直すつもりです。" }
+    }
+  ]
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N6KFC2LLS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/shikumi/">仕組み化</a>
+    <span class="sep">/</span>
+    <span aria-current="page">在庫の仕組みをAIと作ったのに続かない（進行中）</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">仕組み化</span>
+    <h1 class="post-title">在庫の仕組みをAIと作ったのに続かない——弁当屋が「押す記録」をやめ、1日1回数える形に変えた現在地（※進行中）</h1>
+    <div class="post-meta">
+      <time datetime="2026-10-27">2026年10月27日 公開</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>発注漏れと段取り漏れをなくすために、AI（Claude）と一緒に在庫の仕組みを作りました。でも<strong>「できた」を押して在庫を動かす記録は、回りませんでした</strong>。押し忘れで記録が実物からずれ、ずれた画面は誰も信用しなくなるからです。</p>
+      <p>そこで<strong>1日1回、決まった10品前後の「今ある数」だけを入れる形</strong>に変え、入っていなければスマホに通知が届くようにしました。それでも、<strong>通知は毎日届いているのに、やれていないのが実態</strong>です。次に直すのは、作った私でも読むのがきついほどの<strong>画面の文字の多さ</strong>だと考えています。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="この記事の数字">
+      <div class="stat"><div class="stat__num">2<span style="font-size:1rem">つ</span></div><div class="stat__label">作った画面（担当者用と管理用）</div></div>
+      <div class="stat"><div class="stat__num">10<span style="font-size:1rem">品前後</span></div><div class="stat__label">毎日数えることにした物</div></div>
+      <div class="stat"><div class="stat__num">1<span style="font-size:1rem">日1回</span></div><div class="stat__label">入力をまとめた回数</div></div>
+    </div>
+
+    <!-- ③ 前提（一次情報） -->
+    <h2>なぜ在庫の仕組みを作ろうと思ったか</h2>
+    <p>人口5万人未満の地方都市で弁当・惣菜店を2店舗やっています（詳しくは<a href="/about/">この人について</a>）。調理は料理担当のパートナーが担い、経営・仕組み化は私がほぼ一人でやっています。</p>
+    <p>以前の記事（<a href="/shikumi/hacchu-kanri/">発注量を感覚で決めてきた弁当屋が、仕組み化を決意するまで</a>）で、半自動の発注と簡単な棚卸の仕組みを「設計中」と書きました。この記事はその続きです。</p>
+    <p>きっかけは<strong>発注漏れ</strong>でした。ただ、同じくらい<strong>段取り漏れ</strong>もあります。もっと正確に言うと、一番困っているのは<strong>段取りが重なって、1日の作業の量にむらが出ること</strong>です。</p>
+    <p>私の店では、弁当の具の一部を何日分かまとめて作り、パックで冷凍しています。生産計画は冷凍庫にあるパックの数に合わせて立てるので、<strong>冷凍庫に何がいくつあるかを知らないと、仕込みが抜けます</strong>。抜けた分は別の日にまとめて作ることになり、その日だけ作業が膨らみます。</p>
+
+    <!-- ④ 作った仕組み -->
+    <h2>AIと一緒に作った在庫の仕組み</h2>
+    <p>2026年の秋、AI（Claude）と話しながら、在庫と段取りの仕組みを作りました。私が店のやり方を説明し、AIが画面とプログラムを作り、試作を見て直す、をくり返しています。</p>
+    <p>画面は2つに分けました。</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>画面</th><th>使う人・場所</th><th>中身</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>担当者用</td><td>アルバイトの人（将来）／店のタブレット</td><td>今日やること（明日の生産計画に間に合わせる段取りと仕込み）、詰め終わりの残り</td></tr>
+          <tr><td>管理用</td><td>私／パソコン</td><td>在庫、段取り、購入リスト、棚卸し、品目やレシピの登録</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>担当者用の「今日やること」は、<strong>「今日中に必ず」と「時間があれば」の2段</strong>に分けて出します。生産計画を最優先にし、最近14日の使い方から見て残りが3日分を切りそうな物も「作る」に出します。作業を終えたら「できた」を押すと、冷凍庫の数が増えたり、材料が減ったりする作りです。</p>
+    <p>朝の在庫の引き落としも、手入力はやめました。最初に作った在庫の一覧は、朝の忙しい時間に手で引く形にしていて、不便すぎて使えなかったからです。今は生産計画から自動で引き落とします。</p>
+
+    <!-- ⑤ 続かなかった -->
+    <h2>「できた」を押す記録は、回らなかった</h2>
+    <p>仕組みとしては動きました。でも、肝心の<strong>「できた」が押されませんでした</strong>。冷凍庫から出した、作った、詰め終わった、どれも押せていません。理由を書き出すと、こうなります。</p>
+    <ul>
+      <li><strong>開店直後は忙しく、落ち着いてからやろうとして忘れる</strong></li>
+      <li><strong>押す物が多すぎて面倒</strong></li>
+      <li><strong>まだルーティンになっていない</strong>。これが一番大きいです</li>
+      <li><strong>誰が押すかを決めていない</strong>。スタッフにもまだ伝えていません。まず私が操作して「行ける」と思ってから伝えるつもりです。何度もやり方が変わるのは、仕組みとしてよくないと思っているからです</li>
+    </ul>
+    <p>ほかの準備も重なって、私の手が回っていなかったのも事実です。</p>
+    <p>整理してみると、困りごとは1本につながっていました。</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>順番</th><th>起きること</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>手が回らない</td></tr>
+          <tr><td>2</td><td>「できた」が押せない</td></tr>
+          <tr><td>3</td><td>記録が実物からずれていく（押し忘れが積み重なる）</td></tr>
+          <tr><td>4</td><td>購入リストや「今日やること」が信用できなくなる</td></tr>
+          <tr><td>5</td><td>画面を見なくなり、また手で判断する</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>特に困るのは、<strong>記録の方が実物より多くなったとき</strong>です。画面上はまだあることになっているので「作る」が出ず、そのまま仕込みが抜けます。</p>
+
+    <!-- ⑥ 変えた形 -->
+    <h2>押す記録をやめて、1日1回数える形にした</h2>
+    <p>整理していて気づいたのは、<strong>在庫の数を使って段取りを決めている物は、一部だけ</strong>だということです。冷凍の作り置き、使いかけの具材、ゆで卵、味付けした肉など、10品前後でした。ご飯の用意や肉の解凍などは、生産計画だけで正しく出ます。</p>
+    <p>そこで、やることを<strong>1日1回・1か所</strong>にまとめました。</p>
+    <ul>
+      <li>担当者用の「今日やること」の一番上に<strong>「今ある数」</strong>を置き、10品前後の数を入れる</li>
+      <li>変わっていない物は<strong>「見込みどおり」を1回押すだけ</strong>。見込みは、前回数えた数から使った分を引いた数です</li>
+      <li>3日より前に数えた物には見込みを出さず、数えてもらう</li>
+      <li>「できた」は押さなくてもよい（押せば翌日の見込みが合う）</li>
+      <li>毎週の照合はやめる（毎日数えるので要らない）</li>
+      <li>決まった時刻までに入っていなければ、スマホ（Discord）に知らせが届く</li>
+    </ul>
+    <p>使うたびに押す記録は、忘れた分のずれがどんどん積み重なります。<strong>毎日数える形なら、忘れた日があっても、次に数えた日に正しい数に戻ります</strong>。最初に試作を見たとき、私は「変わりのないところは、前回と変更なし、くらいの操作が望ましい」と頼みました。「見込みどおり」の1回押しは、そこから生まれました。</p>
+
+    <!-- ⑦ 正直な現在地 -->
+    <h2>正直な現在地：通知は届くのに、やれていない</h2>
+    <p>この形で試し始めて、まだ続けられていません。<strong>知らせがスマホに飛んできているのは確認できているのですが、やれないのが実態</strong>です。</p>
+    <p>原因として一番大きいと思っているのは、<strong>画面の文字の多さ</strong>です。作った私が読んでもきつい。アルバイトの人なら、理解しようとする前に拒否反応が出ると思います。いずれアルバイトの人にも使ってもらうつもりなので、ここが直すべき箇所だと考えています。</p>
+    <p>AIと作ると、決まりや説明を足すのは簡単です。そのぶん、画面に文字が増えていきました。次は、<strong>説明を読まなくても、見ただけで何をすればいいか分かる画面</strong>に削っていくつもりです。続けられるようになったら、またここに書き足します。</p>
+
+    <!-- まとめ -->
+    <h2>まとめ</h2>
+    <p>在庫の仕組みは、作ること自体よりも<strong>毎日続けること</strong>の方がずっと難しいと分かりました。使うたびに押す記録は、押し忘れでずれが積み重なり、信用されなくなります。</p>
+    <p>今は、段取りに本当に使う10品前後だけを1日1回数える形にして、それでもまだ回っていない段階です。次は画面の文字を減らします。うまくいかなかったことも含めて、また続きを書きます。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>小さな飲食店の在庫管理は、何から数えればいいですか？</summary>
+        <div class="faq__a"><p>段取りや発注の判断に実際に使う物だけから始めるのがよいと思います。私の店では、在庫の数を使って段取りを決めているのは冷凍の作り置きや使いかけの具材など10品前後で、それ以外は生産計画だけで決まっていました。全部を数えようとすると続きません。</p></div>
+      </details>
+
+      <details>
+        <summary>「使ったら押す」在庫の記録が続かないのはなぜですか？</summary>
+        <div class="faq__a"><p>押し忘れが1回あるだけで、記録が実物からずれ、そのずれが積み重なるからです。ずれた記録は信用されなくなり、誰も見なくなります。私の店では、忙しい時間に「あとで押そう」として忘れることと、押す物が多すぎることが原因でした。</p></div>
+      </details>
+
+      <details>
+        <summary>毎日数える形と、使うたびに押す形はどちらがいいですか？</summary>
+        <div class="faq__a"><p>私は毎日1回数える形に変えました。数えた時点で記録が実物に戻るので、忘れた日があっても次に数えた日に正しくなります。変わっていない物は「見込みどおり」を1回押すだけにして、手間を減らしました。ただ、それでもまだ続けられていないのが正直なところです。</p></div>
+      </details>
+
+      <details>
+        <summary>アルバイトの人にも在庫の画面を使ってもらうには、どうすればいいですか？</summary>
+        <div class="faq__a"><p>まだ答えは出ていません。私の画面は文字が多く、作った私でも読むのがきつい状態でした。アルバイトの人は、理解しようとする前に拒否反応が出ると思っています。次は、文字を減らして見ただけで分かる画面に直すつもりです。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/shikumi/hacchu-kanri/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">発注量を感覚で決めてきた弁当屋が、廃棄と緊急買い出しで仕組み化を決意するまで</div>
+        </a>
+        <a class="related__item" href="/shikumi/seisan-shiji/">
+          <span class="related__cat">仕組み化</span>
+          <div class="related__title">ホワイトボードと電卓をやめた日——弁当屋の生産指示をデジタル化したら、新人でも迷わず動けるようになった話</div>
+        </a>
+        <a class="related__item" href="/keiei/hitori-unei/">
+          <span class="related__cat">経営のリアル</span>
+          <div class="related__title">弁当屋2店舗をほぼ1人で3年回している——「何でも屋」をやめて仕組みに任せるまで</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+        <nav aria-label="フッターナビ">
+          <a href="/keiei/">経営のリアル</a>
+          <a href="/shikumi/">仕組み化</a>
+          <a href="/review/">正直レビュー</a>
+          <a href="/money/">お金</a>
+          <a href="/kaigyo/">開業・独立</a>
+          <a href="/about/">この人について</a>
+          <a href="/privacy/">プライバシーポリシー</a>
+          <a href="/contact/">お問い合わせ</a>
+          <a href="/disclaimer/">免責事項</a>
+          <a href="/disclosure/">運営方針</a>
+        </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
