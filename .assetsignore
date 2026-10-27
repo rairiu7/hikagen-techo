@@ -1,6 +1,18 @@
 # Cloudflare Workers static assets 配信除外リスト
 # assets.directory が "./" のため、配信対象から明示的に外すファイル/ディレクトリを列挙する。
 # 書式: gitignore 形式（ディレクトリは末尾スラッシュ付き）
+# 2026-10-27：.git/ と作業用の .py・.gitignore が公開されていたのを見つけて追加
+
+# --- git の中身 ---
+.git/
+.gitignore
+
+# --- Claude Code の設定・作業用のプログラム ---
+.claude/
+.wrangler/
+*.py
+__pycache__/
+site-audit.md
 
 # --- GitHub Actions（CI ワークフロー・スクリプト） ---
 .github/
