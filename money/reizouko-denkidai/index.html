@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- ===== 基本メタ / SEO ===== -->
+<title>業務用冷蔵庫の電気代は月いくらか——弁当屋のコールドテーブルと製氷機を消費電力から計算したら、上限でも2台で月1万円ほどだった｜火加減手帖</title>
+<meta name="description" content="弁当屋で使っているコールドテーブル（230W）と製氷機（240W）の電気代を、商品ページの消費電力から計算しました。24時間動き続けたとしても1台あたり月5千円台、2台で月1万円ほど。インバーター機との差、電気代を抑えるために見ておくことをまとめます。">
+<link rel="canonical" href="https://hikagen-techo.com/money/reizouko-denkidai/">
+
+<!-- ===== OGP ===== -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="業務用冷蔵庫の電気代は月いくらか——弁当屋のコールドテーブルと製氷機を消費電力から計算したら、上限でも2台で月1万円ほどだった｜火加減手帖">
+<meta property="og:description" content="コールドテーブル230W・製氷機240W。24時間動き続けた上限でも、2台で月1万円ほど。弁当屋が消費電力から計算した業務用冷蔵庫の電気代。">
+<meta property="og:url" content="https://hikagen-techo.com/money/reizouko-denkidai/">
+<meta property="og:site_name" content="火加減手帖">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://hikagen-techo.com/ogp/money-reizouko-denkidai.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hikagen-techo.com/ogp/money-reizouko-denkidai.png">
+
+<!-- ===== フォント ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap"></noscript>
+
+<!-- ===== 共通スタイル ===== -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- ===== 構造化データ: Person ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hikagen-techo.com/#person",
+  "name": "HANABI",
+  "url": "https://hikagen-techo.com/about/",
+  "jobTitle": "地方で小商いを仕組み化する人",
+  "knowsAbout": [
+    "小規模飲食店経営",
+    "業務自動化",
+    "Google Apps Script",
+    "Python",
+    "個人事業の経理",
+    "就労継続支援A型"
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: Article ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "業務用冷蔵庫の電気代は月いくらか——弁当屋のコールドテーブルと製氷機を消費電力から計算したら、上限でも2台で月1万円ほどだった",
+  "description": "弁当屋で使っているコールドテーブル（230W）と製氷機（240W）の電気代を、商品ページの消費電力から計算した。24時間動き続けたとしても1台あたり月5千円台、2台で月1万円ほど。インバーター機との差と、電気代を抑えるために見ておくことをまとめる。",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hikagen-techo.com/money/reizouko-denkidai/"
+  },
+  "author": {
+    "@id": "https://hikagen-techo.com/#person"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "火加減手帖",
+    "url": "https://hikagen-techo.com/"
+  },
+  "datePublished": "2026-10-30",
+  "dateModified": "2026-10-30",
+  "inLanguage": "ja",
+  "articleSection": "個人事業主のお金",
+  "keywords": "業務用冷蔵庫 電気代, コールドテーブル 電気代, 業務用製氷機 電気代, 業務用冷凍冷蔵庫 消費電力, 飲食店 光熱費, 弁当屋"
+}
+</script>
+
+<!-- ===== 構造化データ: BreadcrumbList ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://hikagen-techo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "お金",
+      "item": "https://hikagen-techo.com/money/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "業務用冷蔵庫の電気代は月いくらか",
+      "item": "https://hikagen-techo.com/money/reizouko-denkidai/"
+    }
+  ]
+}
+</script>
+
+<!-- ===== 構造化データ: FAQPage（本文FAQと一致） ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "業務用冷蔵庫の電気代は月いくらくらいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "私が使っている冷凍冷蔵のコールドテーブル（冷却時230W）で計算すると、24時間ずっと動き続けたとしても月約5,100円（1kWhあたり31円で計算）です。実際は庫内が冷えると冷やす機械が止まるので、これより少なくなります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "業務用製氷機の電気代はどのくらいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "私が使っているパナソニックの25kgタイプ（SIM-AS2500、定格240W）で計算すると、24時間動き続けた場合の上限で月約5,400円です。氷がいっぱいになると止まるので、実際はこれより少なくなります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "インバーターの業務用冷蔵庫は電気代が安くなりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "安くなる方向です。新しい作業場のために比べたパナソニックのインバーター機（SUR-LV1561C）は、今使っている機種より容量が大きいのに、冷却時の消費電力は230Wから192Wに下がっていました。冷えたあとも機械を弱く回し続けるため、実際の電気代は上限よりさらに下がると考えています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "業務用冷蔵庫の電気代を抑えるには何をすればいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "凝縮器のフィルターの掃除、熱を出す機器のそばに置かないこと、扉を開けている時間を短くすることの3つが手軽です。買い替えるときは、容量と消費電力を並べて比べると、同じ幅でも差があることが分かります。"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N6KFC2LLS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9N6KFC2LLS');
+  // アフィリエイトリンクのクリック計測（表示には一切影響しない）
+  document.addEventListener('click', function (e) {
+    try {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var a = t.closest('a[rel~="sponsored"]');
+      if (!a) return;
+      var box = a.closest('.cta');
+      var title = box && box.querySelector('.cta__title');
+      gtag('event', 'affiliate_click', {
+        link_url: a.href,
+        link_domain: a.hostname || '',
+        cta_label: ((title ? title.textContent : a.textContent) || '').trim().slice(0, 100),
+        article_path: location.pathname
+      });
+    } catch (err) {}
+  }, true);
+</script>
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__jp">火加減手帖</span>
+      <span class="brand__en">Hikagen Techo</span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビ">
+      <a href="/keiei/">経営のリアル</a>
+      <a href="/shikumi/">仕組み化</a>
+      <a href="/review/">正直レビュー</a>
+      <a href="/money/" aria-current="page">お金</a>
+      <a href="/kaigyo/">開業・独立</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="article">
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">ホーム</a>
+    <span class="sep">/</span>
+    <a href="/money/">お金</a>
+    <span class="sep">/</span>
+    <span aria-current="page">業務用冷蔵庫の電気代は月いくらか</span>
+  </nav>
+
+  <!-- 記事ヘッダー -->
+  <header class="post-header">
+    <span class="post-cat">お金</span>
+    <h1 class="post-title">業務用冷蔵庫の電気代は月いくらか——弁当屋のコールドテーブルと製氷機を消費電力から計算したら、上限でも2台で月1万円ほどだった</h1>
+    <div class="post-meta">
+      <time datetime="2026-10-30">2026年10月30日 公開</time>
+      <span class="dot"></span>
+      <time datetime="2026-10-30">2026年10月30日 更新</time>
+      <span class="dot"></span>
+      <span>著者：HANABI</span>
+    </div>
+  </header>
+
+  <aside class="pr-notice" role="note" aria-label="広告に関する表示">
+    <span class="pr-notice__tag">PR</span>
+    <span>本記事はアフィリエイト広告を含みます。実際に使った物は使った感想を、使っていない物は調べた内容として、分けて書いています。</span>
+  </aside>
+
+  <div class="post-body">
+
+    <!-- ① 結論ファースト -->
+    <div class="lede">
+      <span class="lede__label">この記事の結論</span>
+      <p>今の店で使っている冷凍冷蔵のコールドテーブル（消費電力230W）と製氷機（240W）の電気代を、商品ページの数字から計算しました。<strong>24時間ずっと動き続けたとしても、1台あたり月5千円台、2台で月1万円ほど</strong>です。実際は庫内が冷えると機械が止まるので、これより少なくなります。</p>
+      <p>うちの店の光熱費は、夏場に電気とガスを合わせて月7万円近くになります。冷やす機器の電気代は、その中では<strong>大きくても1割台</strong>という計算になりました。</p>
+    </div>
+
+    <!-- ② 数値ハイライト -->
+    <div class="stat-row" role="group" aria-label="この記事の数字">
+      <div class="stat"><div class="stat__num">約5,100<span style="font-size:1rem">円</span></div><div class="stat__label">コールドテーブル1台の上限（月）</div></div>
+      <div class="stat"><div class="stat__num">約5,400<span style="font-size:1rem">円</span></div><div class="stat__label">製氷機1台の上限（月）</div></div>
+      <div class="stat"><div class="stat__num">約1<span style="font-size:1rem">万円</span></div><div class="stat__label">2台合わせた上限（月）</div></div>
+    </div>
+
+    <!-- ③ 前提 -->
+    <h2>前提：電気代を機器ごとには測っていない</h2>
+    <p>私は人口5万人未満の地方都市で弁当・惣菜店を2店舗営んでいます（詳しくは<a href="/about/">この人について</a>）。光熱費は<a href="/money/konetsuhi/">光熱費2万円台から7万円近くへ</a>の記事に書いたとおり、電気とガスが同じ請求になっていて、内訳を分けて把握できていません。冷蔵庫1台ごとの電気代も測っていません。</p>
+    <p>そこでこの記事では、<strong>使っている機器の商品ページに書かれた消費電力から、電気代の上限を計算</strong>しました。実際に測った数字ではないので、「多くてもこのくらい」という目安として読んでください。</p>
+
+    <!-- ④ 計算の仕方 -->
+    <h2>計算の仕方：消費電力×24時間×30日×電気の単価</h2>
+    <p>計算は単純です。</p>
+    <ul>
+      <li>消費電力（W）×24時間×30日÷1000＝1か月の電気の量（kWh）</li>
+      <li>1か月の電気の量×1kWhあたりの単価＝1か月の電気代</li>
+    </ul>
+    <p>単価は、家電の電気代の目安としてよく使われる<strong>1kWhあたり31円</strong>にしました。契約や時期で単価は変わるので、自分の店の請求書の単価に置き換えると、より近い数字になります。</p>
+    <p>消費電力は、商品ページの「冷却時」の数字のうち、大きいほう（50Hzと60Hzで違う場合は大きいほう）を使いました。霜取りのときは一時的に消費電力が上がりますが、時間が短いので入れていません。</p>
+
+    <!-- ⑤ 今使っている機器 -->
+    <h2>今使っている2台の電気代の上限</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>機器</th><th>消費電力（冷却時）</th><th>24時間動いた場合の月の電気の量</th><th>月の電気代の上限</th></tr></thead>
+        <tbody>
+          <tr><td>冷凍冷蔵コールドテーブル（フクシマガリレイ LCU-151PM-EF）</td><td>215／230W</td><td>約166kWh</td><td>約5,100円</td></tr>
+          <tr><td>製氷機 25kg（パナソニック SIM-AS2500）</td><td>210／240W</td><td>約173kWh</td><td>約5,400円</td></tr>
+          <tr><td><strong>合計</strong></td><td></td><td>約339kWh</td><td><strong>約1万500円</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>これは<strong>機械が24時間止まらずに動き続けた場合</strong>の数字です。冷蔵庫は庫内が設定の温度まで冷えると冷やす機械が止まり、温度が上がるとまた動きます。製氷機も、氷がいっぱいになれば止まります。仮に動いている時間が半分なら、電気代も半分の月2,500円前後になります。</p>
+    <p>光熱費の記事に書いた「電気とガスで夏場に月7万円近く」と比べると、この2台の上限の約1万円は1割台です。少なくとも、<strong>光熱費が増えた一番の原因が冷やす機器だとは考えにくい</strong>、というのが計算してみての感想です。私の店では、炊飯・加熱・揚げ物などの調理の量が増えたことのほうが大きいと考えています。</p>
+
+    <div class="cta">
+      <div class="cta__label">今使っている型番</div>
+      <p class="cta__title">パナソニック キューブアイス製氷機 SIM-AS2500（25kg）</p>
+      <p class="cta__body">単相100V・定格消費電力210／240W。1日の製氷量は約24〜31kg（周囲の温度と水温で変わります）。</p>
+      <a class="btn" href="//af.moshimo.com/af/c/click?a_id=5607005&p_id=54&pc_id=54&pl_id=616&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fchuubou%2Fsim-s2500%2F" rel="sponsored nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" attributionsrc>楽天市場で見る</a><img src="//i.moshimo.com/af/i/impression?a_id=5607005&p_id=54&pc_id=54&pl_id=616" width="1" height="1" style="border:none;" alt="" loading="lazy">
+      <small>※ 当サイトはアフィリエイト広告（楽天市場）を利用しています。</small>
+    </div>
+
+    <!-- ⑥ インバーター機 -->
+    <h2>新しく比べた機種の消費電力（まだ使っていません）</h2>
+    <p>新しい作業場のために比べた、幅1500×奥行600mmの冷凍冷蔵コールドテーブル2機種の消費電力も並べました（比べた経緯は<a href="/review/cold-table/">コールドテーブルの比べ方の記事</a>に書いています）。どちらも使っていないので、商品ページを調べた内容です。</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>機種</th><th>容量（冷凍／冷蔵）</th><th>消費電力（冷却時）</th><th>月の電気代の上限</th></tr></thead>
+        <tbody>
+          <tr><td>フクシマガリレイ LCU-151PM-EF（今使っている・奥行450）</td><td>68L／146L</td><td>215／230W</td><td>約5,100円</td></tr>
+          <tr><td>パナソニック SUR-LV1561C（インバーター）</td><td>146L／153L</td><td>192／192W</td><td>約4,300円</td></tr>
+          <tr><td>ホシザキ RFT-150MNCG</td><td>159L／151L</td><td>193／198W</td><td>約4,400円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>容量は今の機種より大きいのに、冷却時の消費電力はむしろ小さくなっています。パナソニックの SUR-LV1561C は<strong>インバーター制御</strong>で、商品ページには、置いた場所やお店の状況に合わせて冷やす機械の回り方を変え、節電して運転すると書かれていました。インバーターの機種は、冷えたあとも止まったり動いたりを繰り返すのではなく、弱く回し続けるため、実際の電気代は上の上限よりさらに下がると考えています。</p>
+
+    <div class="cta">
+      <div class="cta__label">新しい作業場で選んだ機種（まだ使っていません）</div>
+      <p class="cta__title">パナソニック コールドテーブル冷凍冷蔵庫 SUR-LV1561C</p>
+      <p class="cta__body">インバーター制御・冷却時192W。幅1500×奥行600×高さ800mm、冷凍室146L／冷蔵室153L。</p>
+      <a class="btn" href="//af.moshimo.com/af/c/click?a_id=5607005&p_id=54&pc_id=54&pl_id=616&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fchuubou%2Fsur-lv1561c%2F" rel="sponsored nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" attributionsrc>楽天市場で見る</a><img src="//i.moshimo.com/af/i/impression?a_id=5607005&p_id=54&pc_id=54&pl_id=616" width="1" height="1" style="border:none;" alt="" loading="lazy">
+      <small>※ 当サイトはアフィリエイト広告（楽天市場）を利用しています。</small>
+    </div>
+
+    <!-- ⑦ 抑えるために -->
+    <h2>電気代を抑えるために見ておくこと</h2>
+    <p>商品ページの説明と、計算してみて分かったことから、見ておくところを4つにまとめます。</p>
+    <h3>1. 凝縮器のフィルターの掃除</h3>
+    <p>今使っている機種も、新しく比べた機種も、凝縮器（熱を外に逃がす部分）にほこりよけのフィルターが付いていて、引き出して掃除できるようになっています。ほこりが詰まると熱を逃がしにくくなり、冷やす機械が長く動きます。<strong>フィルターの掃除は、いちばん手軽な節電</strong>です。厨房は油を含んだほこりが付きやすい場所なので、ほかの場所より詰まりやすいと考えておくのが安全です。</p>
+    <h3>2. 熱を出す機器のそばに置かない</h3>
+    <p>コンロやフライヤーのすぐ横は、まわりの温度が上がります。製氷機の製氷量も、商品ページでは周囲の温度20℃で約29〜31kg、30℃で約24〜26kgと、暑いほど少なくなっていました。冷やす機器は、できるだけ熱の出る機器から離して置くのがいいと思います。</p>
+    <h3>3. 扉を開けている時間</h3>
+    <p>今使っている機種もパナソニックの機種も、扉が自動で閉まる仕組みで、開けっぱなしを防ぐようになっています。それでも、仕込みのたびに扉を開けて探す時間が長いと、そのぶん冷気が逃げます。何をどこに入れるかを決めておくと、開けている時間が短くなります。</p>
+    <h3>4. 買い替えるなら、容量あたりの消費電力を見る</h3>
+    <p>上の表のとおり、今の機種（合計214L・230W）より、新しく比べた機種（合計299〜310L・192〜198W）のほうが、容量が大きいのに消費電力は小さいです。同じ幅で選ぶなら、<strong>容量と消費電力を並べて比べる</strong>と違いが分かります。</p>
+
+    <!-- ⑧ まとめ -->
+    <h2>まとめ：冷やす機器の電気代は、上限を計算すると落ち着いて見られる</h2>
+    <p>「業務用の冷蔵庫は電気代が高い」というイメージがありましたが、消費電力から上限を計算すると、<strong>コールドテーブルも製氷機も1台あたり月5千円台が上限</strong>でした。光熱費全体の中では、大きくても1割台です。</p>
+    <p>電気代が気になるときは、まず商品ページの消費電力を見て、自分の店の電気の単価で上限を計算してみるのがおすすめです。新しい作業場でインバーターの機種を使い始めたら、実際の電気代が分かった時点でこの記事に書き足します。</p>
+
+    <!-- 著者ボックス -->
+    <aside class="author">
+      <div class="author__avatar" aria-hidden="true">火</div>
+      <div>
+        <p class="author__name">HANABI｜地方で小商いを仕組み化する人</p>
+        <p class="author__bio">人口5万人未満の地方都市で弁当・惣菜店を2店舗経営（開業3年目）。元自動車部品メーカーの生産技術職。GAS・Python・VBAによる業務自動化を武器に、味は専属の調理担当に任せ、仕組みと経営をほぼ一人で運営。就労継続支援A型事業所を立ち上げ中。</p>
+      </div>
+    </aside>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">よくある質問<span class="en">FAQ</span></h2>
+
+      <details>
+        <summary>業務用冷蔵庫の電気代は月いくらくらいですか？</summary>
+        <div class="faq__a"><p>私が使っている冷凍冷蔵のコールドテーブル（冷却時230W）で計算すると、24時間ずっと動き続けたとしても月約5,100円（1kWhあたり31円で計算）です。実際は庫内が冷えると冷やす機械が止まるので、これより少なくなります。</p></div>
+      </details>
+
+      <details>
+        <summary>業務用製氷機の電気代はどのくらいですか？</summary>
+        <div class="faq__a"><p>私が使っているパナソニックの25kgタイプ（SIM-AS2500、定格240W）で計算すると、24時間動き続けた場合の上限で月約5,400円です。氷がいっぱいになると止まるので、実際はこれより少なくなります。</p></div>
+      </details>
+
+      <details>
+        <summary>インバーターの業務用冷蔵庫は電気代が安くなりますか？</summary>
+        <div class="faq__a"><p>安くなる方向です。新しい作業場のために比べたパナソニックのインバーター機（SUR-LV1561C）は、今使っている機種より容量が大きいのに、冷却時の消費電力は230Wから192Wに下がっていました。冷えたあとも機械を弱く回し続けるため、実際の電気代は上限よりさらに下がると考えています。</p></div>
+      </details>
+
+      <details>
+        <summary>業務用冷蔵庫の電気代を抑えるには何をすればいいですか？</summary>
+        <div class="faq__a"><p>凝縮器のフィルターの掃除、熱を出す機器のそばに置かないこと、扉を開けている時間を短くすることの3つが手軽です。買い替えるときは、容量と消費電力を並べて比べると、同じ幅でも差があることが分かります。</p></div>
+      </details>
+    </section>
+
+    <!-- 関連記事 -->
+    <nav class="related" aria-label="関連記事">
+      <h2 class="related__heading">あわせて読みたい</h2>
+      <div class="related__list">
+        <a class="related__item" href="/money/konetsuhi/">
+          <span class="related__cat">個人事業主のお金</span>
+          <div class="related__title">光熱費2万円台から7万円近くへ——弁当屋3年、生産数と光熱費は比例して増えるという現実</div>
+        </a>
+        <a class="related__item" href="/review/cold-table/">
+          <span class="related__cat">正直レビュー</span>
+          <div class="related__title">コールドテーブルは奥行きと冷凍室の容量で選ぶ——比べずに買った弁当屋が、2台目で比べ直した記録</div>
+        </a>
+        <a class="related__item" href="/kaigyo/chuuko-shinpin/">
+          <span class="related__cat">開業・独立</span>
+          <div class="related__title">厨房機器は中古と新品どちらが得か——新品で買った弁当屋が価格を並べたら、製氷機はほとんど差がなかった</div>
+        </a>
+      </div>
+    </nav>
+
+  </div><!-- /.post-body -->
+</article>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div><span class="jp">火加減手帖</span> <span class="en">Hikagen Techo</span></div>
+        <div class="site-footer__tag">地方の小さな飲食店が、仕組みで勝つ。</div>
+      </div>
+        <nav aria-label="フッターナビ">
+          <a href="/keiei/">経営のリアル</a>
+          <a href="/shikumi/">仕組み化</a>
+          <a href="/review/">正直レビュー</a>
+          <a href="/money/">お金</a>
+          <a href="/kaigyo/">開業・独立</a>
+          <a href="/about/">この人について</a>
+          <a href="/privacy/">プライバシーポリシー</a>
+          <a href="/contact/">お問い合わせ</a>
+          <a href="/disclaimer/">免責事項</a>
+          <a href="/disclosure/">運営方針</a>
+        </nav>
+    </div>
+    <div class="site-footer__bottom">© 2026 火加減手帖 (Hikagen Techo)</div>
+  </div>
+</footer>
+
+</body>
+</html>
