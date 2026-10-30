@@ -6,6 +6,8 @@ FAILED=0
 CHECKED=0
 FLAGGED=0
 
+# ad_slot.html・side_left.html は広告枠の部品（公開しない。add_ad_slot.py / add_side.py が PR表記のある記事にだけ入れる）なので検査しない
+
 # アフィリエイトドメインのパターン（hrefの値として検出）
 AFF_PATTERN='href="[^"]*\b(px\.a8\.net|a8\.net/svt|af\.moshimo\.com)[^"]*"'
 
@@ -25,6 +27,8 @@ done < <(find . \
   -name "*.html" \
   -not -path "./.git/*" \
   -not -path "./.github/*" \
+  -not -path "./ad_slot.html" \
+  -not -path "./side_left.html" \
   -print0)
 
 echo "--- アフィリエイトPR表記 監査結果 ---"
