@@ -383,3 +383,11 @@ a:hover { color: var(--c-accent-dk); text-decoration: underline; text-underline-
   .side-rail__item a[rel~="sponsored"] { align-self: flex-start; margin-top: .2em; padding: .35em .8em; background: var(--c-accent); color: #fff; border-radius: var(--radius); font-weight: 700; font-size: .8rem; text-decoration: none; }
   .side-rail__item a[rel~="sponsored"]:hover { opacity: .88; }
 }
+
+/* --- 共有ボタン（まとめの後。中身は py add_share.py で全記事にそろえる） --- */
+.share { margin: 2.4em 0 1.6em; padding: 1em 1.2em; border: 1px solid var(--c-line); border-radius: var(--radius); background: #fff; }
+.share__label { margin: 0 0 .7em; font-size: .9rem; font-weight: 700; color: var(--c-text); }
+.share__list { display: flex; flex-wrap: wrap; gap: .5em; }
+.share__btn { flex: 1 1 calc(33.333% - .5em); min-width: 88px; padding: .6em .4em; border: 1px solid var(--c-line); border-radius: var(--radius); background: var(--c-sub); color: var(--c-text); font-size: .88rem; font-weight: 700; text-align: center; text-decoration: none; }
+.share__btn:hover { border-color: var(--c-accent); color: var(--c-accent); text-decoration: none; }
+@media (min-width: 721px) { .share__btn { flex: 1 1 0; } }
