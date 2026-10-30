@@ -365,3 +365,21 @@ a:hover { color: var(--c-accent-dk); text-decoration: underline; text-underline-
 .ad-slot__name { flex: 1 1 100%; font-weight: 700; font-size: .95rem; }
 .ad-slot__note { flex: 1 1 auto; font-size: .88rem; color: var(--c-muted); }
 .ad-slot__item a { font-size: .88rem; font-weight: 700; white-space: nowrap; }
+
+/* --- 左右の広告の列（幅の広いPCだけ。中身は py add_side.py で全記事にそろえる。記事の幅は変えない） --- */
+.side-rail { display: none; }
+@media (min-width: 1280px) {
+  main { position: relative; }
+  .side-rail { display: block; position: absolute; top: 2.4em; bottom: 2.4em; width: 220px; }
+  .side-rail--left  { right: calc(50% + 360px + 20px); }
+  .side-rail--right { left:  calc(50% + 360px + 20px); }
+  .side-rail__box { position: sticky; top: 88px; padding: 1em 1.05em; background: var(--c-sub); border: 1px solid var(--c-line); border-radius: var(--radius); }
+  .side-rail__label { margin: 0 0 .5em; font-size: .78rem; font-weight: 700; color: var(--c-muted); letter-spacing: .02em; }
+  .side-rail__list { list-style: none; margin: 0; padding: 0; }
+  .side-rail__item { display: flex; flex-direction: column; gap: .25em; padding: .75em 0; border-top: 1px solid var(--c-line); font-size: .84rem; line-height: 1.55; }
+  .side-rail__item:first-child { border-top: 0; padding-top: .1em; }
+  .side-rail__name, .side-rail__read { font-weight: 700; color: var(--c-text); }
+  .side-rail__note { color: var(--c-muted); font-size: .8rem; }
+  .side-rail__item a[rel~="sponsored"] { align-self: flex-start; margin-top: .2em; padding: .35em .8em; background: var(--c-accent); color: #fff; border-radius: var(--radius); font-weight: 700; font-size: .8rem; text-decoration: none; }
+  .side-rail__item a[rel~="sponsored"]:hover { opacity: .88; }
+}

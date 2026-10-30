@@ -20,6 +20,7 @@ site-audit.md
 # --- 作業用テンプレート ---
 templates/
 ad_slot.html
+side_left.html
 
 # --- Cloudflare / Wrangler 設定ファイル ---
 wrangler.jsonc
