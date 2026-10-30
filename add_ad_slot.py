@@ -50,7 +50,8 @@ def apply(path, ad):
         s = s[:i] + block + "\n\n" + s[i:]
 
     # PR 表示（自動で付けた分だけを出し入れする）
-    s = re.sub(r"\n?  " + re.escape(PR_START) + r".*?" + re.escape(PR_END) + r"\n", "\n", s, flags=re.S)
+    # 入れたときの形（"\n\n  " + 印〜印）をそのまま外すので、何度動かしても空行は増えない
+    s = re.sub(r"\n\n  " + re.escape(PR_START) + r".*?" + re.escape(PR_END), "", s, flags=re.S)
     if ad and 'class="pr-notice"' not in s:
         art = s.find('<article class="article">')
         h = s.find("  </header>", art)
